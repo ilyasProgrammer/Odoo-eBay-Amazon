@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_repricer_scheme_user,repricer.scheme.user,model_repricer_scheme,base.group_user,1,1,1,1
+access_repricer_competitor_user,repricer.competitor.user,model_repricer_competitor,base.group_user,1,1,1,1
+access_repricer_update_line_user,repricer.update.line.user,model_repricer_update_line,base.group_user,1,1,1,1

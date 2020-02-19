@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="view_add_listing" model="ir.ui.view">
+        <field name="name">view.add.listing</field>
+        <field name="model">sale.store.add.listing</field>
+        <field name="arch" type="xml">
+            <form string="List Product to Store">
+                <group>
+                    <group>
+                        <field name="store_id"/>
+                        <field name="site" invisible="1"/>
+                    </group>
+                </group>
+                <div>
+                    <p>Fields below will be used only when corresponding fields in AutoPlus are not found for the product</p>
+                </div>
+                <group>
+                    <group>
+                        <field name="product_name"/>
+                        <field name="ebay_category_id" attrs="{'invisible': [('site', '!=', 'ebay')]}"/>
+                        <field name="price"/>
+                        <field name="quantity"/>
+                    </group>
+                    <group>
+                        <field name="image" widget="image"/>
+                    </group>
+                </group>
+                <footer>
+                  <button name="button_add_listing" type="object" string="List Product" class="oe_highlight"/>
+                  or
+                  <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_store_add_listing" model="ir.actions.act_window">
+        <field name="name">List a Product to a Selected Store</field>
+        <field name="res_model">sale.store.add.listing</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_add_listing"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

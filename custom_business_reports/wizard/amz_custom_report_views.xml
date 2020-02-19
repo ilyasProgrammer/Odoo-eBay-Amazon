@@ -1,0 +1,1699 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_amz_custom_report_wizard" model="ir.ui.view">
+            <field name="name">view.amz.custom.report.form</field>
+            <field name="model">amz.custom.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Amazon Report">
+                    <h2>Copy enumeration value and paste into Report Name</h2>
+                    <group colspan="6" col="2">
+                        <field name="from_date"/>
+                        <field name="to_date"/>
+                        <field name="report_name" placeholder="_GET_MERCHANT_LISTINGS_ALL_DATA_"/>
+                    </group>
+					<footer>
+                        <button name="button_download_report" type="object" string="Download Report" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                    <ul class="ul" style="-webkit-column-count: 3;-moz-column-count: 3;column-count: 3;">
+                        <li class="li">
+                            <a class="btn" onclick="document.getElementById('ReportTypeCategories__ListingsReports').scrollIntoView();">Inventory Reports</a>
+                        </li>
+                        <li class="li">
+                            <a class="btn" onclick="document.getElementById('ReportTypeCategories__OrderReports').scrollIntoView();">Order Reports</a>
+                        </li>
+                        <li class="li">
+                            <a class="btn" onclick="document.getElementById('ReportTypeCategories__OrderTrackingReports').scrollIntoView();">Order Tracking Reports</a>
+                        </li>
+                        <li class="li">
+                            <a class="btn" onclick="document.getElementById('ReportTypeCategories__PendingOrderReports').scrollIntoView();">Pending Order Reports</a>
+                        </li>
+                        <li class="li">
+                            <a class="btn" onclick="document.getElementById('ReportTypeCategories__ReturnsReports').scrollIntoView();">Returns Reports</a>
+                        </li>
+                        <li class="li">
+                            <a class="btn" onclick="document.getElementById('ReportTypeCategories__PerformanceReports').scrollIntoView();">Performance Reports</a>
+                        </li>
+                        <li class="li">
+                            <a class="btn" onclick="document.getElementById('ReportTypeCategories__SettlementReports').scrollIntoView();">Settlement Reports</a>
+                        </li>
+                        <li class="li">
+                            <a class="btn" onclick="document.getElementById('ReportTypeCategories__FBAReports').scrollIntoView();">Fulfillment By Amazon (FBA) Reports</a>
+                        </li>
+                        <li class="li">
+                            <a class="btn" onclick="document.getElementById('ReportTypeCategories__SalesTaxReports').scrollIntoView();">Tax Reports</a>
+                        </li>
+                        <li class="li">
+                            <a class="btn" onclick="document.getElementById('ReportTypeCategories__BrowseTreeReports').scrollIntoView();">Browse Tree Report</a>
+                        </li>
+                        <li class="li">
+                            <a class="btn" onclick="document.getElementById('ReportTypeCategories__EasyShipReport').scrollIntoView();">Easy Ship Report</a>
+                        </li>
+                    </ul>
+					<div class="topic reference nested1" id="ReportTypeCategories">
+						<div class="body refbody">
+							<div class="section" id="ReportTypeCategories__ListingsReports">
+								<h3 class="title sectiontitle">Inventory Reports</h3>
+								<div class="tablenoborder">
+									<table cellpadding="4" cellspacing="0" summary="" id="ReportTypeCategories__ListingReportsTable" class="table" frame="border" border="1" rules="all">
+										<thead class="thead" align="left">
+											<tr class="row">
+												<th class="entry" valign="top" width="50%" id="d279824e224">Name</th>
+												<th class="entry" valign="top" width="50%" id="d279824e227">Description</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e224 ">
+													<span class="keyword parmname">Inventory Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FLAT_FILE_OPEN_LISTINGS_DATA_</samp>
+													</p>
+												</td>
+                                                <td class="entry" valign="top" width="50%" headers="d279824e227 ">Tab-delimited flat file open listings report that contains a summary of the seller's product listings with the price and quantity for each SKU. For Marketplace and Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e224 ">
+													<span class="keyword parmname">All Listings Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_MERCHANT_LISTINGS_ALL_DATA_</samp>
+													</p>													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e227 ">Tab-delimited flat file detailed all listings report. For Marketplace and Seller
+													Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e224 ">
+													<span class="keyword parmname">Active Listings Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_MERCHANT_LISTINGS_DATA_</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e227 ">Tab-delimited flat file detailed active listings report.
+													For Marketplace and Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e224 ">
+													<span class="keyword parmname">Inactive Listings Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_MERCHANT_LISTINGS_INACTIVE_DATA_
+														</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e227 ">Tab-delimited flat file detailed inactive listings
+													report. For Marketplace and Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e224 ">
+													<span class="keyword parmname">Open Listings Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_MERCHANT_LISTINGS_DATA_BACK_COMPAT_</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e227 ">Tab-delimited flat file open listings report.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e224 ">
+													<span class="keyword parmname">Open Listings Report Lite</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_MERCHANT_LISTINGS_DATA_LITE_</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e227 ">Tab-delimited flat file active listings report that
+													contains only the SKU, ASIN, Price, and Quantity fields for
+													items that have a quantity greater than zero. For
+													Marketplace and Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e224 ">
+													<span class="keyword parmname">Open Listings Report Liter</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_MERCHANT_LISTINGS_DATA_LITER_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e227 ">Tab-delimited flat file active listings report that
+													contains only the SKU and Quantity fields for items that
+													have a quantity greater than zero. For Marketplace and
+													Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e224 ">
+													<span class="keyword parmname">Canceled Listings Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_MERCHANT_CANCELLED_LISTINGS_DATA_</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e227 ">Tab-delimited flat file canceled listings report. For Marketplace and Seller Central
+													sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e224 ">
+													<span class="keyword parmname">Sold Listings Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_CONVERGED_FLAT_FILE_SOLD_LISTINGS_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e227 ">Tab-delimited flat file sold listings report that
+													contains items sold on Amazon's retail website. For
+													Marketplace and Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e224 ">
+													<span class="keyword parmname">Listing Quality and Suppressed Listing
+														Report
+													</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_MERCHANT_LISTINGS_DEFECT_DATA_</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e227 ">Tab-delimited flat file listing quality and suppressed
+													listing report that contains your listing information that
+													is incomplete or incorrect. For Marketplace and Seller
+													Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e224 ">
+													<span class="keyword parmname">Pan-European Eligibility: FBA ASINs</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_PAN_EU_OFFER_STATUS_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e227 ">Tab-delimited flat file report that contains enrollment status and eligibility
+													information for the Pan-European FBA program for each of the
+													seller's Amazon-fulfilled listings. <span class="ph">This report is only available to FBA sellers in
+														the Spain, UK, France, Germany, and Italy marketplaces.
+													</span> For more information, see <a class="btn" href="https://sellercentral-europe.amazon.com/gp/help/201986960" target="_blank">Pan-European
+														Eligibility
+													</a> in the Seller Central Help.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e224 ">
+													<span class="keyword parmname">Pan-European Eligibility: Self-fulfilled
+														ASINs
+													</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_MFN_PAN_EU_OFFER_STATUS_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e227 ">Tab-delimited flat file report that contains eligibility information for the
+													Pan-European FBA Program for each of the seller's
+													self-fulfilled listings. Self-fulfilled listings are not
+													allowed in the Pan-European FBA program, and this report can
+													help sellers determine whether to convert any of their
+													self-fulfilled listings to Amazon-fulfilled listings in
+													order to enroll them in the program. <span class="ph">This report is only available in the Spain, UK, France,
+														Germany, and Italy marketplaces.
+													</span> For
+													more information, see <a class="btn" href="https://sellercentral-europe.amazon.com/gp/help/201986960" target="_blank">Pan-European
+														Eligibility
+													</a> in the Seller Central Help.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e224 ">
+													<span class="keyword parmname">Global Expansion Opportunities Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">
+															_GET_FLAT_FILE_GEO_OPPORTUNITIES_
+														</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e227 ">Tab-delimited flat file report that contains products that a seller lists which have
+													a high sales potential in other Amazon marketplaces.
+													<span class="ph">This report is only available in the US
+														marketplace.
+													</span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="section" id="ReportTypeCategories__OrderReports">
+								<h3 class="title sectiontitle">Order Reports</h3>
+								<p class="p">Note that the date range that you specify when requesting an order report
+									indicates when the orders became eligible for fulfillment (no longer in a
+									"pending" state), not when the orders were created.
+								</p>
+								<div class="tablenoborder">
+									<table cellpadding="4" cellspacing="0" summary="" id="ReportTypeCategories__OrderReportsTable" class="table" frame="border" border="1" rules="all">
+										<thead class="thead" align="left">
+											<tr class="row">
+												<th class="entry" valign="top" width="50%" id="d279824e713">Name</th>
+												<th class="entry" valign="top" width="50%" id="d279824e716">Description</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e713 ">
+													<span class="keyword parmname">Unshipped Orders Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FLAT_FILE_ACTIONABLE_ORDER_DATA_</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e716 ">Tab-delimited flat file report that contains only orders that are not confirmed as
+													shipped. Can be requested or scheduled. For Marketplace and
+													Seller Central sellers.
+													<ul class="ul">
+														<li class="li">
+															<span class="keyword parmname">ShowSalesChannel</span>
+															- A Boolean value that indicates whether
+															an additional column is added to the report that shows the sales channel.
+															Default: <var class="keyword varname">false</var>. URL-encoded example:
+															<samp class="ph codeph">ReportOptions=ShowSalesChannel%3Dtrue</samp>
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e713 ">
+													<span class="keyword parmname">Scheduled XML Order Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_ORDERS_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e716 ">Scheduled XML order report. For Seller Central sellers
+													only.
+													<p class="p">You can only schedule one _GET_ORDERS_DATA_ or
+														_GET_FLAT_FILE_ORDERS_DATA_ report at a time. If you
+														have one of these reports scheduled and you schedule a
+														new report, the existing report will be canceled.
+													</p>
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e713 ">
+													<span class="keyword parmname">Requested or Scheduled Flat File Order
+														Report
+													</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FLAT_FILE_ORDERS_DATA_</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e716 ">Tab-delimited flat file order report that can be requested or scheduled. The report
+													shows orders from the previous 60 days. For Marketplace and
+													Seller Central sellers.
+													<p class="p">Seller Central sellers can only
+														schedule one _GET_ORDERS_DATA_ or
+														_GET_FLAT_FILE_ORDERS_DATA_ report at a time. If you
+														have one of these reports scheduled and you schedule a
+														new report, the existing report will be canceled.
+													</p>
+													<p class="p">Marketplace sellers can only schedule one
+														_GET_FLAT_FILE_ORDERS_DATA_ or
+														_GET_CONVERGED_FLAT_FILE_ORDER_REPORT_DATA_ report at a
+														time. If you have one of these reports scheduled and you
+														schedule a new report, the existing report will be
+														canceled.
+													</p>
+													<div class="note note">
+														<span class="notetitle">Note:</span>
+														The format of this report will
+														differ slightly depending on whether it is scheduled or
+														requested.
+													</div>
+													<p class="p">This report accepts the following
+														<a class="btn" href="Reports_RequestReport.html#RequestParameters__ReportOptions">ReportOptions</a>
+														values:
+													</p>
+													<ul class="ul">
+														<li class="li">
+															<span class="keyword parmname">ShowSalesChannel</span>
+															- A Boolean value that indicates whether
+															an additional column is added to the report that shows the sales channel.
+															Default: <var class="keyword varname">false</var>. URL-encoded example:
+															<samp class="ph codeph">ReportOptions=ShowSalesChannel%3Dtrue</samp>
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e713 ">
+													<span class="keyword parmname">Flat File Order Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_CONVERGED_FLAT_FILE_ORDER_REPORT_DATA_</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e716 ">Tab-delimited flat file order report that can be requested or scheduled. For
+													Marketplace sellers only.
+													<p class="p">You can only schedule one
+														_GET_FLAT_FILE_ORDERS_DATA_ or
+														_GET_CONVERGED_FLAT_FILE_ORDER_REPORT_DATA_ report at a
+														time. If you have one of these reports scheduled and you
+														schedule a new report, the existing report will be
+														canceled.
+													</p>
+													<div class="note note">
+														<span class="notetitle">Note:</span>
+														The format of this report will
+														differ slightly depending on whether it is scheduled or
+														requested. For example, the format for the dates will
+														differ, and the ship-method column is only returned when
+														the report is requested.
+													</div>
+													<p class="p">This report accepts the following
+														<a class="btn" href="Reports_RequestReport.html#RequestParameters__ReportOptions">ReportOptions</a>
+														values:
+													</p>
+													<ul class="ul">
+														<li class="li">
+															<span class="keyword parmname">ShowSalesChannel</span>
+															- A Boolean value that indicates whether
+															an additional column is added to the report that shows the sales channel.
+															Default: <var class="keyword varname">false</var>. URL-encoded example:
+															<samp class="ph codeph">ReportOptions=ShowSalesChannel%3Dtrue</samp>
+														</li>
+													</ul>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="section" id="ReportTypeCategories__OrderTrackingReports">
+								<h3 class="title sectiontitle">Order Tracking Reports</h3>
+								<p class="p">These order tracking reports are available in North America (NA) and Europe (EU), and can be
+									used by all Amazon sellers. These reports return all orders, regardless of
+									fulfillment channel or shipment status. These reports are intended for order
+									tracking, not to drive your fulfillment process, as the reports do not
+									include customer-identifying information and scheduling is not supported.
+									Also note that for <span class="ph">self-fulfilled</span> orders, item
+									price is not shown for orders in a "pending" state.
+								</p>
+								<div class="tablenoborder">
+									<table cellpadding="4" cellspacing="0" summary="" id="ReportTypeCategories__OrderTrackingReportsTable" class="table" frame="border" border="1" rules="all">
+										<thead class="thead" align="left">
+											<tr class="row">
+												<th class="entry" valign="top" width="50%" id="d279824e969">Name</th>
+												<th class="entry" valign="top" width="50%" id="d279824e972">Description</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e969 ">
+													<span class="keyword parmname">Flat File Orders By Last Update Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e972 ">Tab-delimited flat file report that shows all orders
+													updated in the specified period. Cannot be scheduled. For
+													all sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e969 ">
+													<span class="keyword parmname">Flat File Orders By Order Date Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FLAT_FILE_ALL_ORDERS_DATA_BY_ORDER_DATE_</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e972 ">Tab-delimited flat file report that shows all orders that
+													were placed in the specified period. Cannot be scheduled.
+													For all sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e969 ">
+													<span class="keyword parmname">Flat File Archived Orders Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FLAT_FILE_ARCHIVED_ORDERS_DATA_BY_ORDER_DATE_</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e972 ">Tab-delimited flat file report that shows all archived
+													orders that were placed in the specified period. Cannot be
+													scheduled. For all sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e969 ">
+													<span class="keyword parmname">XML Orders By Last Update Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_XML_ALL_ORDERS_DATA_BY_LAST_UPDATE_</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e972 ">XML report that shows all orders updated in the specified
+													period. Cannot be scheduled. For all sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e969 ">
+													<span class="keyword parmname">XML Orders By Order Date Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_XML_ALL_ORDERS_DATA_BY_ORDER_DATE_</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e972 ">XML report that shows all orders that were placed in the
+													specified period. Cannot be scheduled. For all sellers.
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="section" id="ReportTypeCategories__PendingOrderReports">
+								<h3 class="title sectiontitle">Pending Order Reports</h3>
+								<p class="p">These pending order reports are only available in Japan and China. These
+									reports can be both scheduled and requested where noted.
+								</p>
+								<div class="tablenoborder">
+									<table cellpadding="4" cellspacing="0" summary="" id="ReportTypeCategories__PendingOrderReportsTable" class="table" frame="border" border="1" rules="all">
+										<thead class="thead" align="left">
+											<tr class="row">
+												<th class="entry" valign="top" width="50%" id="d279824e1133">Name</th>
+												<th class="entry" valign="top" width="50%" id="d279824e1136">Description</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1133 ">
+													<span class="keyword parmname">Flat File Pending Orders Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FLAT_FILE_PENDING_ORDERS_DATA_</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1136 ">Tab-delimited flat file report that can be requested or
+													scheduled that shows all pending orders. For all sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1133 ">
+													<span class="keyword parmname">XML Pending Orders Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_PENDING_ORDERS_DATA_</samp>
+													</p>
+													
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1136 ">XML report that can be requested or scheduled that shows
+													all pending orders. Can only be scheduled using Amazon MWS.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1133 ">
+													<span class="keyword parmname">Converged Flat File Pending Orders
+														Report
+													</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_CONVERGED_FLAT_FILE_PENDING_ORDERS_DATA_</samp>
+													</p>
+													
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1136 ">Flat file report that can be requested or scheduled that
+													shows all pending orders. For Marketplace sellers.
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="section" id="ReportTypeCategories__ReturnsReports">
+								<h3 class="title sectiontitle">Returns Reports</h3>
+								<div class="tablenoborder">
+									<table cellpadding="4" cellspacing="0" summary="" id="ReportTypeCategories__ReturnsReportsTable" class="table" frame="border" border="1" rules="all">
+										<thead class="thead" align="left">
+											<tr class="row">
+												<th class="entry" valign="top" width="50%" id="d279824e1285">Name</th>
+												<th class="entry" valign="top" width="50%" id="d279824e1288">Description</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1285 ">
+													<span class="keyword parmname">XML Returns Report by Return Date</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_XML_RETURNS_DATA_BY_RETURN_DATE_</samp>
+													</p>
+													
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1288 ">XML report that can be requested or scheduled. Contains
+													detailed returns information, including return request date,
+													RMA ID, label details, ASIN, and return reason code. You can
+													request up to 60 days of data in a single report.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1285 ">
+													<span class="keyword parmname">Flat File Returns Report by Return Date</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE_</samp>
+													</p>
+													
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1288 ">Tab-delimited flat file report that can be requested or
+													scheduled. Contains detailed returns information, including
+													return request date, RMA ID, label details, ASIN, and return
+													reason code. You can request up to 60 days of data in a
+													single report.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1285 ">
+													<span class="keyword parmname">XML Prime Returns Report by Return Date</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_XML_MFN_PRIME_RETURNS_REPORT_</samp>
+													</p>
+													
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1288 ">XML report that can be requested or scheduled. Contains
+													detailed Seller Fulfilled Prime returns information,
+													including return request date, RMA ID, label details, ASIN,
+													and return reason code. You can request up to 60 days of
+													data in a single report.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1285 ">
+													<span class="keyword parmname">CSV Prime Returns Report by Return Date</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_CSV_MFN_PRIME_RETURNS_REPORT_</samp>
+													</p>
+													
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1288 ">Comma-separated flat file report that can be requested or
+													scheduled. Contains detailed Seller Fulfilled Prime returns
+													information, including return request date, RMA ID, label
+													details, ASIN, and return reason code. You can request up to
+													60 days of data in a single report.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1285 ">
+													<span class="keyword parmname">XML Return Attributes Report by Return
+														Date
+													</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_XML_MFN_SKU_RETURN_ATTRIBUTES_REPORT_</samp>
+													</p>
+													
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1288 ">XML report that can be requested or scheduled. Contains
+													detailed return attribute information by SKU, including
+													prepaid label eligibility and returnless refund eligibility.
+													You can request up to 60 days of data in a single
+													report.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1285 ">
+													<span class="keyword parmname">Flat File Return Attributes Report by Return
+														Date
+													</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FLAT_FILE_MFN_SKU_RETURN_ATTRIBUTES_REPORT_</samp>
+													</p>
+													
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1288 ">Tab-delimited flat file report that can be requested or
+													scheduled. Contains detailed return attribute information by
+													SKU, including prepaid label eligibility and returnless
+													refund eligibility. You can request up to 60 days of data in
+													a single report.
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="section" id="ReportTypeCategories__PerformanceReports">
+								<h3 class="title sectiontitle">Performance Reports</h3>
+								<div class="tablenoborder">
+									<table cellpadding="4" cellspacing="0" summary="" id="ReportTypeCategories__PerformanceReportsTable" class="table" frame="border" border="1" rules="all">
+										<thead class="thead" align="left">
+											<tr class="row">
+												<th class="entry" valign="top" width="50%" id="d279824e1557">Name</th>
+												<th class="entry" valign="top" width="50%" id="d279824e1560">Description</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1557 ">
+													<span class="keyword parmname">Flat File Feedback Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_SELLER_FEEDBACK_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1560 ">Tab-delimited flat file that returns negative and neutral
+													feedback (one to three stars) from buyers who rated your
+													seller performance. For all sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1557 ">
+													<span class="keyword parmname">XML Customer Metrics Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_V1_SELLER_PERFORMANCE_REPORT_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1560 ">XML file that contains the individual performance metrics
+													data from the Seller Central dashboard. For all
+													sellers.
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="section" id="ReportTypeCategories__SettlementReports">
+								<h3 class="title sectiontitle">Settlement Reports</h3>
+								<p class="p">Note that settlement reports cannot be requested or scheduled. They are
+									automatically scheduled by Amazon.
+								</p>
+								<div class="tablenoborder">
+									<table cellpadding="4" cellspacing="0" summary="" id="ReportTypeCategories__SettlementReportsTable" class="table" frame="border" border="1" rules="all">
+										<thead class="thead" align="left">
+											<tr class="row">
+												<th class="entry" valign="top" width="50%" id="d279824e1643">Name</th>
+												<th class="entry" valign="top" width="50%" id="d279824e1646">Description</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1643 ">
+													<span class="keyword parmname">Flat File Settlement Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_</samp>
+													</p>
+													<p class="p">
+														<span class="ph">
+															<a class="btn" href="Reports_GetReportList.html" title="Returns a list of reports that were created in the previous 90 days.">GetReportList</a>
+														</span>
+													</p>
+													<p class="p">
+														<span class="ph">
+															<a class="btn" href="../reports/Reports_GetReport.html">GetReport</a>
+														</span>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1646 ">Tab-delimited flat file settlement report that is
+													automatically scheduled by Amazon; it cannot be requested
+													through <span class="keyword apiname">RequestReport</span>. For all
+													sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1643 ">
+													<span class="keyword parmname">XML Settlement Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_V2_SETTLEMENT_REPORT_DATA_XML_</samp>
+													</p>
+													<p class="p">
+														<span class="ph">
+															<a class="btn" href="Reports_GetReportList.html" title="Returns a list of reports that were created in the previous 90 days.">GetReportList</a>
+														</span>
+													</p>
+													<p class="p">
+														<span class="ph">
+															<a class="btn" href="../reports/Reports_GetReport.html">GetReport</a>
+														</span>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1646 ">XML file settlement report that is automatically
+													scheduled by Amazon; it cannot be requested through
+													<span class="keyword apiname">RequestReport</span>. For Seller Central
+													sellers only.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1643 ">
+													<span class="keyword parmname">Flat File V2 Settlement Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_V2_</samp>
+													</p>
+													<p class="p">
+														<span class="ph">
+															<a class="btn" href="Reports_GetReportList.html" title="Returns a list of reports that were created in the previous 90 days.">GetReportList</a>
+														</span>
+													</p>
+													<p class="p">
+														<span class="ph">
+															<a class="btn" href="../reports/Reports_GetReport.html">GetReport</a>
+														</span>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1646 ">Tab-delimited flat file alternate version of the Flat
+													File Settlement Report that is automatically scheduled by
+													Amazon; it cannot be requested through
+													<span class="keyword apiname">RequestReport</span>. Price columns are
+													condensed into three general purpose columns: amounttype,
+													amountdescription, and amount. For Seller Central sellers
+													only.
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="section" id="ReportTypeCategories__FBAReports">
+								<h3 class="title sectiontitle">Fulfillment By Amazon (FBA) Reports</h3>
+								<p class="p">There are limits to how often Amazon will generate
+									<span class="ph">FBA</span>
+									reports. These limits depend on whether an <span class="ph">FBA</span> report is a near real-time report or
+									a daily report. See the following table to see which <span class="ph">FBA</span> reports are near real-time and which
+									are daily.
+								</p>
+								<p class="p">A near real-time <span class="ph">FBA</span> report is generated no more than
+									once every 30 minutes. This means that after a near real-time <span class="ph">FBA</span> report is generated following your
+									report request, a 30-minute waiting period must pass before Amazon will
+									generate an updated version of that report. Note that the four "All Orders"
+									reports are not subject to this limitation.
+								</p>
+								<p class="p">A daily <span class="ph">FBA</span> report is generated no more than once every
+									four hours. This means that after a daily <span class="ph">FBA</span> report is generated following your
+									report request, a four-hour waiting period must pass before Amazon will
+									generate an updated version of that report.
+								</p>
+								<p class="p">For more information, see the "Do not request FBA reports more frequently
+									than they are generated" section of the MWS for FBA Sellers Guide.
+								</p>
+								<div class="tablenoborder">
+									<table cellpadding="4" cellspacing="0" summary="" id="ReportTypeCategories__FBAReportsTable" class="table" frame="border" border="1" rules="all">
+										<thead class="thead" align="left">
+											<tr class="row">
+												<th class="entry" valign="top" width="50%" id="d279824e1837">Name</th>
+												<th class="entry" valign="top" width="50%" id="d279824e1840">Description</th>
+											</tr>
+											<tr class="row">
+												<th class="entry" colspan="2" valign="top" id="d279824e1846">FBA Sales Reports</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1837 d279824e1846 ">
+													<span class="keyword parmname">FBA Amazon Fulfilled Shipments Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_AMAZON_FULFILLED_SHIPMENTS_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1840 d279824e1846 ">Tab-delimited flat file. Contains detailed
+													order/shipment/item information including price, address,
+													and tracking data. You can request up to one month of data
+													in a single report. Content updated near real-time in Europe
+													(EU), Japan, and North America (NA). In China, content
+													updated daily. For FBA sellers only. For Marketplace and
+													Seller Central sellers.
+													<div class="note note">
+														<span class="notetitle">Note:</span>
+														In Japan, EU, and NA, in most
+														cases, there will be a delay of approximately one to
+														three hours from the time a fulfillment order ships and
+														the time the items in the fulfillment order appear in
+														the report. In some rare cases there could be a delay of
+														up to 24 hours.
+													</div>
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1837 d279824e1846 ">
+													<span class="keyword parmname">Flat File All Orders Report by Last
+														Update
+													</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1840 d279824e1846 ">Tab-delimited flat file. Returns all orders updated in
+													the specified date range regardless of fulfillment channel
+													or shipment status. This report is intended for order
+													tracking, not to drive your fulfillment process; it does not
+													include customer identifying information and scheduling is
+													not supported. For all sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1837 d279824e1846 ">
+													<span class="keyword parmname">Flat File All Orders Report by Order
+														Date
+													</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FLAT_FILE_ALL_ORDERS_DATA_BY_ORDER_DATE_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1840 d279824e1846 ">Tab-delimited flat file. Returns all orders placed in the
+													specified date range regardless of fulfillment channel or
+													shipment status. This report is intended for order tracking,
+													not to drive your fulfillment process; it does not include
+													customer identifying information and scheduling is not
+													supported. For all sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1837 d279824e1846 ">
+													<span class="keyword parmname">XML All Orders Report by Last Update</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_XML_ALL_ORDERS_DATA_BY_LAST_UPDATE_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1840 d279824e1846 ">XML file order report that returns all orders updated in
+													the specified date range regardless of fulfillment channel
+													or shipment status. This report is intended for order
+													tracking, not to drive your fulfillment process; it does not
+													include customer identifying information and scheduling is
+													not supported. For all sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1837 d279824e1846 ">
+													<span class="keyword parmname">XML All Orders Report by Order Date</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_XML_ALL_ORDERS_DATA_BY_ORDER_DATE_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1840 d279824e1846 ">XML file order report that returns all orders placed in
+													the specified date range regardless of fulfillment channel
+													or shipment status. This report is intended for order
+													tracking, not to drive your fulfillment process; it does not
+													include customer identifying information and scheduling is
+													not supported. For all sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1837 d279824e1846 ">
+													<span class="keyword parmname">FBA Customer Shipment Sales Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_FULFILLMENT_CUSTOMER_SHIPMENT_SALES_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1840 d279824e1846 ">Tab-delimited flat file. Contains condensed item level
+													data on shipped FBA customer orders including price,
+													quantity, and ship to location. Content updated near
+													real-time in Europe (EU), Japan, and North America (NA). In
+													China, content updated daily. For FBA sellers only. For
+													Marketplace and Seller Central sellers.
+													<div class="note note">
+														<span class="notetitle">Note:</span>
+														In Japan, EU,
+														and NA, in most cases, there will be a delay of
+														approximately one to three hours from the time a
+														fulfillment order ships and the time the items in the
+														fulfillment order appear in the report. In some rare
+														cases there could be a delay of up to 24
+														hours.
+													</div>
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1837 d279824e1846 ">
+													<span class="keyword parmname">FBA Promotions Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_FULFILLMENT_CUSTOMER_SHIPMENT_PROMOTION_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1840 d279824e1846 ">Tab-delimited flat file. Contains promotions applied to FBA customer orders sold
+													through Amazon; e.g. Super Saver Shipping. Content updated
+													daily. <span class="ph">This report is only available to FBA sellers in
+														the North America (NA) region.
+													</span> For Marketplace and Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e1837 d279824e1846 ">
+													<span class="keyword parmname">FBA Customer Taxes</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_FULFILLMENT_CUSTOMER_TAXES_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e1840 d279824e1846 ">Tab-delimited flat file for tax-enabled US sellers. This
+													report contains data through February 28, 2013. All new
+													transaction data can be found in the <a class="btn" href="#ReportTypeCategories__SalesTaxReports">Sales Tax Report</a>. For FBA sellers only. For
+													Marketplace and Seller Central sellers.
+												</td>
+											</tr>
+										</tbody>
+										<thead class="thead" align="left">
+											<tr class="row">
+												<th class="entry" colspan="2" valign="top" id="d279824e2087">FBA Inventory Reports</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Amazon Fulfilled Inventory Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_AFN_INVENTORY_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Content updated in near
+													real-time. For FBA sellers only. For Marketplace and Seller
+													Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Multi-Country Inventory Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_AFN_INVENTORY_DATA_BY_COUNTRY_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Contains quantity available for
+													local fulfillment by country, helping Multi-Country
+													Inventory sellers in Europe track their FBA inventory.
+													Content updated in near-real time. This report is only
+													available to FBA sellers in European (EU) marketplaces. For
+													Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Daily Inventory History Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_FULFILLMENT_CURRENT_INVENTORY_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Contains historical daily
+													snapshots of your available inventory in Amazon’s
+													fulfillment centers including quantity, location and
+													disposition. Content updated daily. For FBA sellers only.
+													For Marketplace and Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Monthly Inventory History Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_FULFILLMENT_MONTHLY_INVENTORY_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Contains historical monthly
+													snapshots of your available inventory in Amazon’s
+													fulfillment centers including average and end-of-month
+													quantity, location and disposition. Content updated daily.
+													For FBA sellers only. For Marketplace and Seller Central
+													sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Received Inventory Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_FULFILLMENT_INVENTORY_RECEIPTS_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Contains inventory that has
+													completed the receive process at Amazon’s fulfillment
+													centers. Content updated daily. For FBA sellers only. For
+													Marketplace and Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Reserved Inventory Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_RESERVED_INVENTORY_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Provides data about the number
+													of reserved units in your inventory. Content updated in near
+													real-time. For FBA sellers only. For Marketplace and Seller
+													Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Inventory Event Detail Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_FULFILLMENT_INVENTORY_SUMMARY_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Contains history of inventory
+													events (e.g. receipts, shipments, adjustments etc.) by SKU
+													and Fulfillment Center. Content updated daily. For FBA
+													sellers only. For Marketplace and Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Inventory Adjustments Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_FULFILLMENT_INVENTORY_ADJUSTMENTS_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Contains corrections and updates
+													to your inventory in response to issues such as damage,
+													loss, receiving discrepancies, etc. Content updated daily.
+													For FBA sellers only. For Marketplace and Seller Central
+													sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Inventory Health Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_FULFILLMENT_INVENTORY_HEALTH_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Contains information about
+													inventory age, condition, sales volume, weeks of cover, and
+													price. Content updated daily. For FBA Sellers only. For
+													Marketplace and Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Manage Inventory</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_MYI_UNSUPPRESSED_INVENTORY_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Contains current details of
+													active (not archived) inventory including condition,
+													quantity and volume. Content updated in near real-time. For
+													FBA sellers only. For Marketplace and Seller Central
+													sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Manage Inventory - Archived</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_MYI_ALL_INVENTORY_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Contains current details of all
+													(including archived) inventory including condition, quantity
+													and volume. Content updated in near real-time. For FBA
+													sellers only. For Marketplace and Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">Restock Inventory Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_RESTOCK_INVENTORY_RECOMMENDATIONS_REPORT_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab delimited flat file. Provides recommendations on products to restock, suggested
+													order quantities, and reorder dates. For more information,
+													see <a class="btn" href="https://sellercentral.amazon.com/gp/help/202105670" target="_blank">Restock
+														Inventory Report</a>. Content
+													updated in near real-time.
+													<span class="ph">This report is only available to FBA sellers in
+														the US marketplace.
+													</span>
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Inbound Performance Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_FULFILLMENT_INBOUND_NONCOMPLIANCE_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Contains inbound shipment problems by product and shipment.
+													Content updated daily. For Marketplace and Seller Central
+													sellers.
+													<span class="ph">This report is only available to FBA sellers.</span>
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Stranded Inventory Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_STRANDED_INVENTORY_UI_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Contains a breakdown of inventory in stranded status,
+													including recommended actions. Content updated in near
+													real-time. <span class="ph">This report is only available to FBA
+														sellers in the US, India, and Japan marketplaces.
+													</span> For more information, see <a class="btn" href="https://sellercentral.amazon.com/gp/help/201835130" target="_blank">Stranded
+														Inventory Report</a>.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Bulk Fix Stranded Inventory Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_STRANDED_INVENTORY_LOADER_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Contains a list of stranded inventory. Update the listing
+													information in this report file and then submit the file
+													using the Flat File Inventory Loader Feed
+													(_POST_FLAT_FILE_INVLOADER_DATA_) of the <span class="ph">Feeds API section</span>. Content
+													updated in near real-time. <span class="ph">This report is only available to FBA
+														sellers in the US, India, and Japan marketplaces.
+													</span> For more information, see <a class="btn" href="https://sellercentral.amazon.com/gp/help/201968550" target="_blank">Bulk Fix
+														Stranded Inventory Report</a>.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Inventory Age Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_INVENTORY_AGED_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Indicates the age of inventory, which helps sellers take
+													action to avoid paying the Long Term Storage Fee. Content
+													updated daily. <span class="ph">This report is only available to FBA
+														sellers in the US, India, and Japan marketplaces.
+													</span> For more information, see <a class="btn" href="https://sellercentral.amazon.com/gp/help/201979220" target="_blank">Inventory
+														Age Report</a>.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Manage Excess Inventory Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_EXCESS_INVENTORY_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Contains listings with excess inventory, which helps
+													sellers take action to sell through faster. Content updated
+													in near real-time. <span class="ph">This report is only available to FBA
+														sellers in the US, India, and Japan marketplaces.
+													</span> For more information, see <a class="btn" href="https://sellercentral.amazon.com/gp/help/201835150" target="_blank">Excess
+														Inventory Report</a>.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">
+													<span class="keyword parmname">FBA Storage Fees Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_STORAGE_FEE_CHARGES_DATA_</samp>
+													</p>
+													
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2087 ">Tab-delimited flat file. Contains estimated monthly
+													inventory storage fees for each ASIN of a seller's inventory
+													in <span class="ph">Amazon fulfillment centers</span>. For FBA sellers
+													only.
+												</td>
+											</tr>
+										</tbody>
+										<thead class="thead" align="left">
+											<tr class="row">
+												<th class="entry" colspan="2" valign="top" id="d279824e2635">FBA Payments Reports</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2635 ">
+													<span class="keyword parmname">FBA Fee Preview Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_ESTIMATED_FBA_FEES_TXT_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2635 ">Tab-delimited flat file. Contains the estimated Amazon
+													Selling and Fulfillment Fees for your FBA inventory with
+													active offers. The content is updated at least once every 72
+													hours. To successfully generate a report, specify the
+													<span class="keyword parmname">StartDate</span>
+													parameter of a minimum 72
+													hours prior to NOW and <span class="keyword parmname">EndDate</span> to NOW.
+													For FBA sellers in the NA and EU only. For Marketplace and
+													Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2635 ">
+													<span class="keyword parmname">FBA Reimbursements Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_REIMBURSEMENTS_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2635 ">Tab-delimited flat file. Contains itemized details of
+													your inventory reimbursements including the reason for the
+													reimbursement. Content updated daily. For FBA sellers only.
+													For Marketplace and Seller Central sellers.
+												</td>
+											</tr>
+										</tbody>
+										<thead class="thead" align="left">
+											<tr class="row">
+												<th class="entry" colspan="2" valign="top" id="d279824e2712">FBA Customer Concessions
+													Reports
+												</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2712 ">
+													<span class="keyword parmname">FBA Returns Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2712 ">Tab-delimited flat file. Contains customer returned items received at an <span class="ph">Amazon fulfillment center</span>, including Return
+													Reason and Disposition. Content updated daily. For FBA
+													sellers only. For Marketplace and Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2712 ">
+													<span class="keyword parmname">FBA Replacements Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_FULFILLMENT_CUSTOMER_SHIPMENT_REPLACEMENT_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2712 ">Tab-delimited flat file. Contains replacements that have
+													been issued to customers for completed orders. Content
+													updated daily. For FBA sellers only. For Marketplace and
+													Seller Central sellers. Available in the US and China (CN)
+													only.
+												</td>
+											</tr>
+										</tbody>
+										<thead class="thead" align="left">
+											<tr class="row">
+												<th class="entry" colspan="2" valign="top" id="d279824e2786">FBA Removals Reports</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2786 ">
+													<span class="keyword parmname">FBA Recommended Removal Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_RECOMMENDED_REMOVAL_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2786 ">Tab-delimited flat file. The report identifies sellable
+													items that will be 365 days or older during the next
+													Long-Term Storage cleanup event, if the report is generated
+													within six weeks of the cleanup event date. The report
+													includes both sellable and unsellable items. Content updated
+													daily. For FBA sellers. For Marketplace and Seller Central
+													sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2786 ">
+													<span class="keyword parmname">FBA Removal Order Detail Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_FULFILLMENT_REMOVAL_ORDER_DETAIL_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2786 ">Tab-delimited flat file. This report contains all the removal orders, including the
+													items in each removal order, placed during any given time
+													period. This can be used to help reconcile the total number
+													of items requested to be removed from an <span class="ph">Amazon fulfillment center</span> with the actual number
+													of items removed along with the status of each item in the
+													removal order. Content updated in near real-time. For FBA
+													sellers. For Marketplace and Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2786 ">
+													<span class="keyword parmname">FBA Removal Shipment Detail Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FBA_FULFILLMENT_REMOVAL_SHIPMENT_DETAIL_DATA_</samp>
+													</p>
+													
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2786 ">Tab-delimited flat file. This report provides shipment tracking information for all
+													removal orders and includes the items that have been removed
+													from an <span class="ph">Amazon fulfillment center</span> for either a
+													single removal order or for a date range. This report will
+													not include canceled returns or disposed items; it is only
+													for shipment information. Content updated in near real-time.
+													For FBA sellers. For Marketplace and Seller Central sellers.
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="section" id="ReportTypeCategories__SalesTaxReports">
+								<h3 class="title sectiontitle">Tax Reports</h3>
+								<div class="tablenoborder">
+									<table cellpadding="4" cellspacing="0" summary="" id="ReportTypeCategories__SalesTaxReportsTable" class="table" frame="border" border="1" rules="all">
+										<thead class="thead" align="left">
+											<tr class="row">
+												<th class="entry" valign="top" width="50%" id="d279824e2899">Name</th>
+												<th class="entry" valign="top" width="50%" id="d279824e2902">Description</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2899 ">
+													<span class="keyword parmname">Sales Tax Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_FLAT_FILE_SALES_TAX_DATA_</samp>
+													</p>
+													<p class="p">
+														<span class="ph">
+															<a class="btn" href="Reports_GetReportList.html" title="Returns a list of reports that were created in the previous 90 days.">GetReportList</a>
+														</span>
+													</p>
+													<p class="p">
+														<span class="ph">
+															<a class="btn" href="../reports/Reports_GetReport.html">GetReport</a>
+														</span>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2902 ">Tab-delimited flat file for tax-enabled US sellers. Content updated daily. This
+													report cannot be requested or scheduled. You must generate
+													the report from the <a class="btn" href="https://sellercentral.amazon.com/gp/tax/tax-library.html" target="_blank">Tax Document Library</a> in Seller
+													Central. After the report has been generated, you can
+													download the report using the
+													<span class="keyword apiname">GetReportList</span>
+													and
+													<span class="keyword apiname">GetReport</span>
+													operations. For Marketplace
+													and Seller Central sellers.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2899 ">
+													<span class="keyword parmname">Amazon VAT Calculation Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_SC_VAT_TAX_REPORT_</samp>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2902 ">Comma-separated flat file report that provides detailed
+													value-added tax (VAT) calculation information for buyer
+													shipments, returns, and refunds. This report is only
+													available in the Germany, Spain, Italy, France, and UK
+													marketplaces.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2899 ">
+													<span class="keyword parmname">Amazon VAT Transactions Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_VAT_TRANSACTION_DATA_</samp>
+													</p>
+													<span class="ph"></span>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2902 ">Tab-delimited flat file report that provides detailed information for sales,
+													returns, refunds, cross border inbound and cross border
+													fulfillment center transfers. This report is only available
+													in the Germany, Spain, Italy, France, and UK marketplaces.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2899 ">
+													<span class="keyword parmname">On Demand GST Merchant Tax Report B2B</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_GST_MTR_B2B_CUSTOM_</samp>
+													</p>
+													<span class="ph"></span>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2902 ">Tab-delimited flat file report that provides detailed information about sales,
+													refunds, and cancellations from <span class="ph">Amazon Business</span> invoices issued
+													within a date range that you specify. This report is only
+													available in the India marketplace.
+												</td>
+											</tr>
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d279824e2899 ">
+													<span class="keyword parmname">On Demand GST Merchant Tax Report B2C</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_GST_MTR_B2C_CUSTOM_</samp>
+													</p>
+													<span class="ph"></span>
+												</td>
+												<td class="entry" valign="top" width="50%" headers="d279824e2902 ">Tab-delimited flat file report that provides detailed information about sales,
+													refunds, and cancellations from consumer invoices issued
+													within a date range that you specify. This report is only
+													available in the India marketplace.
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="section" id="ReportTypeCategories__BrowseTreeReports">
+								<h3 class="title sectiontitle">Browse Tree Report</h3>
+								<div class="tablenoborder">
+									<table cellpadding="4" cellspacing="0" summary="" id="ReportTypeCategories__BrowseTreeReportsTable" class="table" frame="border" border="1" rules="all">
+										<thead class="thead" align="left">
+											<tr class="row">
+												<th class="entry" valign="top" width="29.761904761904763%" id="d279824e3075">Name</th>
+												<th class="entry" valign="top" width="70.23809523809523%" id="d279824e3078">Description</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr class="row">
+												<td class="entry" valign="top" width="29.761904761904763%" headers="d279824e3075 ">
+													<span class="keyword parmname">Browse Tree Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_XML_BROWSE_TREE_DATA_</samp>
+													</p>
+													
+													
+												</td>
+												<td class="entry" valign="top" width="70.23809523809523%" headers="d279824e3078 ">XML report that provides browse tree hierarchy information and node refinement
+													information for the Amazon retail website in any
+													marketplace.
+													<p class="p">Can be requested or scheduled. For
+														Marketplace and Seller Central sellers.
+													</p>
+													<p class="p">This
+														report accepts the
+														following
+														<span class="keyword parmname">ReportOptions</span>
+														values:
+													</p>
+													<ul class="ul">
+														<li class="li">
+															<span class="keyword parmname">MarketplaceId</span>
+															– Specifies the
+															marketplace from which you want browse tree
+															information. Optional. If
+															<span class="keyword parmname">MarketplaceId</span>
+															is not included
+															in the <span class="keyword parmname">ReportOptions</span> parameter,
+															the report contains browse tree information from
+															your default marketplace.
+															<div class="note note">
+																<span class="notetitle">Note:</span>
+																You must be
+																registered as a seller in any marketplace that you
+																specify using the
+																<span class="keyword parmname">MarketplaceId</span>
+																value. Also,
+																your request must be sent to an endpoint that
+																corresponds to the
+																<span class="keyword parmname">MarketplaceId</span>
+																that you
+																specify. Otherwise the service returns an error.
+																You can find a list of
+																<span class="keyword parmname">MarketplaceId</span>
+																values and
+																endpoints in the "Amazon MWS endpoints and
+																MarketplaceId values" section of the Amazon MWS
+																Developer Guide.
+															</div>
+														</li>
+														<li class="li">
+															<span class="keyword parmname">RootNodesOnly</span>
+															- <span class="ph">Type: xs:boolean</span>. Optional.
+															If <var class="keyword varname">true</var>, then the report contains
+															only the root nodes from the marketplace specified
+															using <span class="keyword parmname">MarketplaceId</span> (or from
+															your default marketplace, if
+															<span class="keyword parmname">MarketplaceId</span>
+															is not
+															specified). If <var class="keyword varname">false</var>, or if
+															<span class="keyword parmname">RootNodesOnly</span>
+															is not included
+															in the <span class="keyword parmname">ReportOptions</span> parameter,
+															then the content of the report depends on the value
+															of <span class="keyword parmname">BrowseNodeId</span>.
+														</li>
+														<li class="li">
+															<span class="keyword parmname">BrowseNodeId</span>
+															– Specifies the
+															top node of the browse tree hierarchy in the report.
+															Optional. If <span class="keyword parmname">BrowseNodeId</span> is
+															not included in the
+															<span class="keyword parmname">ReportOptions</span>
+															parameter, and
+															if <span class="keyword parmname">RootNodesOnly</span> is
+															<var class="keyword varname">false</var>
+															or is not included in the
+															<span class="keyword parmname">ReportOptions</span>
+															parameter, then
+															the report contains the entire browse node hierarchy
+															from the marketplace specified using
+															<span class="keyword parmname">MarketplaceId</span>
+															(or from your
+															default marketplace, if
+															<span class="keyword parmname">MarketplaceId</span>
+															is not
+															specified). Note that if you include an invalid
+															<span class="keyword parmname">BrowseNodeId</span>
+															in your request,
+															the service returns a report that contains no
+															data.
+														</li>
+													</ul>
+													<div class="note note">
+														<span class="notetitle">Note:</span>
+														If <span class="keyword parmname">RootNodesOnly</span> and
+														<span class="keyword parmname">BrowseNodeId</span>
+														are both included
+														in the <span class="keyword parmname">ReportOptions</span> parameter,
+														<span class="keyword parmname">RootNodesOnly</span>
+														takes precedence.
+													</div>
+													<div class="note note">
+														<span class="notetitle">Note:</span>
+														Amazon recommends that you do not include
+														the <span class="keyword parmname">MarketplaceIdList</span> parameter
+														with calls to the
+														<span class="keyword apiname">RequestReport</span>
+														operation that request the <span class="keyword parmname">Browse Tree
+														Report</span>. If there is ever a conflict
+														between a
+														<span class="keyword parmname">MarketplaceIdList</span>
+														parameter value and the
+														<span class="keyword parmname">MarketplaceId</span>
+														value of the
+														<span class="keyword parmname">ReportOptions</span>
+														parameter, the
+														<span class="keyword parmname">MarketplaceId</span>
+														value takes
+														precedence.
+													</div>
+													<p class="p">To keep track of which browse nodes
+														change over time, Amazon recommends that each time you
+														request this report you compare it to the last report
+														you requested using the same
+														<span class="keyword parmname">ReportOptions</span>
+														values.
+													</p>
+													<p class="p">URL-encoded example:
+														<samp class="ph codeph">ReportOptions=MarketplaceId%3DATVPDKIKX0DER;BrowseNodeId%3D15706661</samp>
+													</p>
+													<p class="p">The
+														Browse Tree Report is described by the following XSD:
+														<a class="btn" href="https://images-na.ssl-images-amazon.com/images/G/01/mwsportal/doc/en_US/Reports/XSDs/BrowseTreeReport.xsd" target="_blank">BrowseTreeReport.xsd</a>.
+													</p>
+													<div class="note note">
+														<span class="notetitle">Note:</span>
+														As Amazon updates the Amazon MWS Reports
+														API section, we may update the BrowseTreeReport.xsd
+														schema. Keep this in mind if you choose to use this
+														schema for validation. Monitor an Amazon MWS discussion
+														forum for announcements of updates to the
+														BrowseTreeReport.xsd schema. You can find the Amazon MWS
+														discussion forums here:
+														<ul class="ul">
+															<li class="li">Chinese:
+																<a class="btn" href="https://mai.amazon.cn/forums/forum.jspa?forumID=15" target="_blank">https://mai.amazon.cn/forums/forum.jspa?forumID=15</a>
+															</li>
+															<li class="li">English:
+																<a class="btn" href="https://sellercentral.amazon.com/forums/forum.jspa?forumID=35" target="_blank">https://sellercentral.amazon.com/forums/forum.jspa?forumID=35</a>
+															</li>
+															<li class="li">Japanese:
+																<a class="btn" href="https://sellercentral.amazon.co.jp/forums/forum.jspa?forumID=14" target="_blank">https://sellercentral.amazon.co.jp/forums/forum.jspa?forumID=14</a>
+															</li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="section" id="ReportTypeCategories__EasyShipReport">
+								<h3 class="title sectiontitle">Easy Ship Report</h3>
+								<div class="tablenoborder">
+									<table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+										<thead class="thead" align="left">
+											<tr class="row">
+												<th class="entry" valign="top" width="29.761904761904763%" id="d279824e3314">Name</th>
+												<th class="entry" valign="top" width="70.23809523809523%" id="d279824e3317">Description</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr class="row">
+												<td class="entry" valign="top" width="29.761904761904763%" headers="d279824e3314 ">
+													<span class="keyword parmname">EasyShip Report</span>
+													<p class="p">Enumeration value:
+														<samp class="ph codeph">_GET_EASYSHIP_DOCUMENTS_</samp>
+													</p>
+													<p class="p">
+														<a class="btn" href="../reports/Reports_GetReport.html#GetReport">GetReport</a>
+													</p>
+												</td>
+												<td class="entry" valign="top" width="70.23809523809523%" headers="d279824e3317 ">PDF report that contains the invoice, shipping label, and warranty (if available)
+													documents for the
+													<span class="ph">Amazon Easy Ship</span>
+													order. <span class="ph">This report is only available in the India
+														marketplace.
+													</span> For
+													more information, see <a class="btn" href="../easy_ship/EasyShip_HowToGetEasyShipDocs.html">How to get invoice, shipping label, and warranty documents</a>.
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</field>
+		</record>
+		<!--ACTIONS-->
+		<record id="action_amz_custom_report_wizard" model="ir.actions.act_window">
+			<field name="name">Amazon Report</field>
+			<field name="res_model">amz.custom.report.wizard</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+	</data>
+</odoo>

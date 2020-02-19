@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+a1,a1,model_mapm_sales_report,base.group_user,1,1,1,1
+a2,a2,model_mapm_pbl_sales_report,base.group_user,1,1,1,1
+a3,a3,model_return_cost_report,base.group_user,1,1,1,1

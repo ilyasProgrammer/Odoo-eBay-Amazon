@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_inventory_average_costs" model="ir.actions.act_url">
+            <field name="name">Inventory Average Costs</field>
+            <field name="url">/reports/inventory_ave_costs</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="action_amazon_mapping" model="ir.actions.act_url">
+            <field name="name">Amazon Mapping</field>
+            <field name="url">/reports/amazon_mapping</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="action_c2c_competition_report" model="ir.actions.act_url">
+            <field name="name">C2C Competition Report</field>
+            <field name="url">/reports/c2c_competition</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="action_non_c2c_competition_report" model="ir.actions.act_url">
+            <field name="name">Non C2C Competition Report</field>
+            <field name="url">/reports/non_c2c_competition</field>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem name="ebay_stock"
+                  id="ebay_stock"
+                  parent="stock.menu_warehouse_report"
+                  action="action_ebay_stock_wizard"/>
+
+        <menuitem name="Inventory Average Costs"
+                  id="menu_inventory_ave_costs"
+                  parent="stock.menu_warehouse_report"
+                  action="action_inventory_average_costs"/>
+
+        <menuitem name="Dropship Demand"
+                  id="menu_dropship_demand_wizard"
+                  parent="purchase.purchase_report"
+                  action="action_dropship_demand_wizard"/>
+
+        <menuitem name="Sales Demand"
+                  id="menu_sale_demand_wizard"
+                  parent="sales_team.menu_sale_report"
+                  action="action_sale_demand_wizard"/>
+
+        <menuitem name="C2C Competition"
+                  id="menu_sale_c2c_competition_report"
+                  parent="sales_team.menu_sale_report"
+                  action="action_c2c_competition_report" />
+
+        <menuitem name="Non C2C Competition"
+                  id="menu_sale_non_c2c_competition_report"
+                  parent="sales_team.menu_sale_report"
+                  action="action_non_c2c_competition_report" />
+
+        <menuitem name="Competition Demand"
+                  id="menu_competition_demand_report"
+                  parent="sales_team.menu_sale_report"
+                  action="action_competition_demand_wizard" />
+
+        <menuitem name="Missing Features"
+                  id="menu_missing_features_wizard"
+                  parent="sales_team.menu_sale_report"
+                  action="action_missing_features_wizard"/>
+
+        <menuitem name="Unlisted WH Items"
+                  id="menu_unlisted_wh_items_wizard"
+                  parent="sales_team.menu_sale_report"
+                  action="action_unlisted_wh_items_wizard"
+                  sequence="20"/>
+
+        <menuitem name="Unlisted WH Items By Brand"
+                  id="menu_unlisted_wh_items_by_brand_wizard"
+                  parent="sales_team.menu_sale_report"
+                  action="action_unlisted_wh_items_by_brand_wizard"
+                  sequence="21"/>
+
+        <menuitem name="Unlisted WH Kits"
+                  id="menu_unlisted_wh_kits_wizard"
+                  parent="sales_team.menu_sale_report"
+                  action="action_unlisted_wh_kits_wizard"/>
+
+        <menuitem name="Unsold WH Items"
+                  id="menu_unsold_wh_items"
+                  parent="sales_team.menu_sale_report"
+                  action="action_unsold_wh_items_wizard"/>
+
+        <menuitem name="Amazon Mapping"
+                  id="menu_amazon_mapping_wizard"
+                  parent="sales_team.menu_sale_report"
+                  action="action_amazon_mapping"/>
+
+        <menuitem name="Lossy Do Not Reprice Listings MAPM"
+                  id="menu_lossy_dnrl_wizard"
+                  parent="sales_team.menu_sale_report"
+                  action="action_lossy_dnrl_wizard"/>
+
+        <!-- Sales reports -->
+        <menuitem id="menu_sales_reports_root" name="Sales Reports" parent="sales_team.menu_base_partner" sequence="95"/>
+
+        <!-- I had to lower Reports menu sequence -->
+        <menuitem id="sales_team.menu_sale_report" name="Reports" parent="sales_team.menu_base_partner" sequence="90" groups="sales_team.group_sale_manager"/>
+
+        <menuitem name="Dropship Margin"
+                  id="menu_sale_dropship_margin_wizard"
+                  parent="menu_sales_reports_root"
+                  action="action_dropship_margin_wizard"/>
+
+        <menuitem name="Sales Margins"
+                  id="menu_sales_margin_wizard"
+                  parent="menu_sales_reports_root"
+                  sequence="30"
+                  action="action_sales_margin_wizard"/>
+
+        <menuitem name="Sales Margins Returns"
+                  id="menu_sales_margin_ret_wizard"
+                  parent="menu_sales_reports_root"
+                  sequence="31"
+                  action="action_sales_margin_ret_wizard"/>
+
+        <menuitem name="Sales Margins by States"
+                  id="menu_sales_margin_states_wizard"
+                  parent="menu_sales_reports_root"
+                  sequence="31"
+                  action="action_sales_margin_states_wizard"/>
+
+        <menuitem name="Sales Margins MAPM"
+                  id="menu_sales_margin_mapm_wizard"
+                  parent="menu_sales_reports_root"
+                  sequence="32"
+                  action="action_sales_margin_mapm_wizard"/>
+
+        <menuitem name="Sales Margins MAPM PBL"
+                  id="menu_sales_margin_mapm_pbl_wizard"
+                  parent="menu_sales_reports_root"
+                  sequence="33"
+                  action="action_sales_margin_mapm_pbl_wizard"/>
+
+        <menuitem name="Sales Margins Grouped"
+                  id="menu_sales_margin_grouped_wizard"
+                  parent="menu_sales_reports_root"
+                  sequence="34"
+                  action="action_sales_margin_grouped_wizard"/>
+
+        <menuitem name="Sales Per Product"
+                  id="menu_sales_per_product_wizard"
+                  parent="menu_sales_reports_root"
+                  sequence="35"
+                  action="action_sales_per_product_wizard"/>
+
+        <menuitem name="Amazon Reports"
+                  id="menu_amazon_custom_business_reports_wizard"
+                  parent="sales_team.menu_base_partner"
+                  sequence="96"
+                  action="action_amz_custom_report_wizard"/>
+
+        <menuitem name="MAPM Buy Box"
+                  id="menu_mapm_buy_box_wizard"
+                  parent="sales_team.menu_sale_report"
+                  sequence="22"
+                  action="action_mapm_buy_box_wizard"/>
+
+        <menuitem name="Returns Scrap"
+                  id="menu_return_scrap_views"
+                  parent="dynamic_reports_action_root"
+                  sequence="9"
+                  action="action_return_scrap_wizard"/>
+
+        <menuitem name="Returns Percent"
+                  id="menu_return_percent_views"
+                  parent="dynamic_reports_action_root"
+                  sequence="10"
+                  action="action_return_percent_wizard"/>
+
+        <menuitem name="International POs Discrepancy"
+                  id="menu_po_international_diff_views"
+                  parent="purchase.purchase_report"
+                  sequence="3"
+                  action="action_po_international_diff_wizard"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ship_carrier_package_user,ship.carrier.package.user,model_ship_carrier_package,base.group_user,1,1,1,1
+access_ship_carrier_user,ship.carrier.user,model_ship_carrier,base.group_user,1,1,1,1
+access_ship_carrier_service_user,ship.carrier.service.user,model_ship_carrier_service,base.group_user,1,1,1,1
+access_product_listing_user,product.listing.user,model_product_listing,base.group_user,1,1,1,1
+access_sale_store_user,sale.store.user,model_sale_store,base.group_user,1,1,1,1
+access_sale_store_feed_user,sale.store.feed.user,model_sale_store_feed,base.group_user,1,0,0,0
+access_sale_store_log_user,sale.store.log.user,model_sale_store_log,base.group_user,1,0,0,0
+access_sale_store_admin,sale.store.admin,model_sale_store,base.group_system,1,1,1,1
+access_sale_store_feed_admin,sale.store.feed.admin,model_sale_store_feed,base.group_user,1,1,1,1
+access_sale_store_log_admin,sale.store.log.admin,model_sale_store_log,base.group_user,1,1,1,1
+access_sale_order_line_kit_user,sale.order.line.kit.user,model_sale_order_line_kit,base.group_user,1,1,1,1
+access_sale_store_image_user,sale.store.image.user,model_sale_store_image,base.group_user,1,1,1,1

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_picking_with_return_form" model="ir.ui.view">
+            <field name="name">stock.picking.with.return.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">
+                <field name="min_date" position="after">
+                    <field name="receipt_return_id" attrs="{'invisible': [('receipt_return_id', '=', False)]}"/>
+                    <field name="replacement_return_id" attrs="{'invisible': [('replacement_return_id', '=', False)]}"/>
+                </field>
+                <button name="action_see_move_scrap" position="after">
+                    <button name="action_get_attachment_tree_view"
+                            class="oe_stat_button"
+                            icon="fa-book"
+                            type="object">
+                        <field name="attachment_number" widget="statinfo" string="Attachments"/>
+                    </button>
+                </button>
+            </field>
+        </record>
+    </data>
+</odoo>

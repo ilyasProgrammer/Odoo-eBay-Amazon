@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="zero_stock_notification" model="mail.template">
+            <field name="name">Zero Stock Notification</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="email_from"><![CDATA[Opsyst Admin <admin@opsyst.com>]]></field>
+            <field name="email_to">ajporlante@gmail.com</field>
+            <field name="subject"><![CDATA[ ${ctx.get('sku')} is Now Out of Stock ]]></field>
+            <field name="body_html"><![CDATA[
+<style>
+td {
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+}
+table {
+    border-right:1px solid black;
+    border-bottom:1px solid black;
+}
+</style>
+
+<p>We just ran out of stock of ${ctx.get('sku')}. Handling time for Amazon listings will be updated.</p>
+
+<p>Stock level thru dropship is <strong>${ctx.get('qty')}</strong> and minimum cost is <strong>${ctx.get('cost')}</strong>.</p>
+
+<br/>
+
+<p><strong>Last Order</strong></p>
+<p>Ref: ${ctx.get('line').order_id.name }</p>
+<p>Store: ${ctx.get('line').order_id.store_id.name }</p>
+<p>Order ID: ${ctx.get('line').order_id.web_order_id }</p>
+
+
+<br/>
+
+<p><strong>Following listings will be updates:</strong></p>
+<table cellpadding="0" cellspacing="0">
+    <tr>
+        <td width="160px"><strong>Store</strong></td>
+        <td width="240px"><strong>SKU</strong></td>
+        <td width="160px"><strong>New Qty</strong></td>
+        <td width="160px"><strong>New Price</strong></td>
+    </tr>
+    % for l in ctx.get('updates'):
+        <tr>
+            <td>${l['store'].title()}</td>
+            <td>${l['item_id']}</td>
+            <td align="right">${l['qty']}</td>
+            <td align="right">${round(l['price'], 2)}</td>
+        </tr>
+     % endfor
+</table>
+
+
+
+]]></field>
+            <field name="user_signature" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_ship_carrier" model="ir.actions.act_window">
+            <field name="name">Carriers</field>
+            <field name="res_model">ship.carrier</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_ship_carrier_tree" model="ir.ui.view">
+            <field name="name">view.ship.carrier.tree</field>
+            <field name="model">ship.carrier</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_ship_carrier_form" model="ir.ui.view">
+            <field name="name">view.ship.carrier.form</field>
+            <field name="model">ship.carrier</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="ss_code"/>
+                            </group>
+                            <group>
+                                <field name="description"/>
+                                <field name="enabled"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="services" string="Services">
+                                <field name="service_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                        <field name="package_id" />
+                                        <field name="max_weight" />
+                                        <field name="max_length" />
+                                        <field name="max_length_plus_girth"/>
+                                        <field name="domestic" />
+                                        <field name="enabled" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="packages" string="Packages">
+                                <field name="package_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                        <field name="ss_code" />
+                                        <field name="domestic" />
+                                        <field name="international" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_ship_carrier_service_form" model="ir.ui.view">
+            <field name="name">view.ship.carrier.service.form</field>
+            <field name="model">ship.carrier.service</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" default_focus="1" placeholder="Description"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="ss_code"/>
+                                <field name="package_id"/>
+                                <field name="max_weight"/>
+                                <field name="max_length"/>
+                                <field name="max_length_plus_girth"/>
+                            </group>
+                            <group>
+                                <field name="enabled"/>
+                                <field name="domestic"/>
+                                <field name="international"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <menuitem
+            id="menu_ship_carrier"
+            name="Carriers"
+            action="action_ship_carrier"
+            parent="sales_team.menu_sale_config"
+            sequence="3"/>
+    </data>
+</odoo>

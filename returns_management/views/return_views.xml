@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sale_return_search_view" model="ir.ui.view">
+            <field name="name">sale.return.search</field>
+            <field name="model">sale.return</field>
+            <field name="arch" type="xml">
+                <search string="Groups">
+                    <filter string="Not Received" name="not_received" domain="['|',('ebay_sellerTotalRefund', '&gt;', 0),('amz_refund_amount', '&gt;', 0),
+                    ('receipt_state', 'not in', ['done']),('compensation_status', 'not in', ['received'])]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_sale_return" model="ir.actions.act_window">
+            <field name="name">Returns</field>
+            <field name="res_model">sale.return</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_sale_return_tree" model="ir.ui.view">
+            <field name="name">view.sale.return.tree</field>
+            <field name="model">sale.return</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="store_id"/>
+                    <field name="sale_order_id"/>
+                    <field name="partner_id"/>
+                    <field name="request_date"/>
+                    <field name="state"/>
+                    <field name="receipt_state"/>
+                    <field name="compensation_status"/>
+                    <field name="ebay_sellerTotalRefund"/>
+                    <field name="amz_refund_amount"/>
+                    <field name="replacement_state"/>
+                    <field name="ebay_status"/>
+                    <field name="ebay_state"/>
+                    <field name="receipt_pickings_count"/>
+                    <field name="replacement_pickings_count"/>
+                    <field name="create_uid"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_sale_return_form" model="ir.ui.view">
+            <field name="name">view.sale.return.form</field>
+            <field name="model">sale.return</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="item_sent_by_buyer_button" type="object" class="oe_highlight" string="Sent by buyer" states='waiting_buyer_send'/>
+                        <button name="receive_return_in_wh_button" type="object" class="oe_highlight" string="Receive in WH" states='waiting_receipt' help="You must use returns interface and scan tracking number"/>
+                        <!--<button name="print_label" type="object" string="Print Lbl"/>-->
+                        <button name="create_picking_for_receipt" type="object" string="Create Receipt" class="oe_highlight btn-danger"/>
+                        <button name="create_replacement" type="object" string="Create Repl." class="oe_highlight btn-danger"/>
+                        <field name="state" widget="statusbar" clickable="True" statusbar_visible="draft,open,waiting_buyer_send,waiting_receipt,received,to_refund,refund_paid,to_replacement,replacement_sent,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                name="action_view_receipt_picking"
+                                class="oe_stat_button"
+                                icon="fa-building" attrs="{'invisible':[('receipt_pickings_count', '=', 0)]}">
+                                <field name="receipt_pickings_count" widget="statinfo" string="Receipts" help="Related receipts"/>
+                            </button>
+                            <button type="object"
+                                name="action_view_replacement_picking"
+                                class="oe_stat_button"
+                                icon="fa-truck" attrs="{'invisible':[('replacement_pickings_count', '=', 0)]}">
+                                <field name="replacement_pickings_count" widget="statinfo" string="Replacements" help="Related replacements"/>
+                            </button>
+                            <button name="action_get_attachment_tree_view"
+                                    class="oe_stat_button"
+                                    icon="fa-book"
+                                    type="object">
+                                <field name="attachment_number" widget="statinfo" string="Attachments"/>
+                            </button>
+                        </div>
+                        <div class="alert alert-warning o_form_header" attrs="{'invisible': [('not_available_in_all', '=', False)]}">
+                            <field name="not_available_in_all" invisible="1"/>
+                            <a class="close" data-dismiss="alert" href="#" aria-hidden="true">x</a>
+                            <ul>
+                                <li>
+                                    <strong>ERROR: </strong>Product/s you are trying to ship is/are not available in any warehouse.
+                                </li>
+                            </ul>
+                        </div>
+                        <!--<h4><field name="ebay_comments" attrs="{'invisible': [('type','not in',['ebay'])]}"/></h4>-->
+                        <group col="10" colspan="4">
+                            <group col="2" colspan="2" string="General">
+                                <field name="type"/>
+                                <field name="ebay_returnId"/>
+                                <field name="name" class="oe_inline"/>
+                                <field name="sale_order_id"/>
+                                <field name="partner_id"/>
+                                <field name="request_date"/>
+                                <field name="carrier_id"/>
+                                <field name="return_reason"/>
+                                <field name="receipt_state"/>
+                                <!--<field name="customer_comments"/>-->
+                            </group>
+                            <group col="2" colspan="2" attrs="{'invisible': [('type','not in',['amazon'])]}" string="Amazon data">
+                                <field name="amz_return_type"/>
+                                <field name="amz_return_request_status"/>
+                                <field name="amz_return_request_date"/>
+                                <field name="amz_label_to_be_paid_by"/>
+                                <field name="amz_label_cost"/>
+                                <field name="amz_label_type"/>
+                                <field name="amz_rma_id"/>
+                            </group>
+                            <group col="2" colspan="2" attrs="{'invisible': [('type','not in',['amazon'])]}" string="Amazon data">
+                                <field name="amz_related_message_id"/>
+                                <field name="amz_return_request_details" widget="url"/>
+                                <field name="amz_return_carrier"/>
+                                <field name="amz_tracking_id"/>
+                                <field name="amz_refund_amount"/>
+                                <field name="amz_refund_date"/>
+                                <field name="amz_adjusted_fee"/>
+                            </group>
+                            <group col="2" colspan="2" attrs="{'invisible': [('type','not in',['ebay'])]}" string="eBay data">
+                                <field name="ebay_state"/>
+                                <field name="ebay_status"/>
+                                <field name="ebay_creationInfo_type"/>
+                                <field name="ebay_currentType"/>
+                                <field name="ebay_creationDate"/>
+                                <field name="ebay_timeoutDate"/>
+                                <field name="ebay_refundStatus"/>
+                                <field name="ebay_sellerTotalRefund"/>
+                                <field name="ebay_reason"/>
+                            </group>
+                            <group col="2" colspan="2" attrs="{'invisible': [('type','not in',['ebay'])]}" string="eBay data">
+                                <field name="ebay_transactionId"/>
+                                <field name="ebay_returnQuantity"/>
+                                <field name="ebay_label_cost"/>
+                                <field name="ebay_label_payee"/>
+                                <field name="ebay_receipt_deliveryStatus"/>
+                                <field name="ebay_replacement_deliveryStatus"/>
+                                <field name="ebay_refundInitiationType"/>
+                                <field name="ebay_reasonType"/>
+                            </group>
+                            <group col="2" colspan="2" string="Actual data">
+                                <field name="refund_amount"/>
+                                <field name="refund_status"/>
+                                <field name="refund_type"/>
+                                <field name="compensation_amount"/>
+                                <field name="compensation_status"/>
+                                <field name="compensation_type"/>
+                            </group>
+                        </group>
+                        <group col="6" colspan="4">
+                            <field name="store_id"/>
+                            <field name="web_order_id"/>
+                            <field name="tracking_number"/>
+                        </group>
+                            <h4><field name="customer_comments"/></h4>
+                        <notebook>
+                            <page string="Products">
+                                <field name="return_line_ids">
+                                    <tree editable="bottom">
+                                        <field name="return_type" invisible="1"/>
+                                        <field name="product_id"/>
+                                        <field name="name"/>
+                                        <field name='product_uom_qty'/>
+                                        <!--<field name='qty_received'/>-->
+                                        <!--<field name="product_uom"/>-->
+                                        <!--<field name="route_id"/>-->
+                                        <field name="amz_in_policy" attrs="{'invisible': [('return_type','in',['ebay'])]}"/>
+                                        <field name="amz_resolution" attrs="{'invisible': [('return_type','in',['ebay'])]}"/>
+                                        <field name="amz_return_quantity" attrs="{'invisible': [('return_type','in',['ebay'])]}"/>
+                                        <field name="amz_return_reason_code" attrs="{'invisible': [('return_type','in',['ebay'])]}"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="product_id"/>
+                                                <field name="name"/>
+                                                <field name="product_uom_qty"/>
+                                                <field name="product_uom"/>
+                                            </group>
+                                            <group>
+                                                <field name="route_id"/>
+                                                <field name="dropship_cost"/>
+                                            </group>
+                                        </group>
+                                        <group>
+                                            <field name="item"/>
+                                            <field name="customer_comments"/>
+                                            <field name="return_reason"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="History">
+                                <field name="ebay_response_history"/>
+                            </page>
+                            <page string="Receipts"><field name="receipt_picking_ids"/> </page>
+                            <page string="Replacements"><field name="replacement_picking_ids"/></page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="menu_sales_returns" name="Returns" parent="sales_team.menu_sales" sequence="30" action="action_sale_return"/>
+
+        <record id="action_returns_processing" model="ir.actions.client">
+            <field name="name">Returns</field>
+            <field name="tag">returns_management_main_menu</field>
+        </record>
+
+        <menuitem id="menu_returns_processing"
+                  action="action_returns_processing"
+                  icon="fa-undo"
+                  web_icon="website_crm_partner_assign,static/description/icon.png"
+                  sequence="99"
+                  groups="stock.group_stock_user"
+                  name="Returns"/>
+    </data>
+</odoo>

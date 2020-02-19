@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+     <record id="product_template_form_boxpackaging" model="ir.ui.view">
+        <field name="name">product.template.form.box.packaging</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <div name="options" position="inside">
+                <div>
+                    <field name="box_packaging"/>
+                    <label for="box_packaging"/>
+                </div>
+            </div>
+            <div class="oe_title" position="after">
+                <group>
+                    <field name="package_box" attrs="{'invisible': [('box_packaging', '=', True)]}"/>
+                </group>
+            </div>
+        </field>
+    </record>
+    <record id="view_picking_form_boxpackaging" model="ir.ui.view">
+        <field name="name">stock.picking.form.box.packaging</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page/field[@name='pack_operation_product_ids']/tree/button[@name='show_details']" position="after">
+                <field name="use_exsiting_box" invisible="True"/>
+                <field name="box_barcode"/>
+                <field name="package_box" attrs="{'readonly': [('use_exsiting_box', '=', True)]}"/>
+                <button name="button_put_in" string="Put In Exist Box" type="object" icon="fa fa-arrow-down"/>
+                <button name="button_put_out" string="Put Out Exist Box" type="object" icon="fa fa-arrow-up"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

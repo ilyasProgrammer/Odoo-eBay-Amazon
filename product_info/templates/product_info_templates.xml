@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="autoplus_product_info" name="AutoPlus Product Info">
+        <t t-call="web.layout">
+            <t t-set="head">
+                <t t-call-assets="web.assets_common" t-js="false"/>
+                <t t-call-assets="web.assets_frontend" t-js="false"/>
+                <t t-call-assets="web.assets_common" t-css="false"/>
+                <t t-call-assets="web.assets_frontend" t-css="false"/>
+            </t>
+
+            <t t-if="PartNo">
+                <div class="container">
+                    <div class="row mt64">
+                        <div class="col-md-12">
+                            <h4><strong><t t-esc="PartNo"/>: <t t-esc="ProdName"/></strong></h4>
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                    <t t-if="PictureURLs">
+                        <div class="container">
+                            <div class="row mt64">
+                                <div class="col-md-12 text-center">
+                                    <h4><strong>Images</strong></h4>
+                                </div>
+                                <t t-foreach="PictureURLs" t-as="url">
+                                    <div class="col-md-12 text-center">
+                                        <img t-att-src="url" style="max-width: 100%"/>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+
+                    <t t-if="not PictureURLs">
+                        <div class="row mt64">
+                            <div class="col-md-12 text-center">
+                                <h4><strong>No images found.</strong></h4>
+                            </div>
+                        </div>
+                    </t>
+
+                    <hr/>
+
+                    <t t-if="Vehicles">
+                        <div class="row mt64">
+                            <div class="col-md-12 text-center">
+                                <h4><strong>Fitment Data</strong></h4>
+                            </div>
+                        </div>
+                        <div class="row mt32">
+                            <table class="table table-condensed table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Make</th>
+                                        <th>Model</th>
+                                        <th>Year</th>
+                                        <th>Trim</th>
+                                        <th>Engine</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="counter" t-value="1"/>
+                                    <t t-foreach="Vehicles" t-as="vehicle">
+                                        <tr>
+                                            <td><t t-esc="counter" /></td>
+                                            <td><t t-esc="vehicle['Make']" /></td>
+                                            <td><t t-esc="vehicle['Model']" /></td>
+                                            <td><t t-esc="vehicle['Year']" /></td>
+                                            <td><t t-esc="vehicle['Trim']" /></td>
+                                            <td><t t-esc="vehicle['Engine']"/></td>
+                                        </tr>
+                                        <t t-set="counter" t-value="counter + 1"/>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+
+                    <t t-if="not Vehicles">
+                        <div class="row mt64">
+                            <div class="col-md-12 text-center">
+                                <h4><strong>No fitment data found.</strong></h4>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </t>
+            <t t-if="not PartNo">
+                <div class="container">
+                    <div class="row mt64">
+                        <div class="col-md-12">
+                            <h4><strong>Product not found in AutoPlus.</strong></h4>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

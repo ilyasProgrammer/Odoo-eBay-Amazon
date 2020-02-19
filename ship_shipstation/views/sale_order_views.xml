@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="ss_sale_view_order_form" model="ir.ui.view">
+            <field name="name">ss.sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <field name="partner_id" position="before">
+                    <field name="shipstation_id" attrs="{'invisible': [('shipstation_id', '=', False)]}"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="ss_sale_view_get_cheapest_button_form" model="ir.ui.view">
+            <field name="name">ss.sale.order.get.cheapest.button.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_store.store_sale_view_with_shipment_order_form" />
+            <field name="arch" type="xml">
+                <field name="service_id" position="replace">
+                    <label for="service_id"/>
+                    <div class="o_row">
+                        <field name="service_id"/>
+                        <button name="button_get_cheapest_service" string="Get cheapest service" type="object" class="oe_inline fa fa-arrow-right oe_link" attrs="{'invisible':[('state','in',('done'))]}"/>
+                    </div>
+                </field>
+                <field name="rate" position="replace">
+                    <label for="rate"/>
+                    <div class="o_row">
+                        <field name="rate"/>
+                        <button name="button_update_shipment_rate" string="Update rate" type="object" class="oe_inline fa fa-arrow-right oe_link" attrs="{'invisible':[('state','in',('done'))]}"/>
+                    </div>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

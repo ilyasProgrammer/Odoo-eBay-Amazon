@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_cron_store_rhino_get_items_no_fitment" model="ir.cron">
+            <field name="name">[MISC] Rhino - Get No Fitment Items</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1010</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'cron_rhino_get_no_fitment_items'" name="function"/>
+            <field name="active" eval="False"/>
+            <field eval="(1,)" name="args"/>
+        </record>
+
+        <record id="ir_cron_store_rhino_remove_duped_items" model="ir.cron">
+            <field name="name">[MISC] Rhino - Remove Duped Items</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1011</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'cron_rhino_remove_duped_items'" name="function"/>
+            <field name="active" eval="False"/>
+            <field eval="()" name="args"/>
+        </record>
+
+        <record id="ir_cron_store_rhino_upload_fitments" model="ir.cron">
+            <field name="name">[MISC] Rhino - Upload Fitments</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1016</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'cron_store_rhino_upload_fitments'" name="function"/>
+            <field name="active" eval="False"/>
+            <field eval="(1, 1)" name="args"/>
+        </record>
+
+        <record id="ir_cron_store_ebay_get_created_job_list" model="ir.cron">
+            <field name="name">[MISC] eBay - Get Created Jobs List</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1012</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'ebay_get_created_job_list'" name="function"/>
+            <field name="active" eval="False"/>
+            <field eval="('sandbox',)" name="args"/>
+        </record>
+
+        <record id="ir_cron_store_ebay_abort_jobs" model="ir.cron">
+            <field name="name">[MISC] eBay - Abort Jobs</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1013</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'ebay_abort_jobs'" name="function"/>
+            <field name="active" eval="False"/>
+            <field eval="('sandbox',)" name="args"/>
+        </record>
+
+        <record id="ir_cron_store_ebay_get_active_listings" model="ir.cron">
+            <field name="name">[MISC] eBay - Get Active List to File</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1014</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'ebay_get_active_listings'" name="function"/>
+            <field name="active" eval="False"/>
+            <field eval="('rhino', 56, 125)" name="args"/>
+        </record>
+
+        <record id="ir_cron_store_ebay_ebay_revise_active_listings" model="ir.cron">
+            <field name="name">[MISC] eBay - Revise Active Listings</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1015</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'ebay_revise_active_listings'" name="function"/>
+            <field name="active" eval="False"/>
+            <field eval="('rhino',1,1)" name="args"/>
+        </record>
+
+        <record id="ir_cron_store_ebay_bulk_list_from_file" model="ir.cron">
+            <field name="name">[MISC] eBay - Bulk List From File</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1015</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'ebay_bulk_list_from_file'" name="function"/>
+            <field name="active" eval="False"/>
+            <field eval="('rhino', '/var/tmp/2016_12_19_To_List_Result.txt', 1,1)" name="args"/>
+        </record>
+
+        <record id="ir_cron_get_products_from_autoplus" model="ir.cron">
+            <field name="name">[MISC] AutoPlus - Get Products From AutoPlus</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1016</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'get_products_from_autoplus'" name="function"/>
+            <field name="active" eval="False"/>
+            <field eval="(1,100000)" name="args"/>
+        </record>
+
+        <record id="ir_cron_get_products_from_autoplus" model="ir.cron">
+            <field name="name">[MISC] AutoPlus - Get Products From AutoPlus</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1016</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'get_products_from_autoplus'" name="function"/>
+            <field name="active" eval="False"/>
+            <field eval="(1,100000)" name="args"/>
+        </record>
+
+        <record id="ir_cron_ebay_create_inventory_status_from_file" model="ir.cron">
+            <field name="name">[MISC] eBay - Create Invetory Status From File</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1017</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'ebay_create_inventory_status_from_file'" name="function"/>
+            <field name="active" eval="False"/>
+            <field eval="('rhino','/var/tmp/2016_12_19_To_Update_Qty.csv', 1,10)" name="args"/>
+        </record>
+
+        <record id="ir_cron_ebay_download_active_inventory_report" model="ir.cron">
+            <field name="name">[MISC] eBay - Download Active Inventory Report</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1018</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'ebay_download_active_inventory_report'" name="function"/>
+            <field name="active" eval="False"/>
+            <field eval="('rhino',)" name="args"/>
+        </record>
+
+        <record id="ir_cron_ebay_get_job_status" model="ir.cron">
+            <field name="name">[MISC] eBay - Get Job Status</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1019</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'ebay_get_job_status'" name="function"/>
+            <field name="active" eval="False"/>
+            <field eval="('rhino', '6054399771')" name="args"/>
+        </record>
+
+        <record id="ir_cron_ebay_download_file" model="ir.cron">
+            <field name="name">[MISC] eBay - Download File</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1019</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'ebay_download_file'" name="function"/>
+            <field name="active" eval="False"/>
+            <field eval="('rhino', '6054399771', '6146774301')" name="args"/>
+        </record>
+
+        <record id="ir_cron_ebay_generate_title_revision_file" model="ir.cron">
+            <field name="name">[MISC] eBay - Generate Title Revision File</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1020</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'ebay_generate_title_revision_file'" name="function"/>
+            <field name="active" eval="False"/>
+            <field eval="('rhino', '/var/tmp/inv_updates/2016_12_19_Inv_To_Update.csv', 1, 12)" name="args"/>
+        </record>
+    </data>
+</odoo>

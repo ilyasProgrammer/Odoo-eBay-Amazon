@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ds_sale_view_order_form" model="ir.ui.view">
+            <field name="name">ds.sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <button name="action_quotation_send" position="before">
+                    <button name="button_set_routes" string="Get Routes" type="object" class="oe_highlight" states="draft"/>
+                    <button name="button_set_losy_routes" string="Get Routes With Loss" type="object" class="oe_highlight" states="draft"/>
+                </button>
+                <div class="oe_button_box" position="inside">
+                    <button name="action_view_purchase_orders"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-credit-card"
+                        attrs="{'invisible': [('purchase_order_ids_count', '=', 0)]}">
+                        <field name="purchase_order_ids_count" widget="statinfo" string="Dropship POs"/>
+                    </button>
+                </div>
+
+                <xpath expr="//sheet/div[@name='button_box']" position="after">
+                    <div class="alert alert-warning o_form_header" attrs="{'invisible': [('has_exception', '=', False)]}">
+                        <field name="has_exception" invisible="1"/>
+                        <a class="close" data-dismiss="alert" href="#" aria-hidden="true">x</a>
+                        <ul>
+                            <li attrs="{'invisible': [('not_available_in_all', '=', False)]}">
+                                <strong>ERROR: </strong>Product/s you are trying to sell is/are not available in any warehouse.
+                                <field name="not_available_in_all" invisible="1"/>
+                            </li>
+                            <li attrs="{'invisible': [('has_no_state', '=', False)]}">
+                                <strong>ERROR: </strong>Customer has entered an invalid state.
+                                <field name="has_no_state" invisible="1"/>
+                            </li>
+                        </ul>
+                     </div>
+                </xpath>
+                <xpath expr="//field[@name='order_line']//form//group/group[2]" position="inside">
+                    <field name="dropship_cost" attrs="{'invisible': [('route_id', '=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="ds_sale_view_order_form_with_purchase" model="ir.ui.view">
+            <field name="name">ds.sale.order.form.with.purchase</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_store.store_sale_view_order_form" />
+            <field name="arch" type="xml">
+                <field name="ebay_sales_record_number" position="after">
+                    <field name="purchase_order_id" />
+                </field>
+            </field>
+        </record>
+
+        <record id="action_quotations_custom" model="ir.actions.act_window">
+            <field name="name">Quotations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="sale.view_quotation_tree"/>
+            <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+            <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+            <field name="domain">[('state', '=', 'draft'), ('has_exception', '=', False)]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Create a Quotation, the first step of a new sale.
+              </p><p>
+                Your next actions should flow efficiently: confirm the Quotation
+                to a Sale Order, then create the Invoice and collect the Payment.
+              </p><p>
+                Note that once a Quotation becomes a Sale Order, it will be moved
+                from the Quotations list to the Sales Order list.
+              </p>
+            </field>
+        </record>
+
+        <record id="action_orders_with_exceptions" model="ir.actions.act_window">
+            <field name="name">Quotations with Exceptions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+            <field name="view_id" ref="sale.view_quotation_tree"/>
+            <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+            <field name="context">{}</field>
+            <field name="domain">[('state', '=', 'draft'),('has_exception', '=', True)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create a Quotation, the first step of a new sale.
+                </p><p>
+                    Once the quotation is confirmed, it becomes a sales order.
+                    You'll be able to invoice it and collect payments.
+                    From the <i>Sales Orders</i> menu, you can track delivery
+                    orders or services.
+                </p>
+            </field>
+        </record>
+
+        <record id="action_orders_custom" model="ir.actions.act_window">
+            <field name="name">Sales Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+            <field name="view_id" ref="sale.view_quotation_tree"/>
+            <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+            <field name="context">{}</field>
+            <field name="domain">[('state', '!=', 'draft')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create a Quotation, the first step of a new sale.
+                </p><p>
+                    Once the quotation is confirmed, it becomes a sales order.
+                    You'll be able to invoice it and collect payments.
+                    From the <i>Sales Orders</i> menu, you can track delivery
+                    orders or services.
+                </p>
+            </field>
+        </record>
+
+        <record id="view_picking_form_form" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">
+                <button name="button_scrap" position="after">
+                    <!--<button name="button_reroute_to_dropship" string="Reroute to Dropship" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('purchase_order_id', '!=', False), ('state', 'in', ('cancel', 'done'))]}"/>-->
+                    <button name="button_reroute_to_dropship" string="Reroute to Dropship" type="object" class="oe_highlight" invisible="True"/>
+                </button>
+            </field>
+        </record>
+
+        <menuitem id="sale.menu_sale_quotations"
+            action="action_quotations_custom" parent="sales_team.menu_sales"
+            sequence="5"/>
+
+        <menuitem action="action_orders_with_exceptions"
+            id="menu_sale_with_exceptions" parent="sales_team.menu_sales"
+            sequence="6" groups="sales_team.group_sale_salesman,sales_team.group_sale_manager"/>
+
+        <menuitem action="action_orders_custom"
+            id="sale.menu_sale_order" parent="sales_team.menu_sales"
+            sequence="7" groups="sales_team.group_sale_salesman,sales_team.group_sale_manager"/>
+    </data>
+</odoo>

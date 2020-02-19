@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_product_template_listed" model="ir.actions.act_window">
+            <field name="name">Listed Products</field>
+            <field name="res_model">product.template.listed</field>
+            <field name="view_type">form</field>
+            <field name="context">{"search_default_active": 1}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_product_template_listed_tree" model="ir.ui.view">
+            <field name="name">view.product.template.listed.tree</field>
+            <field name="model">product.template.listed</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_tmpl_id"/>
+                    <field name="wh_qty"/>
+                    <field name="wh_product_cost" />
+                    <field name="wh_shipping_cost"/>
+                    <field name="wh_box_cost"/>
+                    <field name="vendor_qty"/>
+                    <field name="vendor_cost" />
+                    <field name="total_min_cost" />
+                    <field name="write_date" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_product_template_listed_form" model="ir.ui.view">
+            <field name="name">view.product.template.listed.form</field>
+            <field name="model">product.template.listed</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="button_set_as_active" type="object" class="oe_highlight" string="Set as Active" states="inactive"/>
+                        <button name="button_set_as_inactive" type="object" string="Set as Inactive" states="active"/>
+                        <field name="state" widget="statusbar" statusbar_visible="active,inactive"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="action_view_sales"
+                              type="object" icon="fa-usd">
+                              <field string="Sales" name="sales_count" widget="statinfo" />
+                            </button>
+                            <button type="object"
+                                name="action_view_listings"
+                                class="oe_stat_button"
+                                icon="fa-shopping-cart" attrs="{'invisible':[('listings_count', '=', 0)]}">
+                                <field name="listings_count" widget="statinfo" string="Listings"/>
+                            </button>
+                            <button type="object"
+                                name="action_view_competitors"
+                                class="oe_stat_button"
+                                icon="fa-bomb" attrs="{'invisible':[('competitors_count', '=', 0)]}">
+                                <field name="competitors_count" widget="statinfo" string="Competitors"/>
+                            </button>
+                            <button type="object"
+                                name="action_view_components"
+                                class="oe_stat_button"
+                                icon="fa-gears" attrs="{'invisible':[('is_a_kit', '=', False)]}"
+                                string="Components">
+                                <field name="is_a_kit" invisible="1"/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="product_tmpl_id"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="WH Availability">
+                                <field name="wh_qty"/>
+                                <field name="wh_prev_qty"/>
+                                <field name="wh_qty_write_date"/>
+                                <field name="wh_product_cost"/>
+                                <field name="wh_prev_product_cost"/>
+                                <field name="wh_product_cost_write_date"/>
+                                <field name="wh_shipping_cost"/>
+                                <field name="wh_box_cost"/>
+                                <field name="wh_prev_shipping_cost"/>
+                                <field name="wh_shipping_cost_write_date"/>
+                                <field name="wh_sale_price"/>
+                            </group>
+                            <group string="Vendor Availability">
+                                <field name="vendor_qty" />
+                                <field name="vendor_qty_write_date" />
+                                <field name="vendor_cost" />
+                                <field name="vendor_cost_write_date" />
+                            </group>
+                        </group>
+                        <group string="Total Cost">
+                            <group>
+                                <field name="total_min_cost" />
+                                <field name="prev_total_min_cost" />
+                                <field name="total_min_cost_write_date" />
+                            </group>
+                            <group>
+                                <field name="ebay_min_price" />
+                                <field name="amz_min_price" />
+                            </group>
+                        </group>
+                        <group>
+                            <button name="button_do_not_restock_all_listings" string="⇒ Do not restock all listings" type="object" class="oe_link"/>
+                            <button name="button_restock_all_listings" string="⇒ Automate restocking all listings" type="object" class="oe_link"/>
+                            <button name="button_do_not_reprice_all_listings" string="⇒ Do not reprice of all listings" type="object" class="oe_link"/>
+                            <button name="button_reprice_all_listings" string="⇒ Automate repricing of all listings" type="object" class="oe_link"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_product_template_listed_search" model="ir.ui.view">
+            <field name="name">view.product.template.listed.search</field>
+            <field name="model">product.template.listed</field>
+            <field name="arch" type="xml">
+                <search string="Listed Products">
+                    <field name="product_tmpl_id"/>
+                    <filter string="Active" name="active" domain="[('state', '=', 'active')]"/>
+                    <filter string="Inactive" name="inactive" domain="[('state', '=', 'inactive')]"/>
+               </search>
+            </field>
+        </record>
+
+        <menuitem id="menu_product_template_listed" parent="stock_update_store_real_time.menu_repricer_root" sequence="15" name="Listed Products" action="action_product_template_listed" groups="base.group_user"/>
+    </data>
+</odoo>

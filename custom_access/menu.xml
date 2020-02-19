@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="manu_mapm"
+              action="custom_business_reports.action_order_report_all"
+              icon="fa-align-left"
+              web_icon="custom_access,static/description/icon.png"
+              sequence="101"
+              groups="mapm"
+              name="MAPM"/>
+
+    <menuitem id="manu_mapm_pbl"
+              action="custom_business_reports.action_mapm_pbl_order_report_all"
+              icon="fa-align-left"
+              web_icon="custom_access,static/description/icon.png"
+              sequence="102"
+              groups="mapm"
+              name="MAPM PBL"/>
+
+    <menuitem id="menu_margin_mapm"
+              action="custom_business_reports.action_sales_margin_mapm_wizard"
+              icon="fa-align-left"
+              web_icon="custom_access,static/description/icon.png"
+              sequence="103"
+              groups="mapm"
+              name="Margin MAPM"/>
+
+    <menuitem id="menu_margin_mapm_pbl"
+              action="custom_business_reports.action_sales_margin_mapm_pbl_wizard"
+              icon="fa-align-left"
+              web_icon="custom_access,static/description/icon.png"
+              sequence="104"
+              groups="mapm"
+              name="Margin MAPM PBL"/>
+
+
+</odoo>

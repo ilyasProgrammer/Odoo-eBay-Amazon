@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_digital_ocean_droplet,access_digital_ocean_droplet,model_digital_ocean_droplet,,1,0,0,0
+access_digital_ocean_snapshot,access_digital_ocean_snapshot,model_digital_ocean_snapshot,,1,0,0,0
+access_digital_ocean,access_digital_ocean,model_digital_ocean,,1,0,0,0

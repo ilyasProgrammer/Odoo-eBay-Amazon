@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_cron_ebay_get_created_shipment_job_list" model="ir.cron">
+            <field name="name">[eBay] Get Created Shipment Job List</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="False" name="active"/>
+            <field name="priority">100</field>
+            <field eval="'ebay_cron_get_created_shipment_job_list'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+
+        <record id="ir_cron_ebay_abort_job" model="ir.cron">
+            <field name="name">[eBay] Abort Job</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="False" name="active"/>
+            <field eval="'ebay_cron_abort_job'" name="function"/>
+            <field eval="('eBay - Sandbox by James', '50011656895')" name="args"/>
+        </record>
+
+        <record id="ir_cron_ebay_upload_file" model="ir.cron">
+            <field name="name">[eBay] Upload File</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">1</field>
+            <field eval="False" name="doall"/>
+            <field name="active" eval="False"/>
+            <field name="priority">101</field>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'ebay_cron_upload_file'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+
+        <record id="ir_cron_ebay_start_job" model="ir.cron">
+            <field name="name">[eBay] Start Job</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="False" name="active"/>
+            <field name="priority">102</field>
+            <field eval="'ebay_cron_start_job'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+
+        <record id="ir_cron_ebay_get_job_status" model="ir.cron">
+            <field name="name">[eBay] Get Job Status</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">1</field>
+            <field name="priority">103</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="False" name="active"/>
+            <field eval="'ebay_cron_get_job_status'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+
+        <record id="ir_cron_ebay_test_file_upload_on_addfixedpriceitem" model="ir.cron">
+            <field name="name">[MISC] Test Bulk File Upload on AddFixedPriceItem</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="False" name="active"/>
+            <field name="priority">100</field>
+            <field eval="'ebay_bulk_list_products_by_file_upload'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+    </data>
+</odoo>

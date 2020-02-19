@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="qwe_with_loss" model="ir.cron">
+        <field name="name">qwe_with_loss</field>
+        <field name="interval_number">30</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">0</field>
+        <field name="model">cron.tool</field>
+        <field name="active">False</field>
+        <field name="function">qwe_with_loss</field>
+    </record>
+</odoo>

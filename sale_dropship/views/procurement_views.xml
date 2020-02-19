@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ds_view_procurement_rule_form" model="ir.ui.view">
+            <field name="name">ds.view.procurement.rule.form</field>
+            <field name="model">procurement.rule</field>
+            <field name="inherit_id" ref="stock.view_procurement_rule_form_stock_inherit" />
+            <field name="arch" type="xml">
+                <field name="picking_type_id" position="after">
+                    <field name="dropshipper_id" attrs="{'invisible': [('action', '!=', 'buy')]}"/>
+                    <field name="mfg_codes" attrs="{'invisible': [('action', '!=', 'buy')]}"/>
+                    <field name="min_qty" attrs="{'invisible': [('action', '!=', 'buy')]}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

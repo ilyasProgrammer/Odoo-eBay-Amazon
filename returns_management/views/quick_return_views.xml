@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_stock_quick_return" model="ir.actions.act_window">
+            <field name="name">Quick Returns</field>
+            <field name="res_model">stock.quick.return</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_stock_quick_return_tree" model="ir.ui.view">
+            <field name="name">Quick Returns</field>
+            <field name="model">stock.quick.return</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_stock_quick_return_form" model="ir.ui.view">
+            <field name="name">Quick Returns</field>
+            <field name="model">stock.quick.return</field>
+            <field name="arch" type="xml">
+                <form string="Quick Returns">
+                    <header>
+                        <button name="button_process" string="Process" type="object" class="btn-primary" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                        <button name="button_process" string="Reprocess" type="object" attrs="{'invisible': [('state', '!=', 'processed')]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,processed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="scanned_location_id" readonly="1"/>
+                                <field name="scanned_code" readonly="1"/>
+                                <field name="total_scanned_qty"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Products">
+                                <field name="return_line_ids">
+                                    <tree editable="bottom">
+                                        <field name="scanned_code"/>
+                                        <field name="location_id"/>
+                                        <field name="quantity"/>
+                                        <field name="state"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="location_id"/>
+                                                <field name="scanned_code"/>
+                                                <field name="quantity"/>
+                                            </group>
+                                            <group>
+                                                <field name="return_id"/>
+                                                <field name="state"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <field name="_barcode_scanned" widget="quick_returns_barcode_handler"/>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="menu_quick_returns" name="Quick Returns" parent="stock.menu_stock_warehouse_mgmt" sequence="5" action="action_stock_quick_return" groups="stock.group_stock_user"/>
+    </data>
+</odoo>

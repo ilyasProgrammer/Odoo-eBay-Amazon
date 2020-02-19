@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_store_messaging_form" model="ir.ui.view">
+            <field name="name">view.store.ebay.form</field>
+            <field name="model">sale.store</field>
+            <field name="inherit_id" ref="sale_store.view_sale_store_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position='inside'>
+                    <page string="Messaging" name="ebay_messaging" attrs="{'invisible': [('site', '!=', 'ebay')]}">
+                        <group string="Messaging">
+                            <group>
+                                <field name="ebay_get_messages_enabled"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

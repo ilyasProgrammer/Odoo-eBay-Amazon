@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_sales_per_product_wizard" model="ir.ui.view">
+            <field name="name">view.sales.per.product.wizard.form</field>
+            <field name="model">sales.per.product.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Sales Per Product">
+                    <group>
+                        <group>
+                            <field name="period_start"/>
+                            <field name="grouping_criteria"/>
+                            <field name="drop_percentage"/>
+                        </group>
+                    </group>
+                    <footer>
+                      <button name="button_download_report" type="object" string="Download Report" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--ACTIONS-->
+        <record id="action_sales_per_product_wizard" model="ir.actions.act_window">
+            <field name="name">Sales Per Product</field>
+            <field name="res_model">sales.per.product.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>
+

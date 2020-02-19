@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="custom_product_supplierinfo_tree_view" model="ir.ui.view">
+            <field name="name">custom.product.supplierinfo.tree.view</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_tree_view" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="product_code"/>
+                    <field name="cu_ft"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="product.product_supplierinfo_form_view" model="ir.ui.view">
+            <field name="name">product.supplierinfo.form.view</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="arch" type="xml">
+                <form string="Vendor Pricelist">
+                    <sheet>
+                        <group>
+                            <group string="Vendor">
+                                <field name="name" context="{'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1}"/>
+                                <field name="product_name"/>
+                                <field name="product_code"/>
+                                <field name="product_id" domain="[('product_tmpl_id', '=', product_tmpl_id)]" invisible="1"/>
+                                <label for="delay"/>
+                                <div>
+                                    <field name="delay" class="oe_inline"/> days
+                                </div>
+                            </group>
+                            <group string="Price List">
+                                <field name="product_tmpl_id" string="Product" invisible="context.get('visible_product_tmpl_id', True)"/>
+                                <label for="min_qty"/>
+                                <div>
+                                    <field name="min_qty" class="oe_inline"/>
+                                    <field name="product_uom" class="oe_inline" groups="product.group_uom"/>
+                                </div>
+                                <label for="price"/>
+                                <div>
+                                    <field name="price" class="oe_inline"/><field name="currency_id" class="oe_inline" groups="base.group_multi_currency"/>
+                                </div>
+                                <label for="date_start" string="Validity"/>
+                                <div><field name="date_start" class="oe_inline"/> to <field name="date_end" class="oe_inline"/></div>
+                                <field name="cu_ft"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group string="Barcodes">
+                                <field name="barcode_unit"/>
+                                <field name="barcode_case"/>
+                                <field name="qty_case"/>
+                                <field name="barcode_inner_case"/>
+                                <field name="qty_inner_case"/>
+                            </group>
+                            <group string="Other Information" groups="base.group_multi_company">
+                                <field name="company_id" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_product_supplier_with_sequence" model="ir.ui.view">
+            <field name="name">product.template.supplier.form.with.sequence</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="purchase.view_product_supplier_inherit"/>
+            <field name="arch" type="xml">
+                <field name="seller_ids" position="replace">
+                    <field name="seller_ids" context="{'default_product_tmpl_id': context.get('product_tmpl_id', active_id)}">
+                        <tree editable="bottom">
+                            <field name="sequence"/>
+                            <field name="name"/>
+                            <field name="product_code"/>
+                            <field name="cu_ft"/>
+                            <field name="min_qty"/>
+                            <field name="price" string="Price"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                        </tree>
+                    </field>
+                </field>
+            </field>
+        </record>
+
+        <record id="purchase_order_send_to_vendor_form" model="ir.ui.view">
+            <field name="name">purchase.order.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="arch" type="xml">
+                <button name="action_view_picking" position="before">
+                    <button name="action_send_to_vendor_api" string="Send to Vendor" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('dropshipper_code', 'not in', ['lkq', 'pfg']), ('vendor_order_id', '!=', False), ('vendor_order_id', '!=', 'ERROR')]}"/>
+                    <button name="action_send_po_to_pfg_api" string="Send to PFG API" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('dropshipper_code', '!=', 'pfg'), ('vendor_order_id', '!=', False)]}" groups="base.group_no_one"/>
+                </button>
+                <field name="partner_id" position="after">
+                    <field name="dropshipper_code" invisible="1"/>
+                </field>
+                <field name="dest_address_id" position="after">
+                    <field name="sent_to_vendor" groups="base.group_no_one"/>
+                    <field name="vendor_order_id"/>
+                </field>
+                <field name="company_id" position="after">
+                    <field name="sale_id"/>
+                    <field name="store_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_purchase_order_dropship_search" model="ir.ui.view">
+            <field name="name">view.purchase.order.dropship.search</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="dest_address_id" string="Customer"/>
+                    <field name="vendor_order_id"/>
+                </field>
+            </field>
+        </record>
+
+        <!--Classify RFQs as Domestic, Dropship, International -->
+
+        <record id="purchase.purchase_rfq" model="ir.actions.act_window">
+            <field name="name">Dropship RFQs</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order</field>
+            <field name="context">{'search_default_todo':1}</field>
+            <field name="domain">[('state','in',('draft','sent','bid','cancel', 'confirmed')), ('dest_address_id', '!=', False)]</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph,calendar</field>
+            <field name="search_view_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a request for quotation.
+              </p><p>
+                The quotation contains the history of the discussion/negotiation
+                you had with your vendor. Once confirmed, a request for
+                quotation is converted into a purchase order.
+              </p><p>
+                Most propositions of purchase orders are created automatically
+                by Odoo based on inventory needs.
+              </p>
+            </field>
+        </record>
+
+        <record id="action_purchase_domestic_rfq" model="ir.actions.act_window">
+            <field name="name">Domestic RFQs</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order</field>
+            <field name="domain">[('state','in',('draft','sent','bid','cancel', 'confirmed')), ('dest_address_id', '=', False), ('is_domestic', '=', True)]</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph,calendar</field>
+            <field name="search_view_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a request for quotation.
+              </p><p>
+                The quotation contains the history of the discussion/negotiation
+                you had with your vendor. Once confirmed, a request for
+                quotation is converted into a purchase order.
+              </p><p>
+                Most propositions of purchase orders are created automatically
+                by Odoo based on inventory needs.
+              </p>
+            </field>
+        </record>
+
+        <record id="action_purchase_international_rfq" model="ir.actions.act_window">
+            <field name="name">International RFQs</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order</field>
+            <field name="domain">[('state','in',('draft','sent','bid','cancel', 'confirmed')), ('dest_address_id', '=', False), ('is_domestic', '=', False)]</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph,calendar</field>
+            <field name="search_view_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a request for quotation.
+              </p><p>
+                The quotation contains the history of the discussion/negotiation
+                you had with your vendor. Once confirmed, a request for
+                quotation is converted into a purchase order.
+              </p><p>
+                Most propositions of purchase orders are created automatically
+                by Odoo based on inventory needs.
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_purchase_tools" name="Tools" parent="purchase.menu_purchase_root" sequence="5"/>
+
+        <menuitem id="menu_purchase_send_po_to_ppr" name="Send POs to PPR" parent="menu_purchase_tools" sequence="100" action="action_purchase_send_po_to_ppr_wizard"/>
+
+        <menuitem id="menu_purchase_tools" name="Tools" parent="purchase.menu_purchase_root" sequence="5"/>
+
+        <menuitem action="action_purchase_domestic_rfq" id="menu_purchase_domestic_rfq"
+            parent="purchase.menu_procurement_management"
+            sequence="1"/>
+
+        <menuitem action="action_purchase_international_rfq" id="menu_purchase_international_rfq"
+            parent="purchase.menu_procurement_management"
+            sequence="2"/>
+    </data>
+</odoo>

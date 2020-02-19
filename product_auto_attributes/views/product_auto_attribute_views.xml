@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_product_auto_attribute_line" model="ir.actions.act_window">
+            <field name="name">Attributes</field>
+            <field name="res_model">product.auto.attribute.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_product_auto_attribute_line_search" model="ir.ui.view">
+            <field name="name">view.product.auto.attribute.line.search</field>
+            <field name="model">product.auto.attribute.line</field>
+            <field name="arch" type="xml">
+                <search string="Search Attributes">
+                    <field name="product_tmpl_id"/>
+                    <field name="auto_attribute_id"/>
+                    <field name="value_ids"/>
+               </search>
+            </field>
+        </record>
+
+        <record id="view_product_auto_attribute_line_tree" model="ir.ui.view">
+            <field name="name">view.product.auto.attribute.line.tree</field>
+            <field name="model">product.auto.attribute.line</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_tmpl_id"/>
+                    <field name="auto_attribute_id"/>
+                    <field name="value_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_product_auto_attribute_line_form" model="ir.ui.view">
+            <field name="name">view.product.auto.attribute.line.form</field>
+            <field name="model">product.auto.attribute.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="product_tmpl_id"/>
+                                <field name="auto_attribute_id"/>
+                                <field name="value_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('auto_attribute_id', '=', auto_attribute_id)]" context="{'default_auto_attribute_id': auto_attribute_id}"/>\
+                                <field name="create_date"/>
+                                <field name="write_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_product_auto_attribute" model="ir.actions.act_window">
+            <field name="name">Attribute Names</field>
+            <field name="res_model">product.auto.attribute</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_product_auto_attribute_tree" model="ir.ui.view">
+            <field name="name">view.product.auto.attribute.tree</field>
+            <field name="model">product.auto.attribute</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_product_auto_attribute_form" model="ir.ui.view">
+            <field name="name">view.product.auto.attribute.form</field>
+            <field name="model">product.auto.attribute</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="item_specific_attribute_ids" widget="many2many_tags" options="{'no_create_edit': True}" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Values" name="values">
+                                <field name="value_ids">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Synonyms" name="synonyms">
+                                <field name="attribute_synonym_ids">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="code"/>
+                                        <field name="sequence"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_product_auto_attribute_value" model="ir.actions.act_window">
+            <field name="name">Attribute Values</field>
+            <field name="res_model">product.auto.attribute.value</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_product_auto_attribute_value_tree" model="ir.ui.view">
+            <field name="name">view.product.auto.attribute.value.tree</field>
+            <field name="model">product.auto.attribute.value</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="auto_attribute_id"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_product_auto_attribute_value_form" model="ir.ui.view">
+            <field name="name">view.product.auto.attribute.value.form</field>
+            <field name="model">product.auto.attribute.value</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="auto_attribute_id"/>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_product_item_specific_line" model="ir.actions.act_window">
+            <field name="name">Item Specifics</field>
+            <field name="res_model">product.item.specific.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_product_item_specific_line_search" model="ir.ui.view">
+            <field name="name">view.product.item.specific.line.search</field>
+            <field name="model">product.item.specific.line</field>
+            <field name="arch" type="xml">
+                <search string="Search Item Specifics">
+                    <field name="product_tmpl_id"/>
+                    <field name="item_specific_attribute_id"/>
+                    <field name="value_id"/>
+               </search>
+            </field>
+        </record>
+
+        <record id="view_product_item_specific_line_tree" model="ir.ui.view">
+            <field name="name">view.product.item.specific.line.tree</field>
+            <field name="model">product.item.specific.line</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_tmpl_id"/>
+                    <field name="item_specific_attribute_id"/>
+                    <field name="value_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_product_item_specific_line_form" model="ir.ui.view">
+            <field name="name">view.product.item.specific.line.form</field>
+            <field name="model">product.item.specific.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="product_tmpl_id"/>
+                                <field name="item_specific_attribute_id"/>
+                                <field name="value_id" options="{'no_create_edit': True}" domain="[('item_specific_attribute_id', '=', item_specific_attribute_id)]" context="{'default_item_specific_attribute_id': item_specific_attribute_id}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_product_item_specific_attribute" model="ir.actions.act_window">
+            <field name="name">Item Specific Names</field>
+            <field name="res_model">product.item.specific.attribute</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_product_item_specific_attribute_tree" model="ir.ui.view">
+            <field name="name">view.product.item.specific.attribute.tree</field>
+            <field name="model">product.item.specific.attribute</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_product_item_specific_attribute_form" model="ir.ui.view">
+            <field name="name">view.product.item.specific.attribute.form</field>
+            <field name="model">product.item.specific.attribute</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="listing_specific"/>
+                                <field name="auto_attribute_ids" widget="many2many_tags" options="{'no_create_edit': True}" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Values" name="values">
+                                <field name="value_ids">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_product_item_specific_value" model="ir.actions.act_window">
+            <field name="name">Item Specific Values</field>
+            <field name="res_model">product.item.specific.value</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_product_item_specific_value_tree" model="ir.ui.view">
+            <field name="name">view.product.item.specific.value.tree</field>
+            <field name="model">product.item.specific.value</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="item_specific_attribute_id"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_product_item_specific_value_form" model="ir.ui.view">
+            <field name="name">view.product.item.specific.value.form</field>
+            <field name="model">product.item.specific.value</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="item_specific_attribute_id"/>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_template_form_view_attribute_button">
+            <field name="name">product.template.attribute.button</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" name="action_product_attribute_line_filtered_by_product"
+                        type="object" icon="fa-gears" string="Attributes">
+                    </button>
+                    <button class="oe_stat_button" name="action_product_item_specific_line_filtered_by_product"
+                        type="object" icon="fa-gears" string="Item Specifics">
+                    </button>
+                </div>
+            </field>
+        </record>
+
+        <menuitem id="menu_product_auto_attribute_line" name="Attributes Mapping" action="action_product_auto_attribute_line" parent="autoplus_interchange.menu_sales_products" sequence="60"/>
+
+        <menuitem id="menu_product_auto_attribute" name="Attribute Names" action="action_product_auto_attribute" parent="autoplus_interchange.menu_sales_products" sequence="61"/>
+
+        <menuitem id="menu_product_auto_attribute_value" name="Attribute Values" action="action_product_auto_attribute_value" parent="autoplus_interchange.menu_sales_products" sequence="62"/>
+
+        <menuitem id="menu_product_item_specific_line" name="Item Specific Mapping" action="action_product_item_specific_line" parent="autoplus_interchange.menu_sales_products" sequence="63"/>
+
+        <menuitem id="menu_product_item_specific_attribute" name="Item Specific Names" action="action_product_item_specific_attribute" parent="autoplus_interchange.menu_sales_products" sequence="64"/>
+
+        <menuitem id="menu_product_item_specific_value" name="Item Specific Values" action="action_product_item_specific_value" parent="autoplus_interchange.menu_sales_products" sequence="65"/>
+    </data>
+</odoo>

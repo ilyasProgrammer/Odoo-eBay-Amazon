@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="package_fedex_package_oversized" model="ship.carrier.package">
+            <field name="name">Package</field>
+            <field name="ss_code">package</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_fedex_10_kg_oversized" model="ship.carrier.package">
+            <field name="name">FedEx 10kg Box</field>
+            <field name="ss_code">fedex_10kg_box</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_fedex_25_kg_oversized" model="ship.carrier.package">
+            <field name="name">FedEx 25kg Box</field>
+            <field name="ss_code">fedex_25kg_box</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_fedex_box_oversized" model="ship.carrier.package">
+            <field name="name">FedEx Box</field>
+            <field name="ss_code">fedex_box</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_fedex_envelope_oversized" model="ship.carrier.package">
+            <field name="name">FedEx Envelope</field>
+            <field name="ss_code">fedex_envelope</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_fedex_pak_oversized" model="ship.carrier.package">
+            <field name="name">FedEx Pak</field>
+            <field name="ss_code">fedex_pak</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_fedex_tube_oversized" model="ship.carrier.package">
+            <field name="name">FedEx Tube</field>
+            <field name="ss_code">fedex_tube</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_fedex_envelope_onerate_oversized" model="ship.carrier.package">
+            <field name="name">One Rate Envelope</field>
+            <field name="ss_code">fedex_envelope_onerate</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="package_fedex_extra_large_box_onerate_oversized" model="ship.carrier.package">
+            <field name="name">One Rate Extra Large Box</field>
+            <field name="ss_code">fedex_extra_large_box_onerate</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="package_fedex_large_box_onerate_oversized" model="ship.carrier.package">
+            <field name="name">One Rate Large Box</field>
+            <field name="ss_code">fedex_large_box_onerate</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="package_fedex_medium_box_onerate_oversized" model="ship.carrier.package">
+            <field name="name">One Rate Medium Box</field>
+            <field name="ss_code">fedex_medium_box_onerate</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="package_fedex_pak_box_onerate_oversized" model="ship.carrier.package">
+            <field name="name">One Rate Pak</field>
+            <field name="ss_code">fedex_pak_onerate</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="package_fedex_small_box_onerate_oversized" model="ship.carrier.package">
+            <field name="name">One Rate Small Box</field>
+            <field name="ss_code">fedex_small_box_onerate</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="package_fedex_tube_onerate_oversized" model="ship.carrier.package">
+            <field name="name">One Rate Tube</field>
+            <field name="ss_code">fedex_tube_onerate</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+
+    </data>
+</odoo>

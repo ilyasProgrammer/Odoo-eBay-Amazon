@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+a1,a1  ,custom_business_reports.model_mapm_sales_report,mapm,1,0,0,0
+a2,a2  ,custom_business_reports.model_mapm_pbl_sales_report,mapm,1,0,0,0
+a3,a3  ,hr.model_hr_employee,mapm,0,0,0,0

@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_recon_user,purchase.recon.user,model_purchase_recon,purchase.group_purchase_user,1,1,1,1
+access_purchase_recon_line_user,purchase.recon.line.user,model_purchase_recon_line,purchase.group_purchase_user,1,1,1,1
+access_shipping_recon_user,shipping.recon.user,model_purchase_shipping_recon,purchase.group_purchase_user,1,1,1,1
+access_shipping_recon_line_user,shipping.recon.line.user,model_purchase_shipping_recon_line,purchase.group_purchase_user,1,1,1,1
+a,a,model_ebay_recon,purchase.group_purchase_user,1,1,1,1
+a1,a1,model_ebay_recon_line,purchase.group_purchase_user,1,1,1,1
+b,b,model_amazon_recon,purchase.group_purchase_user,1,1,1,1
+b1,b1,model_amazon_recon_line,purchase.group_purchase_user,1,1,1,1

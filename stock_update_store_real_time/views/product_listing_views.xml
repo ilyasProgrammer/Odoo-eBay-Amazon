@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_product_listing_repricer_form" model="ir.ui.view">
+            <field name="name">view.product.listing.repricer.form</field>
+            <field name="model">product.listing</field>
+            <field name="inherit_id" ref="sale_store.view_product_listing_form" />
+            <field name="arch" type="xml">
+                <button name="button_end_item" position="before">
+                    <button name="update_availability" type='object' string='Re-stock' class="oe_highlight" attrs="{'invisible': [('site', '!=', 'ebay')]}"/>
+                </button>
+                <field name="name" position="after">
+                    <field name="repricer_scheme_id"/>
+                    <field name="do_not_restock"/>
+                    <field name="do_not_reprice"/>
+                    <field name="ebay_reprice_against_competitors" attrs="{'invisible': ['|', ('site', '!=', 'ebay'), ('do_not_reprice', '=', True)]}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

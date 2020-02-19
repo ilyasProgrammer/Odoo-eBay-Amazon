@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_auto_attribute_user,access.product.auto.attribute.user,model_product_auto_attribute,base.group_user,1,1,1,1
+access_product_auto_attribute_value_user,access.product.auto.attribute.value.user,model_product_auto_attribute_value,base.group_user,1,1,1,1
+access_product_auto_attribute_synonym_user,access.product.auto.attribute.synonym.user,model_product_auto_attribute_synonym,base.group_user,1,1,1,1
+access_product_auto_attribute_line_user,access.product.auto.attribute.line.user,model_product_auto_attribute_line,base.group_user,1,1,1,1
+access_product_item_specific_attribute_user,access.product.item.specific.attribute.user,model_product_item_specific_attribute,base.group_user,1,1,1,1
+access_product_item_specific_value_user,access.product.item.specific.value.user,model_product_item_specific_value,base.group_user,1,1,1,1
+access_product_item_specific_line_user,access.product.item.specific.line.user,model_product_item_specific_line,base.group_user,1,1,1,1

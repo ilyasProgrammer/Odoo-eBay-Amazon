@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_return_user,sale.return.user,model_sale_return,base.group_user,1,1,1,1
+access_sale_return_line_user,sale.return.line.user,model_sale_return_line,base.group_user,1,1,1,1
+access_amz_return_message_user,amz.message.user,model_sale_store_amz_return_message,base.group_user,1,1,1,1
+access_stock_quick_return_user,stock.quick.return.user,model_stock_quick_return,stock.group_stock_user,1,1,1,1
+access_stock_quick_return_line_user,stock.quick.return.line.user,model_stock_quick_return_line,stock.group_stock_user,1,1,1,1

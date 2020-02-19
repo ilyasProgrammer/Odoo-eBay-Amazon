@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_sale_autoplus_settings" model="ir.ui.view">
+            <field name="name">autoplus.settings</field>
+            <field name="model">sale.config.settings</field>
+            <field name="inherit_id" ref="sales_team.view_sale_config_settings"/>
+            <field name="arch" type="xml">
+                <div id="main" position="inside">
+                    <separator string="AutoPlus Integration"/>
+                    <group>
+                        <group>
+                            <div>
+                                <div>
+                                    <label for="autoplus_server"/>
+                                    <field name="autoplus_server"/>
+                                </div>
+                                <div>
+                                    <label for="autoplus_db_name"/>
+                                    <field name="autoplus_db_name"/>
+                                </div>
+                                <div>
+                                    <label for="autoplus_username"/>
+                                    <field name="autoplus_username"/>
+                                </div>
+                                <div>
+                                    <label for="autoplus_password"/>
+                                    <field name="autoplus_password"/>
+                                </div>
+                            </div>
+                        </group>
+                    </group>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

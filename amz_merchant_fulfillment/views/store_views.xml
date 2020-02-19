@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_amz_shipping_template" model="ir.actions.act_window">
+            <field name="name">Amazon Shipping Templates</field>
+            <field name="res_model">sale.store.amz.shipping.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_amz_shipping_template_tree" model="ir.ui.view">
+            <field name="name">view.amz.shipping.template.tree</field>
+            <field name="model">sale.store.amz.shipping.template</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="store_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_amz_shipping_template_form" model="ir.ui.view">
+            <field name="name">view.amz.shipping.template.form</field>
+            <field name="model">sale.store.amz.shipping.template</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="store_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_amz_shipping_template_search" model="ir.ui.view">
+            <field name="name">view.amz.shipping.template.search</field>
+            <field name="model">sale.store.amz.shipping.template</field>
+            <field name="arch" type="xml">
+                <search string="Search Amazon Shipping Templates">
+                    <field name="name"/>
+                    <field name="store_id"/>
+               </search>
+            </field>
+        </record>
+
+        <menuitem id="menu_amz_shipping_template"
+            name="Amazon Shipping Templates"
+            action="action_amz_shipping_template"
+            parent="sale_store.menu_sale_store_root"
+            sequence="20"
+        />
+
+        <record id="view_store_amz_shipping_template_form" model="ir.ui.view">
+            <field name="name">view.store.amz.shipping.template.form</field>
+            <field name="model">sale.store</field>
+            <field name="inherit_id" ref="sale_store.view_sale_store_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position='inside'>
+                    <page string="Shipping Templates" name="shipping" attrs="{'invisible': [('site', '!=', 'amz')]}">
+                        <group>
+                            <group>
+                                <field name="default_shipping_template_id" options="{'no_create_edit': True}" domain="[('store_id', '=', id)]"/>
+                                <field name="prime_shipping_template_id" options="{'no_create_edit': True}" domain="[('store_id', '=', id)]"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

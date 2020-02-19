@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <record id="view_mapm_product_pivot2" model="ir.ui.view">
+         <field name="name">mapm.sales.report.pivot</field>
+         <field name="model">mapm.sales.report</field>
+         <field name="arch" type="xml">
+             <pivot string="MAPM">
+                 <field name="date" interval="month" type="row"/>
+                 <field name="price_total" type="measure"/>
+             </pivot>
+         </field>
+    </record>
+
+    <record id="view_mapm_product_graph" model="ir.ui.view">
+         <field name="name">mapm.sales.report.graph</field>
+         <field name="model">mapm.sales.report</field>
+         <field name="arch" type="xml">
+             <graph string="MAPM">
+                 <field name="date" type="row"/>
+                 <field name="price_total" type="measure"/>
+             </graph>
+         </field>
+    </record>
+
+    <record id="view_mapm_product_tree" model="ir.ui.view">
+         <field name="name">mapm.sales.report.tree</field>
+         <field name="model">mapm.sales.report</field>
+         <field name="arch" type="xml">
+             <tree string="MAPM">
+                 <field name="date"/>
+                 <field name="order_id"/>
+                 <field name="item_id"/>
+                 <field name="name"/>
+                 <field name="price_total"/>
+             </tree>
+         </field>
+    </record>
+
+
+    <record id="action_order_report_all" model="ir.actions.act_window">
+        <field name="name">MAPM</field>
+        <field name="res_model">mapm.sales.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,pivot,graph</field>
+        <field name="view_id" ref="view_mapm_product_tree"/>
+    </record>
+
+    <menuitem name="MAPM" action="action_order_report_all" id="menu_mapm_report" parent="sales_team.menu_sale_report" sequence="11"/>
+</data>
+</odoo>

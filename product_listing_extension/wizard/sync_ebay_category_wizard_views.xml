@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_sync_ebay_categories_form" model="ir.ui.view">
+            <field name="name">Sync eBay Categories</field>
+            <field name="model">product.ebay.category.sync.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Sync eBay Categories">
+                    <group>
+                        <group>
+                            <field name="parent_category_id"/>
+                            <field name="site_id"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="button_sync_ebay_categories" string="Sync eBay Categories" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+         <record id="action_sync_ebay_categories" model="ir.actions.act_window">
+            <field name="name">Sync eBay Categories</field>
+            <field name="res_model">product.ebay.category.sync.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+         </record>
+
+    </data>
+</odoo>

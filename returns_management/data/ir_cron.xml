@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="0">
+    <record id="amazon_get_new_returns" model="ir.cron">
+        <field name="name">[amazon] Get amazon returns</field>
+        <field name="interval_number">30</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="model">sale.return</field>
+        <field name="active">False</field>
+        <field name="function">amazon_get_returns</field>
+    </record>
+    <record id="ebay_get_new_returns" model="ir.cron">
+        <field name="name">[eBay] Get new returns</field>
+        <field name="interval_number">30</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="model">sale.return</field>
+        <field name="active">False</field>
+        <field name="function">ebay_get_new_returns</field>
+    </record>
+    <record id="ebay_get_all_returns" model="ir.cron">
+        <field name="name">[eBay] Get all returns</field>
+        <field name="interval_number">30</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">0</field>
+        <field name="model">sale.return</field>
+        <field name="active">False</field>
+        <field name="function">ebay_get_all_returns</field>
+    </record>
+    <record id="ebay_get_year_returns" model="ir.cron">
+        <field name="name">[eBay] Get year returns</field>
+        <field name="interval_number">30</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">0</field>
+        <field name="model">sale.return</field>
+        <field name="active">False</field>
+        <field name="function">ebay_get_all_year_returns</field>
+        <field name="args">(2018,)</field>
+    </record>
+    <record id="ebay_update_old_returns" model="ir.cron">
+        <field name="name">[eBay] Update ebay old returns</field>
+        <field name="interval_number">30</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="model">sale.return</field>
+        <field name="active">True</field>
+        <field name="function">ebay_update_old_returns</field>
+    </record>
+    <record id="get_all_year_returns" model="ir.cron">
+        <field name="name">Get all year returns</field>
+        <field name="interval_number">30</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">0</field>
+        <field name="model">sale.return</field>
+        <field name="active">False</field>
+        <field name="function">get_all_year_returns</field>
+        <field name="args">(2018,)</field>
+    </record>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_form_amz_state" model="ir.ui.view">
+            <field name="name">partner.form.amz.state</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <field name="website" position="before">
+                    <field name="amz_state" attrs="{'invisible': [('amz_state', '=', False)]}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_repricer_competitor_history" model="ir.actions.act_window">
+            <field name="name">eBay Repricer Competitor History</field>
+            <field name="res_model">repricer.competitor.history</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_repricer_competitor_history_tree" model="ir.ui.view">
+            <field name="name">view.repricer.competitor.history.tree</field>
+            <field name="model">repricer.competitor.history</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="comp_id"/>
+                    <field name="price"/>
+                    <field name="qty_sold"/>
+                    <field name="create_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_repricer_competitor_history_form" model="ir.ui.view">
+            <field name="name">view.repricer.competitor.history.form</field>
+            <field name="model">repricer.competitor.history</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="comp_id" />
+                                <field name="price" />
+                                <field name="qty_sold" />
+                                <field name="create_date" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_repricer_competitor_history_search" model="ir.ui.view">
+            <field name="name">view.repricer.competitor.history.search</field>
+            <field name="model">repricer.competitor.history</field>
+            <field name="arch" type="xml">
+                <search string="eBay Competitor History">
+                    <field name="comp_id" />
+               </search>
+            </field>
+        </record>
+
+        <record id="stock_update_store_real_time.view_repricer_competitor_form" model="ir.ui.view">
+            <field name="name">view.repricer.competitor.form</field>
+            <field name="model">repricer.competitor</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="button_deactivate" type="object" string="Deactivate" states="active"/>
+                        <button name="button_activate" type="object" string="Activate" states="inactive" class="btn-primary"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button"
+                                name="action_view_history"
+                                type="object"
+                                icon="fa-copy"
+                                string="History"
+                                attrs="{'invisible':[('history_count', '=', 0)]}"
+                            />
+                            <field name="history_count" invisible="1"/>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="item_id"/>
+                                <field name="title"/>
+                                <field name="product_tmpl_id"/>
+                                <field name="seller"/>
+                                <field name="quantity_sold"/>
+                            </group>
+                            <group>
+                                <field name="price"/>
+                                <field name="previous_price"/>
+                                <field name="quantity"/>
+                                <field name="price_write_date"/>
+                                <field name="sequence"/>
+                                <field name="listing_url" widget="listing_url"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

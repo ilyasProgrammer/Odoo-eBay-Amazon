@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_product_ebay_category" model="ir.actions.act_window">
+            <field name="name">eBay Categories</field>
+            <field name="res_model">product.ebay.category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_product_ebay_category_tree" model="ir.ui.view">
+            <field name="name">view.product.ebay.category.tree</field>
+            <field name="model">product.ebay.category</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="display_name"/>
+                    <field name="ebay_category_id"/>
+                    <field name="is_leaf_category"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_product_ebay_category_form" model="ir.ui.view">
+            <field name="name">view.product.ebay.category.form</field>
+            <field name="model">product.ebay.category</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="parent_id"/>
+                                <field name="ebay_category_id"/>
+                                <field name="is_leaf_category"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_product_ebay_category_search" model="ir.ui.view">
+            <field name="name">view.product.ebay.category.search</field>
+            <field name="model">product.ebay.category</field>
+            <field name="arch" type="xml">
+                <search string="Search eBay Categories">
+                    <field name="name"/>
+                    <filter string="Leaf Categories" name="leaf" domain="[('is_leaf_category', '=', True)]"/>
+               </search>
+            </field>
+        </record>
+
+        <menuitem id="menu_ebay_categories" name="eBay Categories" action="action_product_ebay_category" parent="autoplus_interchange.menu_sales_products" sequence="60"/>
+
+        <menuitem id="menu_sync_ebay_categories" name="Sync eBay Categories" parent="sale_store.menu_sales_tools" sequence="10" action="action_sync_ebay_categories"/>
+    </data>
+</odoo>

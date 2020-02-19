@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_cron_reroute_purchase_orders_to_wh" model="ir.cron">
+            <field name="name">[ODOO] Reroute POs to WH</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">15</field>
+            <field name="interval_type">minutes</field>
+            <field name="priority">202</field>
+            <field name="numbercall">1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'purchase.order'" name="model"/>
+            <field eval="'cron_reroute_po_to_wh'" name="function"/>
+            <field eval="()" name="args"/>
+        </record>
+
+        <record id="ir_cron_pfg_send_purchase_orders" model="ir.cron">
+            <field name="name">[ODOO] Send POs to PFG</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">20</field>
+            <field name="interval_type">minutes</field>
+            <field name="priority">203</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="False"/>
+            <field name="model" eval="'purchase.order'"/>
+            <field name="function" eval="'cron_pfg_send_purchase_orders'"/>
+            <field eval="()" name="args"/>
+        </record>
+
+        <record id="ir_cron_lkq_send_purchase_orders" model="ir.cron">
+            <field name="name">[ODOO] Send POs to LKQ</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">20</field>
+            <field name="interval_type">minutes</field>
+            <field name="priority">204</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="False"/>
+            <field name="model" eval="'purchase.order'"/>
+            <field name="function" eval="'cron_lkq_send_purchase_orders'"/>
+            <field eval="()" name="args"/>
+        </record>
+
+        <record id="ir_cron_ppr_send_purchase_orders" model="ir.cron">
+            <field name="name">[ODOO] Send POs to PPR</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="priority">204</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="False"/>
+            <field name="model" eval="'purchase.order'"/>
+            <field name="function" eval="'cron_ppr_send_purchase_orders'"/>
+            <field eval="()" name="args"/>
+        </record>
+
+        <record id="ir_cron_pfg_get_tracking_numbers" model="ir.cron">
+            <field name="name">[ODOO] Get Tracking Numbers for PFG Orders</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">20</field>
+            <field name="interval_type">minutes</field>
+            <field name="priority">205</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="False"/>
+            <field name="model" eval="'stock.picking'"/>
+            <field name="function" eval="'cron_pfg_get_tracking_numbers'"/>
+            <field eval="()" name="args"/>
+        </record>
+
+        <record id="ir_cron_check_for_potential_losses" model="ir.cron">
+            <field name="name">[ODOO] Check for Potential Losses</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="priority">206</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="False"/>
+            <field name="model" eval="'sale.order'"/>
+            <field name="function" eval="'cron_check_for_potential_losses'"/>
+            <field eval="()" name="args"/>
+        </record>
+
+        <record id="ir_cron_get_pfg_order_ids" model="ir.cron">
+            <field name="name">[ODOO] Get PFG Order IDs</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">15</field>
+            <field name="interval_type">minutes</field>
+            <field name="priority">201</field>
+            <field name="numbercall">1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'purchase.order'" name="model"/>
+            <field eval="'cron_get_pfg_order_ids'" name="function"/>
+            <field eval="()" name="args"/>
+        </record>
+
+        <record id="ir_cron_sync_products_with_autoplus" model="ir.cron">
+            <field name="name">[AUTOPLUS] Sync Products with AutoPlus</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">1</field>
+            <field eval="False" name="doall"/>
+            <field name="active" eval="False"/>
+            <field eval="'product.template'" name="model"/>
+            <field eval="'cron_sync_products_with_autoplus'" name="function"/>
+            <field eval="(1, 20)" name="args"/>
+        </record>
+
+        <record id="ir_cron_get_products_by_inventory_range" model="ir.cron">
+            <field name="name">[AUTOPLUS] Get Products By Inventory Range</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">1</field>
+            <field eval="False" name="doall"/>
+            <field name="active" eval="False"/>
+            <field eval="'product.template'" name="model"/>
+            <field eval="'cron_get_products_by_inventory_range'" name="function"/>
+            <field eval="(1, 1000)" name="args"/>
+        </record>
+
+        <record id="ir_cron_process_sales_orders" model="ir.cron">
+            <field name="name">Process Sales Orders</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field name="active" eval="True"/>
+            <field eval="'sale.order'" name="model"/>
+            <field eval="'cron_process_sales_orders'" name="function"/>
+            <field eval="()" name="args"/>
+        </record>
+
+        <record id="partner_lkq" model="res.partner">
+            <field name="name">LKQ Auto Parts</field>
+            <field name="dropshipper_code">lkq</field>
+            <field name="company_type">company</field>
+            <field name="supplier" eval="True"/>
+        </record> 
+
+        <record id="partner_pfg" model="res.partner">
+            <field name="name">PFG Auto Parts</field>
+            <field name="dropshipper_code">pfg</field>
+            <field name="company_type">company</field>
+            <field name="supplier" eval="True"/>
+        </record>
+
+        <record id="partner_ppr" model="res.partner">
+            <field name="name">PPR</field>
+            <field name="dropshipper_code">ppr</field>
+            <field name="company_type">company</field>
+            <field name="supplier" eval="True"/>
+        </record> 
+
+        <!-- Drop Shipping-->
+        <record id="route_lkq_drop_shipping" model='stock.location.route'>
+            <field name="name">LKQ: Drop Shipping</field>
+            <field name="sequence">5</field>
+            <field name="sale_selectable" eval="True"/>
+        </record>
+
+        <record id="procurement_lkq_rule_drop_shipping" model="procurement.rule">
+            <field name="name">LKQ → Customer</field>
+            <field name="action">buy</field>
+            <field name="location_id" ref="stock.stock_location_customers"/>
+            <field name="dropshipper_id" ref="partner_lkq"/>
+            <field name="mfg_codes">'BXLD','GMK'</field>
+            <field name="min_qty">5</field>
+            <field name="location_src_id" ref="stock.stock_location_suppliers"/>
+            <field name="procure_method">make_to_stock</field>
+            <field name="route_id" ref="route_lkq_drop_shipping"/>
+            <field name="picking_type_id" ref="stock_dropshipping.picking_type_dropship"/>
+        </record>
+
+        <record id="route_pfg_drop_shipping" model='stock.location.route'>
+            <field name="name">PFG: Drop Shipping</field>
+            <field name="sequence">5</field>
+            <field name="sale_selectable" eval="True"/>
+        </record>
+
+        <record id="procurement_pfg_rule_drop_shipping" model="procurement.rule">
+            <field name="name">PFG → Customer</field>
+            <field name="action">buy</field>
+            <field name="location_id" ref="stock.stock_location_customers"/>
+            <field name="dropshipper_id" ref="partner_pfg"/>
+            <field name="mfg_id">'BFHZ','REPL','STYL','NDRE','BOLT','EVFI'</field>
+            <field name="min_qty">3</field>
+            <field name="location_src_id" ref="stock.stock_location_suppliers"/>
+            <field name="procure_method">make_to_stock</field>
+            <field name="route_id" ref="route_pfg_drop_shipping"/>
+            <field name="picking_type_id" ref="stock_dropshipping.picking_type_dropship"/>
+        </record>
+
+        <record id="route_ppr_drop_shipping" model='stock.location.route'>
+            <field name="name">PPR: Drop Shipping</field>
+            <field name="sequence">5</field>
+            <field name="sale_selectable" eval="True"/>
+        </record>
+
+        <record id="procurement_ppr_rule_drop_shipping" model="procurement.rule">
+            <field name="name">PPR → Customer</field>
+            <field name="action">buy</field>
+            <field name="location_id" ref="stock.stock_location_customers"/>
+            <field name="dropshipper_id" ref="partner_ppr"/>
+            <field name="mfg_codes">'PPR'</field>
+            <field name="min_qty">0</field>
+            <field name="location_src_id" ref="stock.stock_location_suppliers"/>
+            <field name="procure_method">make_to_stock</field>
+            <field name="route_id" ref="route_ppr_drop_shipping"/>
+            <field name="picking_type_id" ref="stock_dropshipping.picking_type_dropship"/>
+        </record>
+
+        <record id="ir_cron_set_saleid_storeid" model="ir.cron">
+            <field name="name">Set SaleId And StoreId</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="priority">201</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field name="active" eval="False"/>
+            <field eval="'procurement.order'" name="model"/>
+            <field eval="'cron_set_saleid_storeid'" name="function"/>
+            <field eval="()" name="args"/>
+        </record>
+    </data>
+</odoo>

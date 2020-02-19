@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_unlisted_wh_items_wizard" model="ir.ui.view">
+            <field name="name">view.unlisted.wh.items.wizard.form</field>
+            <field name="model">sale.unlisted.wh.items.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Unlisted WH Items">
+                    <group>
+                        <group>
+                            <field name="store_id"/>
+                        </group>
+                    </group>
+                    <footer>
+                      <button name="button_download_report" type="object" string="Download Report" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_unlisted_wh_items_wizard" model="ir.actions.act_window">
+            <field name="name">Unlisted Warehouse Items</field>
+            <field name="res_model">sale.unlisted.wh.items.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

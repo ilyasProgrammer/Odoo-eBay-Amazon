@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_box_line_form" model="ir.ui.view">
+        <field name="name">view_box_line_form</field>
+        <field name="model">box.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet><group>
+                <field name="product_id"/>
+                <field name="name"/>
+                <field name="box_id"/>
+                <field name="qty"/>
+                <field name="comment"/>
+                </group></sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_box_line_tree" model="ir.ui.view">
+        <field name="name">view_box_line_tree</field>
+        <field name="model">box.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_id"/>
+                <field name="name"/>
+                <field name="box_id"/>
+                <field name="qty"/>
+                <!--<field name="comment"/>-->
+            </tree>
+        </field>
+    </record>
+    <record id="action_box_mapping" model="ir.actions.act_window">
+            <field name="name">Box mapping</field>
+            <field name="res_model">box.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_box_lines"
+              name="Box mapping"
+              parent="autoplus_interchange.menu_sales_products"
+              sequence="90"
+              action="action_box_mapping"
+              groups="stock.group_stock_user"/>
+</odoo>

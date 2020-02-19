@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <record id="view_sale_order_graph" model="ir.ui.view">
+        <field name="name">sale.order.graph</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <graph string="Sales Orders" type="line">
+                <field name="date_order" type="row" interval="day"/>
+                <field name="amz_order_type" type="col"/>
+                <!--<field name="state" type="col"/>-->
+                <!--<field name="amount_total" type="measure"/>-->
+            </graph>
+        </field>
+    </record>
+
+    <record id="sales_dashboard_search_view" model="ir.ui.view">
+        <field name="name">sale.order.search</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <search string="Groups">
+                <filter string="Current Week" name="week" domain="[('date_order','&lt;=', (context_today() + relativedelta(weeks=0,day=7, weekday=-1)).strftime('%Y-%m-%d')),('date_order','&gt;=',(context_today() - relativedelta(weeks=1, weekday=0)).strftime('%Y-%m-%d'))]" help="Current Week"/>
+                <filter string="This Month" name="month" domain="[('date_order','&lt;=',(datetime.date.today()+relativedelta(day=31)).strftime('%Y-%m-%d')),('date_order','&gt;=',(datetime.date.today()-relativedelta(day=1)).strftime('%Y-%m-%d'))]" help="Current Month"/>
+                <filter string="Prev Month" name="prev_month" domain="[('date_order','&gt;=',(context_today()-relativedelta(months=1)).strftime('%Y-%m-01')),('date_order','&lt;',time.strftime('%Y-%m-01'))]"/>
+                <filter string="This Year" name="year" domain="[('date_order','&lt;=', time.strftime('%%Y-12-31')),('date_order','&gt;=',time.strftime('%%Y-01-01'))]"/>
+                <filter string="Last week" name="last_week" domain="[('date_order', '&gt;=', ((context_today()+relativedelta(weeks=-2,days=1, weekday=0)).strftime('%Y-%m-%d'))),('date_order', '&lt;=', ((context_today()+relativedelta(weeks=-1,weekday=6)).strftime('%Y-%m-%d')))]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="sales_dashboard_act" model="ir.actions.act_window">
+        <field name="name">Dashboard</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">graph</field>
+        <field name="search_view_id" ref="sales_dashboard_search_view"/>
+        <!--<field name="context">{'search_default_month':1, 'graph_mode':'line'}</field>-->
+        <field name="context">{'search_default_month':1}</field>
+        <field name="domain">[('state', 'in', ('sale','done'))]</field>
+        <field name="view_id" ref="view_sale_order_graph"/>
+    </record>
+
+    <record id="sales_dashboard_act_window_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">graph</field>
+        <field name="act_window_id" ref="sales_dashboard_act"/>
+        <field name="view_id" ref="view_sale_order_graph"/>
+    </record>
+
+    <menuitem id="menu_sales_team_act"
+              action="sales_dashboard_act"
+              sequence="1"
+              parent="sales_team.menu_base_partner"
+              name="Dashboard"/>
+
+</data>
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_picking_with_packaging" model="ir.ui.view">
+            <field name="name">view.picking.with.packaging</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="ship_shipstation.view_picking_with_carrier_out_form"/>
+            <field name="arch" type="xml">
+                <page name="shipping" position="after">
+                    <page string="Packaging Info" name="packaging" attrs="{'invisible': [('picking_type_code', 'not in', ('return', 'outgoing'))]}">
+                        <button name="button_assign_packaging" string="Assign Packaging to Product" class="btn-primary oe_inline" type="object" />
+                        <group>
+                            <field name="packaging_not_required"/>
+                        </group>
+                        <field name="packaging_line_ids" attrs="{'invisible': [('packaging_not_required', '=', True)]}">
+                            <tree editable="bottom">
+                                <field name="packaging_product_id"/>
+                                <field name="quantity"/>
+                            </tree>
+                        </field>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+        <record id="view_picking_type_with_packaging_form" model="ir.ui.view">
+            <field name="name">view.stock.picking.type.with.packaging.form</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.view_picking_type_form"/>
+            <field name="arch" type="xml">
+                <field name="barcode_nomenclature_id" position="after">
+                    <field name="require_packaging" groups="base.group_no_one"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

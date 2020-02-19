@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="dynamic_reports_action_root" name="Reports" web_icon="custom_business_reports,static/description/reports.png" groups="base.group_user" sequence="30"/>
+    <!--<menuitem name="Reports" id="dynamic_reports_menu" parent="dynamic_reports_action_root" sequence="99" groups="base.group_user"/>-->
+
+
+    <record id="view_dr_returns_pivot" model="ir.ui.view">
+            <field name="name">stock.picking.returns.pivot</field>
+            <field name="model">stock.picking</field>
+            <field name="arch" type="xml">
+            <pivot string="Returns Count">
+                 <field name="date_done" interval="day" type="row"/>
+                 <!--<field name="cost" type="measure"/>-->
+             </pivot>
+         </field>
+    </record>
+
+    <record id="view_dr_returns_graph" model="ir.ui.view">
+        <field name="name">stock.picking.returns.graph</field>
+        <field name="model">stock.picking</field>
+        <field name="arch" type="xml">
+            <graph string="Returns Count" type="line">
+                <field name="date_done" type="row" interval="day"/>
+                <!--<field name="amz_order_type" type="col"/>-->
+                <!--<field name="state" type="col"/>-->
+                <!--<field name="amount_total" type="measure"/>-->
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_dr_returns_search_view" model="ir.ui.view">
+        <field name="name">stock.picking.returns.search</field>
+        <field name="model">stock.picking</field>
+        <field name="arch" type="xml">
+            <search string="Groups">
+                <filter string="Current Week" name="week" domain="[('date_done','&lt;=', (context_today() + relativedelta(weeks=0,day=7, weekday=-1)).strftime('%Y-%m-%d')),('date_done','&gt;=',(context_today() - relativedelta(weeks=1, weekday=0)).strftime('%Y-%m-%d'))]" help="Current Week"/>
+                <filter string="This Month" name="month" domain="[('date_done','&lt;=',(datetime.date.today()+relativedelta(day=31)).strftime('%Y-%m-%d')),('date_done','&gt;=',(datetime.date.today()-relativedelta(day=1)).strftime('%Y-%m-%d'))]" help="Current Month"/>
+                <filter string="Prev Month" name="prev_month" domain="[('date_done','&gt;=',(context_today()-relativedelta(months=1)).strftime('%Y-%m-01')),('date_done','&lt;',time.strftime('%Y-%m-01'))]"/>
+                <filter string="This Year" name="year" domain="[('date_done','&lt;=', time.strftime('%%Y-12-31')),('date_done','&gt;=',time.strftime('%%Y-01-01'))]"/>
+                <filter string="Last week" name="last_week" domain="[('date_done', '&gt;=', ((context_today()+relativedelta(weeks=-2,days=1, weekday=0)).strftime('%Y-%m-%d'))),('date_done', '&lt;=', ((context_today()+relativedelta(weeks=-1,weekday=6)).strftime('%Y-%m-%d')))]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="dynamic_reports_action" model="ir.actions.act_window">
+        <field name="name">Returns Count</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="search_view_id" ref="view_dr_returns_search_view"/>
+        <field name="context">{'search_default_month':1}</field>
+        <field name="domain">[('picking_type_id', '=', 9), ('state', '=', 'done')]</field>
+        <field name="view_id" ref="view_dr_returns_graph"/>
+    </record>
+
+    <menuitem action="dynamic_reports_action" id="dra" parent="dynamic_reports_action_root" sequence="4" groups="base.group_user"/>
+
+</odoo>

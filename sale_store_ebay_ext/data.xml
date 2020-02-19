@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="ir_cron_cron_activated_method" model="ir.cron">
+            <field name="name">[TECH] cron_activated_method </field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="numbercall">0</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.order'" name="model"/>
+            <field eval="False" name="active"/>
+            <field name="priority">1</field>
+            <field eval="'cron_activated_method'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+
+    </data>
+</odoo>

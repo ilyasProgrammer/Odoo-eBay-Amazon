@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="amazon_wh_fullfilment_il" model="res.partner">
+            <field name="name">Amazon Fulfillment Center - MDW9</field>
+            <field name="email">none@none.fake</field>
+            <field name="supplier" eval="False"/>
+            <field name="customer" eval="False"/>
+            <field name="notify_email">none</field>
+            <field name="city">Naperville</field>
+            <field name="zip">60563</field>
+            <field name='state_id' ref='base.state_us_14'/>
+            <field name="country_id" ref="base.us"/>
+            <field name="company_type">company</field>
+            <field name="street">Ferry Rd, 4200</field>
+        </record>
+    </data>
+    <data noupdate="True">
+        <record id="seq_amz_fba_to_customer" model="ir.sequence">
+            <field name="name">Amazon FBA to customer seq</field>
+            <field name="code">amz.fba.customer</field>
+            <field name="prefix">FBATOC</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="amz_fba_to_customer" model="stock.picking.type">
+            <field name="name">Amazon FBA to customer</field>
+            <field name="code">outgoing</field>
+            <field name="sequence_id" ref="seq_amz_fba_to_customer"/>
+            <field name="warehouse_id" search="[('code','=','WH')]" model="stock.warehouse"/>
+            <field name="default_location_src_id" search="[('barcode','=','Amazon FBA')]" model="stock.location"/>
+            <field name="default_location_dest_id" search="[('barcode','=','customers')]" model="stock.location"/>
+        </record>
+    </data>
+
+    <data noupdate="True">
+       <record id="ir_cron_store_amz_fba_getorder" model="ir.cron">
+            <field name="name">[STORE] Get Amazon FBA Orders Scheduler</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field name="active" eval="False"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'cron_fba_getorder'" name="function"/>
+            <field eval="(5,)" name="args"/>
+        </record>
+
+        <record id="ir_cron_get_amz_fba_fees" model="ir.cron">
+            <field name="name">[STORE] Get Amazon FBA Fees</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">60</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field name="priority">13</field>
+            <field name="active" eval="False"/>
+            <field eval="'sale.order'" name="model"/>
+            <field eval="'cron_get_amz_fba_fees'" name="function"/>
+        </record>
+
+        <record id="route_amz_fba" model='stock.location.route'>
+            <field name="name">Amazon FBA</field>
+            <field name="sequence">12</field>
+            <field name="sale_selectable" eval="True"/>
+            <field name="product_selectable" eval="False"/>
+            <field name="product_categ_selectable" eval="True"/>
+        </record>
+    </data>
+    <record id="ir_cron_validate_fba_picks" model='ir.cron'>
+            <field name="name">[STORE] Validate FBA Picks</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">8</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field name="active" eval="True"/>
+            <field eval="'stock.picking'" name="model"/>
+            <field eval="'cron_validate_fba_picks'" name="function"/>
+    </record>
+</odoo>

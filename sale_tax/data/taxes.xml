@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <!--COMMON-->
+    <record id="tax_ca" model="account.tax">
+        <field name="name">7.25% CA</field>
+        <field name="amount">7.25</field>
+        <field name="description">7.25</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="active">True</field>
+        <field name="state_id" search="[('code','ilike','CA')]"/>
+    </record>
+    <record id="tax_il" model="account.tax">
+        <field name="name">6.25% IL</field>
+        <field name="amount">6.25</field>
+        <field name="description">6.25</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="active">True</field>
+        <field name="state_id" search="[('code','ilike','IL')]"/>
+    </record>
+    <record id="tax_mi" model="account.tax">
+        <field name="name">6% MI</field>
+        <field name="amount">6</field>
+        <field name="description">6</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="active">True</field>
+        <field name="state_id" search="[('code','ilike','MI')]"/>
+    </record>
+    <record id="tax_oh" model="account.tax">
+        <field name="name">5.75% OH</field>
+        <field name="amount">5.75</field>
+        <field name="description">5.75</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="active">True</field>
+        <field name="state_id" search="[('code','ilike','OH')]"/>
+    </record>
+    <record id="tax_va" model="account.tax">
+        <field name="name">5.3% VA</field>
+        <field name="amount">5.3</field>
+        <field name="description">5.3</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="active">True</field>
+        <field name="state_id" search="[('code','ilike','VA')]"/>
+    </record>
+    <!--AMAZON-->
+    <!--<record id="tax_amz_il" model="account.tax">-->
+        <!--<field name="name">6.25% amz IL</field>-->
+        <!--<field name="amount">6.25</field>-->
+        <!--<field name="amount_type">percent</field>-->
+        <!--<field name="type_tax_use">sale</field>-->
+        <!--<field name="active">True</field>-->
+        <!--<field name="state_id" search="[('code','ilike','IL')]"/>-->
+        <!--<field name="web_store">amz</field>-->
+        <!--<field name="tax_reg_num">4281-4480</field>-->
+    <!--</record>-->
+    <!--<record id="tax_amz_mi" model="account.tax">-->
+        <!--<field name="name">6% amz MI</field>-->
+        <!--<field name="amount">6</field>-->
+        <!--<field name="amount_type">percent</field>-->
+        <!--<field name="type_tax_use">sale</field>-->
+        <!--<field name="active">True</field>-->
+        <!--<field name="state_id" search="[('code','ilike','MI')]"/>-->
+        <!--<field name="web_store">amz</field>-->
+        <!--<field name="tax_reg_num">A46-1542293</field>-->
+    <!--</record>-->
+    <!--<record id="tax_amz_oh" model="account.tax">-->
+        <!--<field name="name">5.75% amz OH</field>-->
+        <!--<field name="amount">5.75</field>-->
+        <!--<field name="amount_type">percent</field>-->
+        <!--<field name="type_tax_use">sale</field>-->
+        <!--<field name="active">True</field>-->
+        <!--<field name="state_id" search="[('code','ilike','OH')]"/>-->
+        <!--<field name="web_store">amz</field>-->
+        <!--<field name="tax_reg_num">99110354</field>-->
+    <!--</record>-->
+    <!--<record id="tax_amz_va" model="account.tax">-->
+        <!--<field name="name">5.3% amz VA</field>-->
+        <!--<field name="amount">5.3</field>-->
+        <!--<field name="amount_type">percent</field>-->
+        <!--<field name="type_tax_use">sale</field>-->
+        <!--<field name="active">True</field>-->
+        <!--<field name="state_id" search="[('code','ilike','VA')]"/>-->
+        <!--<field name="web_store">amz</field>-->
+        <!--<field name="tax_reg_num">10-461542293F-001</field>-->
+    <!--</record>-->
+    <!--&lt;!&ndash;EBAY&ndash;&gt;-->
+    <!--<record id="tax_ebay_ca" model="account.tax">-->
+        <!--<field name="name">7.25% ebay CA</field>-->
+        <!--<field name="amount">7.25</field>-->
+        <!--<field name="amount_type">percent</field>-->
+        <!--<field name="type_tax_use">sale</field>-->
+        <!--<field name="active">True</field>-->
+        <!--<field name="state_id" search="[('code','ilike','CA')]"/>-->
+        <!--<field name="web_store">ebay</field>-->
+    <!--</record>-->
+    <!--<record id="tax_ebay_il" model="account.tax">-->
+        <!--<field name="name">6.25% ebay IL</field>-->
+        <!--<field name="amount">6.25</field>-->
+        <!--<field name="amount_type">percent</field>-->
+        <!--<field name="type_tax_use">sale</field>-->
+        <!--<field name="active">True</field>-->
+        <!--<field name="state_id" search="[('code','ilike','IL')]"/>-->
+        <!--<field name="web_store">ebay</field>-->
+    <!--</record>-->
+    <!--<record id="tax_ebay_mi" model="account.tax">-->
+        <!--<field name="name">6% ebay MI</field>-->
+        <!--<field name="amount">6</field>-->
+        <!--<field name="amount_type">percent</field>-->
+        <!--<field name="type_tax_use">sale</field>-->
+        <!--<field name="active">True</field>-->
+        <!--<field name="state_id" search="[('code','ilike','MI')]"/>-->
+        <!--<field name="web_store">ebay</field>-->
+    <!--</record>-->
+    <!--<record id="tax_ebay_oh" model="account.tax">-->
+        <!--<field name="name">5.75% ebay OH</field>-->
+        <!--<field name="amount">5.75</field>-->
+        <!--<field name="amount_type">percent</field>-->
+        <!--<field name="type_tax_use">sale</field>-->
+        <!--<field name="active">True</field>-->
+        <!--<field name="state_id" search="[('code','ilike','OH')]"/>-->
+        <!--<field name="web_store">ebay</field>-->
+    <!--</record>-->
+    <!--<record id="tax_ebay_va" model="account.tax">-->
+        <!--<field name="name">5.3% ebay VA</field>-->
+        <!--<field name="amount">5.3</field>-->
+        <!--<field name="amount_type">percent</field>-->
+        <!--<field name="type_tax_use">sale</field>-->
+        <!--<field name="active">True</field>-->
+        <!--<field name="state_id" search="[('code','ilike','VA')]"/>-->
+        <!--<field name="web_store">ebay</field>-->
+    <!--</record>-->
+</data>
+</odoo>

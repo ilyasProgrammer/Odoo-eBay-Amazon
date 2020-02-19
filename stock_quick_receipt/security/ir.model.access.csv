@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_quick_receipt_user,stock.quick.receipt.user,model_stock_quick_receipt,stock.group_stock_user,1,1,1,1
+access_stock_quick_receipt_line_user,stock.quick.receipt.line.user,model_stock_quick_receipt_line,stock.group_stock_user,1,1,1,1
+access_stock_quick_transfer_user,stock.quick.transfer.user,model_stock_quick_transfer,stock.group_stock_user,1,1,1,1
+access_stock_quick_transfer_line_user,stock.quick.transfer.line.user,model_stock_quick_transfer_line,stock.group_stock_user,1,1,1,1

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_repricer_scheme" model="ir.actions.act_window">
+            <field name="name">Repricer Schemes</field>
+            <field name="res_model">repricer.scheme</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_repricer_scheme_tree" model="ir.ui.view">
+            <field name="name">view.repricer.scheme.tree</field>
+            <field name="model">repricer.scheme</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_repricer_scheme_form" model="ir.ui.view">
+            <field name="name">view.repricer.scheme.form</field>
+            <field name="model">repricer.scheme</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" default_focus="1" placeholder="Description"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="reference"/>
+                                <field name="type"/>
+                                <field name="percent" attrs="{'invisible': [('type', '!=', 'percent')]}"/>
+                                <field name="amount" attrs="{'invisible': [('type', '!=', 'amount')]}"/>
+                            </group>
+                            <group/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="menu_repricer_scheme" parent="menu_repricer_root" sequence="40" name="Repricer" action="action_repricer_scheme" groups="base.group_user"/>
+    </data>
+</odoo>

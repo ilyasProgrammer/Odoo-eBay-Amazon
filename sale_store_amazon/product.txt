@@ -1,0 +1,1375 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by sunil sachdev (amazon.com) -->
+<!-- Revision="$Revision: #12 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <!--
+    $Date: 2007/10/31 $
+ 
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+  <xsd:include schemaLocation="amzn-base.xsd"/>
+  <xsd:include schemaLocation="ClothingAccessories.xsd"/>
+  <xsd:include schemaLocation="Amazon.xsd"/>
+  <xsd:include schemaLocation="ProductClothing.xsd"/>
+  <xsd:include schemaLocation="Miscellaneous.xsd"/>
+  <xsd:include schemaLocation="CameraPhoto.xsd"/>
+  <xsd:include schemaLocation="Home.xsd"/>
+  <xsd:include schemaLocation="Sports.xsd"/>
+  <xsd:include schemaLocation="SportsMemorabilia.xsd"/>
+  <xsd:include schemaLocation="EntertainmentCollectibles.xsd"/>
+  <xsd:include schemaLocation="HomeImprovement.xsd"/>
+  <xsd:include schemaLocation="Tools.xsd"/>
+  <xsd:include schemaLocation="FoodAndBeverages.xsd"/>
+  <xsd:include schemaLocation="Gourmet.xsd"/>
+  <xsd:include schemaLocation="Jewelry.xsd"/>
+  <xsd:include schemaLocation="Health.xsd"/>
+  <xsd:include schemaLocation="CE.xsd"/>
+  <xsd:include schemaLocation="Computers.xsd"/>
+  <xsd:include schemaLocation="SWVG.xsd"/>
+  <xsd:include schemaLocation="Wireless.xsd"/>
+  <xsd:include schemaLocation="Beauty.xsd"/>
+  <xsd:include schemaLocation="Office.xsd"/>
+  <xsd:include schemaLocation="MusicalInstruments.xsd"/>
+  <xsd:include schemaLocation="AutoAccessory.xsd"/>
+  <xsd:include schemaLocation="PetSupplies.xsd"/>
+  <xsd:include schemaLocation="ToysBaby.xsd"/>
+  <xsd:include schemaLocation="Baby.xsd"/>
+  <xsd:include schemaLocation="TiresAndWheels.xsd"/>
+  <xsd:include schemaLocation="Music.xsd"/>
+  <xsd:include schemaLocation="Video.xsd"/>
+  <xsd:include schemaLocation="Lighting.xsd"/>
+  <xsd:include schemaLocation="LargeAppliances.xsd"/>
+  <xsd:include schemaLocation="FBA.xsd"/>
+  <xsd:include schemaLocation="Toys.xsd"/>
+  <xsd:include schemaLocation="GiftCards.xsd"/>
+  <xsd:include schemaLocation="LabSupplies.xsd"/>
+  <xsd:include schemaLocation="RawMaterials.xsd"/>
+  <xsd:include schemaLocation="PowerTransmission.xsd"/>
+  <xsd:include schemaLocation="Industrial.xsd"/>
+  <xsd:include schemaLocation="Shoes.xsd"/>
+  <xsd:include schemaLocation="Motorcycles.xsd"/>
+  <xsd:include schemaLocation="MaterialHandling.xsd"/>
+  <xsd:include schemaLocation="MechanicalFasteners.xsd"/>
+  <xsd:include schemaLocation="FoodServiceAndJanSan.xsd"/>
+  <xsd:include schemaLocation="WineAndAlcohol.xsd"/>
+  <xsd:include schemaLocation="EUCompliance.xsd"/>
+  <xsd:include schemaLocation="Books.xsd"/>
+  <xsd:include schemaLocation="AdditionalProductInformation.xsd"/>
+  <xsd:include schemaLocation="Arts.xsd"/>
+  <xsd:include schemaLocation="Luggage.xsd"/> 
+  <xsd:include schemaLocation="Outdoors.xsd"/>
+  <xsd:include schemaLocation="Coins.xsd"/>
+  <xsd:include schemaLocation="Furniture.xsd"/>
+  <xsd:include schemaLocation="LuxuryBeauty.xsd"/>
+  <xsd:include schemaLocation="Collectibles.xsd"/>
+  <xsd:include schemaLocation="ProfessionalHealthCare.xsd"/>
+  <xsd:include schemaLocation="ThreeDPrinting.xsd"/>
+  
+  <!--
+    Please read the corresponding documentation that contains the recommended values for UsedFor, ItemType,
+    OtherItemAttributes, TargetAudience, and SubjectContent.
+    -->
+  <xsd:element name="Product">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SKU"/>
+        <xsd:element ref="StandardProductID" minOccurs="0"/>
+        <xsd:element name="GtinExemptionReason" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="bundle"/>
+              <xsd:enumeration value="part"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>        
+        <xsd:element ref="RelatedProductID" minOccurs="0"/>       
+        <xsd:element ref="ProductTaxCode" minOccurs="0"/>
+        <xsd:element name="LaunchDate" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="DiscontinueDate" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="ReleaseDate" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="ExternalProductUrl" type="xsd:anyURI" minOccurs="0"/>
+        <xsd:element name="OffAmazonChannel" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="advertise"/>
+              <xsd:enumeration value="exclude"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="OnAmazonChannel" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="sell"/>
+              <xsd:enumeration value="advertise"/>
+              <xsd:enumeration value="exclude"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Condition" type="ConditionInfo" minOccurs="0"/>
+        <xsd:element name="Rebate" type="RebateType" minOccurs="0" maxOccurs="2"/>
+        <xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation> Use this field to indicate the number of units included
+              in the item you are offering for sale, such that each unit is packaged
+              for individual sale. </xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="NumberOfItems" type="xsd:positiveInteger" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation> Use this field to indicate the number of discrete items
+              included in the item you are offering for sale, such that each item is
+              not packaged for individual sale. For example, if you are selling a case
+              of 10 packages of socks, and each package contains 3 pairs of socks, the
+              case would have ItemPackageQuantity = 10 and NumberOfItems = 30.
+            </xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LiquidVolume" type="VolumeDimension" minOccurs="0"/>
+        <xsd:element name="DescriptionData" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Title" type="LongStringNotNull"/>
+              <xsd:element name="Brand" type="HundredString" minOccurs="0"/>
+              <xsd:element name="Designer" type="StringNotNull" minOccurs="0"/>
+              <xsd:element name="Description" minOccurs="0">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:normalizedString">
+                    <xsd:maxLength value="2000"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="BulletPoint" type="LongStringNotNull" minOccurs="0" maxOccurs="5"/>
+              <xsd:element name="ItemDimensions" type="Dimensions" minOccurs="0"/>
+              <xsd:element name="PackageDimensions" type="Dimensions" minOccurs="0"/>
+              <xsd:element name="PackageWeight" type="PositiveWeightDimension" minOccurs="0"/>
+              <xsd:element name="ShippingWeight" type="PositiveWeightDimension" minOccurs="0"/>
+              <xsd:element name="MerchantCatalogNumber" type="FortyStringNotNull" minOccurs="0"/>
+              <xsd:element name="MSRP" type="CurrencyAmount" minOccurs="0"/>
+              <xsd:element name="MSRPWithTax" type="CurrencyAmount" minOccurs="0"/>
+              <xsd:element name="MaxOrderQuantity" type="xsd:positiveInteger" minOccurs="0"/>
+              <xsd:element name="SerialNumberRequired" type="xsd:boolean" minOccurs="0"/>
+              <xsd:element name="Prop65" type="xsd:boolean" minOccurs="0"/>
+              <xsd:element name="CPSIAWarning" minOccurs="0" maxOccurs="4">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="choking_hazard_balloon"/>
+                    <xsd:enumeration value="choking_hazard_contains_a_marble"/>
+                    <xsd:enumeration value="choking_hazard_contains_small_ball"/>
+                    <xsd:enumeration value="choking_hazard_is_a_marble"/>
+                    <xsd:enumeration value="choking_hazard_is_a_small_ball"/>
+                    <xsd:enumeration value="choking_hazard_small_parts"/>
+                    <xsd:enumeration value="no_warning_applicable"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CPSIAWarningDescription" type="TwoFiftyStringNotNull" minOccurs="0"/>
+              <xsd:element name="LegalDisclaimer" minOccurs="0">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:normalizedString">
+                    <xsd:maxLength value="2500"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Manufacturer" type="HundredString" minOccurs="0"/>
+              <xsd:element name="MfrPartNumber" type="FortyStringNotNull" minOccurs="0"/>
+              <xsd:element name="SearchTerms" type="MediumStringNotNull" minOccurs="0" maxOccurs="5"/>
+              <xsd:element name="PlatinumKeywords" type="StringNotNull" minOccurs="0" maxOccurs="20"/>
+              <xsd:element name="Memorabilia" type="xsd:boolean" minOccurs="0"/>
+              <xsd:element name="Autographed" type="xsd:boolean" minOccurs="0"/>
+              <xsd:element name="UsedFor" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+              <xsd:element name="ItemType" type="LongStringNotNull" minOccurs="0"/>
+              <xsd:element name="OtherItemAttributes" type="LongStringNotNull" minOccurs="0" maxOccurs="5"/>
+              <xsd:element name="TargetAudience" type="StringNotNull" minOccurs="0" maxOccurs="4"/>
+              <xsd:element name="SubjectContent" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+              <xsd:element name="IsGiftWrapAvailable" type="xsd:boolean" minOccurs="0"/>
+              <xsd:element name="IsGiftMessageAvailable" type="xsd:boolean" minOccurs="0"/>
+              <xsd:element name="PromotionKeywords" type="StringNotNull" minOccurs="0" maxOccurs="10"/>
+              <xsd:element name="IsDiscontinuedByManufacturer" type="xsd:boolean" minOccurs="0"/>
+              <xsd:element name="DeliveryScheduleGroupID" type="StringNotNull" minOccurs="0"/>
+              <xsd:element ref="DeliveryChannel" minOccurs="0" maxOccurs="2"/>
+              <xsd:element name="PurchasingChannel" minOccurs="0" maxOccurs="2">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="in_store"/>
+                    <xsd:enumeration value="online"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MaxAggregateShipQuantity" type="xsd:positiveInteger" minOccurs="0"/>
+              <xsd:element name="IsCustomizable" type="xsd:boolean" minOccurs="0"/>
+              <xsd:element name="CustomizableTemplateName" type="StringNotNull" minOccurs="0"/>
+              <!-- RecommendedBrowseNode and FEDAS_ID are for use by European merchants only. -->
+              <xsd:element name="RecommendedBrowseNode" type="xsd:positiveInteger" minOccurs="0" maxOccurs="2"/>
+              <xsd:element name="MerchantShippingGroupName" type="LongString" minOccurs="0" />
+              <xsd:element name="FEDAS_ID" minOccurs="0">
+                <!-- Please do not include periods or delimiters. -->
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:normalizedString">
+                    <xsd:length value="6" fixed="true"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TSDAgeWarning" minOccurs="0" maxOccurs="1">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="not_suitable_under_36_months"/>
+                    <xsd:enumeration value="not_suitable_under_3_years_supervision"/>
+                    <xsd:enumeration value="not_suitable_under_4_years_supervision"/>
+                    <xsd:enumeration value="not_suitable_under_5_years_supervision"/>
+                    <xsd:enumeration value="not_suitable_under_6_years_supervision"/>
+                    <xsd:enumeration value="not_suitable_under_7_years_supervision"/>
+                    <xsd:enumeration value="not_suitable_under_8_years_supervision"/>
+                    <xsd:enumeration value="not_suitable_under_9_years_supervision"/>
+                    <xsd:enumeration value="not_suitable_under_10_years_supervision"/>
+                    <xsd:enumeration value="not_suitable_under_11_years_supervision"/>
+                    <xsd:enumeration value="not_suitable_under_12_years_supervision"/>
+                    <xsd:enumeration value="not_suitable_under_13_years_supervision"/>
+                    <xsd:enumeration value="not_suitable_under_14_years_supervision"/>
+                    <xsd:enumeration value="no_warning_applicable"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TSDWarning" minOccurs="0" maxOccurs="8">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="only_domestic_use"/>
+                    <xsd:enumeration value="adult_supervision_required"/>
+                    <xsd:enumeration value="protective_equipment_required"/>
+                    <xsd:enumeration value="water_adult_supervision_required"/>
+                    <xsd:enumeration value="toy_inside"/>
+                    <xsd:enumeration value="no_protective_equipment"/>
+                    <xsd:enumeration value="risk_of_entanglement"/>
+                    <xsd:enumeration value="fragrances_allergy_risk"/>
+                    <xsd:enumeration value="no_warning_applicable"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TSDLanguage" minOccurs="0" maxOccurs="21">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="English"/>
+                    <xsd:enumeration value="French"/>
+                    <xsd:enumeration value="German"/>
+                    <xsd:enumeration value="Italian"/>
+                    <xsd:enumeration value="Spanish"/>
+                    <xsd:enumeration value="Dutch"/>
+                    <xsd:enumeration value="Polish"/>
+                    <xsd:enumeration value="Bulgarian"/>
+                    <xsd:enumeration value="Czech"/>
+                    <xsd:enumeration value="Danish"/>
+                    <xsd:enumeration value="Estonian"/>
+                    <xsd:enumeration value="Finnish"/>
+                    <xsd:enumeration value="Greek"/>
+                    <xsd:enumeration value="Hungarian"/>
+                    <xsd:enumeration value="Latvian"/>
+                    <xsd:enumeration value="Lithuanian"/>
+                    <xsd:enumeration value="Portuguese"/>
+                    <xsd:enumeration value="Romanian"/>
+                    <xsd:enumeration value="Slovak"/>
+                    <xsd:enumeration value="Slovene"/>
+                    <xsd:enumeration value="Swedish"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OptionalPaymentTypeExclusion" minOccurs="0" maxOccurs="2">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="cash_on_delivery"/>
+                    <xsd:enumeration value="cvs"/>
+                    <xsd:enumeration value="exclude_none"/>
+                    <xsd:enumeration value="exclude cod"/>
+                    <xsd:enumeration value="exclude cvs"/>
+                    <xsd:enumeration value="exclude cod and cvs"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DistributionDesignation" type="DistributionDesignationValues" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="PromoTag" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="PromoTagType">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:normalizedString">
+                    <xsd:enumeration value="Sale"/>
+                    <xsd:enumeration value="New"/>
+                    <xsd:enumeration value="NewArrival"/>
+                    <xsd:enumeration value="WebOnly"/>
+                    <xsd:enumeration value="Clearance"/>
+                    <xsd:enumeration value="LimitedOffer"/>
+                    <xsd:enumeration value="SpecialOffer"/>
+                    <xsd:enumeration value="SpecialPurchase"/>
+                    <xsd:enumeration value="OnlyInStores"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="EffectiveFromDate" type="xsd:date"/>
+              <xsd:element name="EffectiveThroughDate" type="xsd:date" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="DiscoveryData" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Priority" minOccurs="0">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:positiveInteger">
+                    <xsd:minInclusive value="1"/>
+                    <xsd:maxInclusive value="10"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="BrowseExclusion" type="xsd:boolean" minOccurs="0"/>
+              <xsd:element name="RecommendationExclusion" type="xsd:boolean" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="ProductData" minOccurs="0">
+          <xsd:complexType>
+            <xsd:choice>
+              <xsd:element ref="ClothingAccessories"/>
+              <xsd:element ref="Clothing"/>
+              <xsd:element ref="Miscellaneous"/>
+              <xsd:element ref="CameraPhoto"/>
+              <xsd:element ref="Home"/>
+              <xsd:element ref="Sports"/>
+              <xsd:element ref="SportsMemorabilia"/>
+              <xsd:element ref="EntertainmentCollectibles"/>
+              <xsd:element ref="HomeImprovement"/>
+              <xsd:element ref="Tools"/>
+              <xsd:element ref="FoodAndBeverages"/>
+              <xsd:element ref="Gourmet"/>
+              <xsd:element ref="Jewelry"/>
+              <xsd:element ref="Health"/>
+              <xsd:element ref="CE"/>
+              <xsd:element ref="Computers"/>
+              <xsd:element ref="SoftwareVideoGames"/>
+              <xsd:element ref="Wireless"/>
+              <xsd:element ref="Beauty"/>
+              <xsd:element ref="Office"/>
+              <xsd:element ref="MusicalInstruments"/>
+              <xsd:element ref="AutoAccessory"/>
+              <xsd:element ref="PetSupplies"/>
+              <xsd:element ref="ToysBaby"/>
+              <xsd:element ref="Baby"/>
+              <xsd:element ref="TiresAndWheels"/>
+              <xsd:element ref="Music"/>
+              <xsd:element ref="Video"/>
+              <xsd:element ref="Lighting"/>
+              <xsd:element ref="LargeAppliances"/>
+              <xsd:element ref="FBA"/>
+              <xsd:element ref="Toys"/>
+              <xsd:element ref="GiftCard"/>
+              <xsd:element ref="LabSupplies"/>
+              <xsd:element ref="RawMaterials"/>
+              <xsd:element ref="PowerTransmission"/>
+              <xsd:element ref="Industrial"/>
+              <xsd:element ref="Shoes"/>
+              <xsd:element ref="Motorcycles"/>
+              <xsd:element ref="MaterialHandling"/>
+              <xsd:element ref="MechanicalFasteners"/>
+              <xsd:element ref="FoodServiceAndJanSan"/>
+              <xsd:element ref="WineAndAlcohol"/>
+              <xsd:element ref="EUCompliance"/>
+              <xsd:element ref="Books"/>
+              <xsd:element ref="AdditionalProductInformation"/>
+              <xsd:element ref="Arts"/>
+              <xsd:element ref="Luggage"/>  
+              <xsd:element ref="Outdoors"/> 
+              <xsd:element ref="Coins"/>
+              <xsd:element ref="Furniture"/>
+              <xsd:element ref="LuxuryBeauty"/>
+              <xsd:element ref="Collectibles"/>
+              <xsd:element ref="ProfessionalHealthCare"/>
+              <xsd:element ref="ThreeDPrinting"/>
+            </xsd:choice>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="ShippedByFreight" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="EnhancedImageURL" type="xsd:anyURI" minOccurs="0" maxOccurs="2"/>
+        <xsd:element ref="Amazon-Vendor-Only" minOccurs="0"/>
+        <xsd:element ref="Amazon-Only" minOccurs="0"/>
+        <xsd:element name="RegisteredParameter" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="PrivateLabel"/>
+              <xsd:enumeration value="Specialized"/>
+              <xsd:enumeration value="NonConsumer"/>
+              <xsd:enumeration value="PreConfigured"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <!--
+     ##################################################
+     # Dimensions types
+     ##################################################
+    -->
+  <xsd:complexType name="Dimensions">
+    <xsd:sequence>
+      <xsd:element name="Length" type="LengthDimension" minOccurs="0"/>
+      <xsd:element name="Width" type="LengthDimension" minOccurs="0"/>
+      <xsd:element name="Height" type="LengthDimension" minOccurs="0"/>
+      <xsd:element name="Weight" type="WeightDimension" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SpatialDimensions">
+    <xsd:sequence>
+      <xsd:element name="Length" type="LengthDimension" minOccurs="0"/>
+      <xsd:element name="Width" type="LengthDimension" minOccurs="0"/>
+      <xsd:element name="Height" type="LengthDimension" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #7 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <!--
+    $Date: 2006/04/21 $
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+  <xsd:include schemaLocation="amzn-base.xsd"/>
+  <xsd:element name="AutoAccessory">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ProductType">
+          <xsd:complexType>
+            <xsd:choice>
+              <xsd:element ref="AutoAccessoryMisc"/>
+              <xsd:element ref="AutoPart"/>
+              <xsd:element ref="PowersportsPart"/>
+              <xsd:element ref="PowersportsVehicle"/>
+              <xsd:element ref="ProtectiveGear"/>
+              <xsd:element ref="Helmet"/>
+              <xsd:element ref="RidingApparel"/>
+            </xsd:choice>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element ref="Battery" minOccurs="0"/>
+        <xsd:element name="BatteryAverageLife" type="PositiveDimension" minOccurs="0"/>
+        <xsd:element name="BatteryAverageLifeStandby" type="PositiveDimension" minOccurs="0"/>
+        <xsd:element name="BatteryChargeTime" type="PositiveDimension" minOccurs="0"/>
+        <xsd:element name="BatteryTypeLithiumIon" type="xsd:positiveInteger" minOccurs="0"/>
+        <xsd:element name="BatteryTypeLithiumMetal" type="xsd:positiveInteger" minOccurs="0"/>
+        <xsd:element name="BodyPartExteriorFinish" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="CAPACertified" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="HollanderNumber" type="FortyStringNotNull" minOccurs="0" maxOccurs="4"/>
+        <xsd:element name="LightBulbType" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="LithiumBatteryEnergyContent" type="xsd:decimal" minOccurs="0"/>
+        <xsd:element name="LithiumBatteryPackaging" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="batteries_contained_in_equipment"/>
+              <xsd:enumeration value="batteries_only"/>
+              <xsd:enumeration value="batteries_packed_with_equipment"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="LithiumBatteryVoltage" type="xsd:decimal" minOccurs="0"/>
+        <xsd:element name="LithiumBatteryWeight" type="xsd:decimal" minOccurs="0"/>
+        <xsd:element name="MfgWarrantyDescriptionLabor" type="SuperLongStringNotNull" minOccurs="0"/>
+        <xsd:element name="MfgWarrantyDescriptionParts" type="SuperLongStringNotNull" minOccurs="0"/>
+        <xsd:element name="MfgWarrantyDescriptionType" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="MirrorAdjustment" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="MirrorDimmingFeature" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="MirrorFolding" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="MirrorHeated" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="MirrorHousingIncluded" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="MirrorLensCurvature" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="MirrorSpecialFeature" type="StringNotNull" minOccurs="0" maxOccurs="8"/>
+        <xsd:element name="MirrorTurnSignalIndicator" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="NumberOfLithiumIonCells" type="xsd:positiveInteger" minOccurs="0"/>
+        <xsd:element name="NumberOfLithiumMetalCells" type="xsd:positiveInteger" minOccurs="0"/>
+        <xsd:element name="OEMPartNumber" type="FortyStringNotNull" minOccurs="0" maxOccurs="5"/>
+        <xsd:element name="part_type_id" type="xsd:nonNegativeInteger" minOccurs="0"/>
+        <xsd:element name="PARTSLINKNumber" type="PARTSLINK" minOccurs="0" maxOccurs="4"/>
+        <xsd:element name="PowerSource" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="SellerWarrantyDescription" type="SuperLongStringNotNull" minOccurs="0"/>
+        <xsd:element name="TargetGender" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="StringNotNull">
+              <xsd:enumeration value="male"/>
+              <xsd:enumeration value="female"/>
+              <xsd:enumeration value="unisex"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Warnings" type="LongStringNotNull" minOccurs="0"/>
+        <xsd:element name="WindowRegulatorLiftType" type="StringNotNull" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AutoAccessoryMisc">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="VariationData" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Parentage">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="parent"/>
+                    <xsd:enumeration value="child"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="VariationTheme" minOccurs="0">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Size"/>
+                    <xsd:enumeration value="Color"/>
+                    <xsd:enumeration value="Size-Color"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Amperage" type="AmperageDimension" minOccurs="0"/>
+        <xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+        <xsd:element name="Season" type="HundredString" minOccurs="0"/>
+        <xsd:element name="ColorSpecification" minOccurs = "0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Color" type="StringNotNull"/>
+              <xsd:element name="ColorMap" type="StringNotNull"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Diameter" type="LengthDimension" minOccurs="0"/>
+        <xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1" minOccurs="0"/>
+        <xsd:element name="NumberOfItems" type="xsd:positiveInteger" minOccurs="0"/>
+        <xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+        <xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+        <xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+        <xsd:element name="ItemShape" type="String" minOccurs="0"/>
+        <xsd:element name="Material" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="Viscosity" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="Volume" type="VolumeDimension" minOccurs="0"/>
+        <xsd:element name="Voltage" type="xsd:positiveInteger" minOccurs="0">
+          <!-- Default unit of measure for Voltage is volts -->
+        </xsd:element>
+        <xsd:element name="Wattage" type="xsd:positiveInteger" minOccurs="0">
+          <!-- Default unit of measure for Wattage is watts -->
+        </xsd:element>
+        <xsd:element name="NumberOfGrooves" type="xsd:positiveInteger" minOccurs="0"/>
+        <xsd:element name="NumberOfHoles" type="xsd:positiveInteger" minOccurs="0"/>
+        <xsd:element name="PartInterchangeData" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="OEManufacturer" type="StringNotNull"/>
+              <xsd:element name="PartInterchangeInfo" type="StringNotNull"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="ManufacturerWarrantyDescription" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:maxLength value="1500"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AutoPart">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="VariationData" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Parentage">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="parent"/>
+                    <xsd:enumeration value="child"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="VariationTheme" minOccurs="0">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Size"/>
+                    <xsd:enumeration value="Color"/>
+                    <xsd:enumeration value="Size-Color"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Amperage" type="AmperageDimension" minOccurs="0"/>
+        <xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+        <xsd:element name="Season" type="HundredString" minOccurs="0"/>
+        <xsd:element name="ColorSpecification" minOccurs = "0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Color" type="StringNotNull"/>
+              <xsd:element name="ColorMap" type="StringNotNull"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Diameter" type="LengthDimension" minOccurs="0"/>
+        <xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1" minOccurs="0"/>
+        <xsd:element name="ItemShape" type="String" minOccurs="0"/>
+        <xsd:element name="Material" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="Voltage" type="xsd:positiveInteger" minOccurs="0">
+          <!-- Default unit of measure for Voltage is volts -->
+        </xsd:element>
+        <xsd:element name="Wattage" type="xsd:positiveInteger" minOccurs="0">
+          <!-- Default unit of measure for Wattage is watts -->
+        </xsd:element>
+        <xsd:element name="NumberOfGrooves" type="xsd:positiveInteger" minOccurs="0"/>
+        <xsd:element name="NumberOfHoles" type="xsd:positiveInteger" minOccurs="0"/>
+        <xsd:element name="ManufacturerWarrantyDescription" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:maxLength value="1500"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Position" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="left"/>
+              <xsd:enumeration value="left_front"/>
+              <xsd:enumeration value="left_rear"/>
+              <xsd:enumeration value="left_inner"/>
+              <xsd:enumeration value="left_outer"/>
+              <xsd:enumeration value="left_center"/>
+              <xsd:enumeration value="left_upper"/>
+              <xsd:enumeration value="left_lower"/>
+              <xsd:enumeration value="left_inside"/>
+              <xsd:enumeration value="left_outside"/>
+              <xsd:enumeration value="right"/>
+              <xsd:enumeration value="right_front"/>
+              <xsd:enumeration value="right_rear"/>
+              <xsd:enumeration value="right_inner"/>
+              <xsd:enumeration value="right_outer"/>
+              <xsd:enumeration value="right_center"/>
+              <xsd:enumeration value="right_upper"/>
+              <xsd:enumeration value="right_lower"/>
+              <xsd:enumeration value="right_inside"/>
+              <xsd:enumeration value="right_outside"/>
+              <xsd:enumeration value="front"/>
+              <xsd:enumeration value="front_inner"/>
+              <xsd:enumeration value="front_outer"/>
+              <xsd:enumeration value="front_center"/>
+              <xsd:enumeration value="front_upper"/>
+              <xsd:enumeration value="front_lower"/>
+              <xsd:enumeration value="front_inside"/>
+              <xsd:enumeration value="front_outside"/>
+              <xsd:enumeration value="rear"/>
+              <xsd:enumeration value="rear_inner"/>
+              <xsd:enumeration value="rear_outer"/>
+              <xsd:enumeration value="rear_center"/>
+              <xsd:enumeration value="rear_upper"/>
+              <xsd:enumeration value="rear_lower"/>
+              <xsd:enumeration value="rear_inside"/>
+              <xsd:enumeration value="rear_outside"/>
+              <xsd:enumeration value="inner"/>
+              <xsd:enumeration value="outer"/>
+              <xsd:enumeration value="upper"/>
+              <xsd:enumeration value="lower"/>
+              <xsd:enumeration value="top"/>
+              <xsd:enumeration value="bottom"/>
+              <xsd:enumeration value="inside"/>
+              <xsd:enumeration value="inside_center"/>
+              <xsd:enumeration value="outside"/>
+              <xsd:enumeration value="intermediate"/>
+              <xsd:enumeration value="driveline"/>
+              <xsd:enumeration value="front_left_inner"/>
+              <xsd:enumeration value="front_left_outer"/>
+              <xsd:enumeration value="front_right_inner"/>
+              <xsd:enumeration value="front_right_outer"/>
+              <xsd:enumeration value="rear_left_inner"/>
+              <xsd:enumeration value="rear_left_outer"/>
+              <xsd:enumeration value="rear_right_inner"/>
+              <xsd:enumeration value="rear_right_outer"/>
+              <xsd:enumeration value="front_left_upper"/>
+              <xsd:enumeration value="front_left_lower"/>
+              <xsd:enumeration value="front_right_upper"/>
+              <xsd:enumeration value="front_right_lower"/>
+              <xsd:enumeration value="rear_left_upper"/>
+              <xsd:enumeration value="rear_left_lower"/>
+              <xsd:enumeration value="rear_right_lower"/>
+              <xsd:enumeration value="rear_right_upper"/>
+              <xsd:enumeration value="left_intermediate"/>
+              <xsd:enumeration value="right_intermediate"/>
+              <xsd:enumeration value="bottom_left"/>
+              <xsd:enumeration value="bottom_right"/>
+              <xsd:enumeration value="top_left"/>
+              <xsd:enumeration value="top_right"/>
+              <xsd:enumeration value="front_left"/>
+              <xsd:enumeration value="front_right"/>
+              <xsd:enumeration value="rear_left"/>
+              <xsd:enumeration value="rear_right"/>
+              <xsd:enumeration value="center"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Orientation" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="passengers_side"/>
+              <xsd:enumeration value="drivers_side"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Profile" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="high"/>
+              <xsd:enumeration value="low"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="PulleyType" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="serpentine"/>
+              <xsd:enumeration value="v_belt"/>
+              <xsd:enumeration value="dual_v_belt"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="PartInterchangeData" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="OEManufacturer" type="StringNotNull"/>
+              <xsd:element name="PartInterchangeInfo" type="StringNotNull"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PowersportsPart">
+    <!-- Use PowersportsPart instead of AutoPart if the part is for a motorcycle or 
+      similar vehicle. Use AutoPart for car and truck parts. -->
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="VariationData" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Parentage">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="parent"/>
+                    <xsd:enumeration value="child"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="VariationTheme" minOccurs="0">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Size"/>
+                    <xsd:enumeration value="Color"/>
+                    <xsd:enumeration value="Size-Color"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Amperage" type="AmperageDimension" minOccurs="0"/>
+        <xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+        <xsd:element name="Season" type="HundredString" minOccurs="0"/>
+        <xsd:element name="ColorSpecification" minOccurs = "0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Color" type="StringNotNull"/>
+              <xsd:element name="ColorMap" type="StringNotNull"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Diameter" type="LengthDimension" minOccurs="0"/>
+        <xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1" minOccurs="0"/>
+        <xsd:element name="Material" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="Voltage" type="xsd:positiveInteger" minOccurs="0">
+          <!-- Default unit of measure for Voltage is volts -->
+        </xsd:element>
+        <xsd:element name="Wattage" type="xsd:positiveInteger" minOccurs="0">
+          <!-- Default unit of measure for Wattage is watts -->
+        </xsd:element>
+        <xsd:element name="NumberOfGrooves" type="xsd:positiveInteger" minOccurs="0"/>
+        <xsd:element name="ManufacturerWarrantyDescription" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:maxLength value="1500"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Position" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="left"/>
+              <xsd:enumeration value="left_front"/>
+              <xsd:enumeration value="left_rear"/>
+              <xsd:enumeration value="left_inner"/>
+              <xsd:enumeration value="left_outer"/>
+              <xsd:enumeration value="left_center"/>
+              <xsd:enumeration value="left_upper"/>
+              <xsd:enumeration value="left_lower"/>
+              <xsd:enumeration value="left_inside"/>
+              <xsd:enumeration value="left_outside"/>
+              <xsd:enumeration value="right"/>
+              <xsd:enumeration value="right_front"/>
+              <xsd:enumeration value="right_rear"/>
+              <xsd:enumeration value="right_inner"/>
+              <xsd:enumeration value="right_outer"/>
+              <xsd:enumeration value="right_center"/>
+              <xsd:enumeration value="right_upper"/>
+              <xsd:enumeration value="right_lower"/>
+              <xsd:enumeration value="right_inside"/>
+              <xsd:enumeration value="right_outside"/>
+              <xsd:enumeration value="front"/>
+              <xsd:enumeration value="front_inner"/>
+              <xsd:enumeration value="front_outer"/>
+              <xsd:enumeration value="front_center"/>
+              <xsd:enumeration value="front_upper"/>
+              <xsd:enumeration value="front_lower"/>
+              <xsd:enumeration value="front_inside"/>
+              <xsd:enumeration value="front_outside"/>
+              <xsd:enumeration value="rear"/>
+              <xsd:enumeration value="rear_inner"/>
+              <xsd:enumeration value="rear_outer"/>
+              <xsd:enumeration value="rear_center"/>
+              <xsd:enumeration value="rear_upper"/>
+              <xsd:enumeration value="rear_lower"/>
+              <xsd:enumeration value="rear_inside"/>
+              <xsd:enumeration value="rear_outside"/>
+              <xsd:enumeration value="inner"/>
+              <xsd:enumeration value="outer"/>
+              <xsd:enumeration value="upper"/>
+              <xsd:enumeration value="lower"/>
+              <xsd:enumeration value="top"/>
+              <xsd:enumeration value="bottom"/>
+              <xsd:enumeration value="inside"/>
+              <xsd:enumeration value="inside_center"/>
+              <xsd:enumeration value="outside"/>
+              <xsd:enumeration value="intermediate"/>
+              <xsd:enumeration value="driveline"/>
+              <xsd:enumeration value="front_left_inner"/>
+              <xsd:enumeration value="front_left_outer"/>
+              <xsd:enumeration value="front_right_inner"/>
+              <xsd:enumeration value="front_right_outer"/>
+              <xsd:enumeration value="rear_left_inner"/>
+              <xsd:enumeration value="rear_left_outer"/>
+              <xsd:enumeration value="rear_right_inner"/>
+              <xsd:enumeration value="rear_right_outer"/>
+              <xsd:enumeration value="front_left_upper"/>
+              <xsd:enumeration value="front_left_lower"/>
+              <xsd:enumeration value="front_right_upper"/>
+              <xsd:enumeration value="front_right_lower"/>
+              <xsd:enumeration value="rear_left_upper"/>
+              <xsd:enumeration value="rear_left_lower"/>
+              <xsd:enumeration value="rear_right_lower"/>
+              <xsd:enumeration value="rear_right_upper"/>
+              <xsd:enumeration value="left_intermediate"/>
+              <xsd:enumeration value="right_intermediate"/>
+              <xsd:enumeration value="bottom_left"/>
+              <xsd:enumeration value="bottom_right"/>
+              <xsd:enumeration value="top_left"/>
+              <xsd:enumeration value="top_right"/>
+              <xsd:enumeration value="front_left"/>
+              <xsd:enumeration value="front_right"/>
+              <xsd:enumeration value="rear_left"/>
+              <xsd:enumeration value="rear_right"/>
+              <xsd:enumeration value="center"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Orientation" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="passengers_side"/>
+              <xsd:enumeration value="drivers_side"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Profile" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="high"/>
+              <xsd:enumeration value="low"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="PulleyType" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="serpentine"/>
+              <xsd:enumeration value="v_belt"/>
+              <xsd:enumeration value="dual_v_belt"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="PartInterchangeData" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="OEManufacturer" type="StringNotNull"/>
+              <xsd:element name="PartInterchangeInfo" type="StringNotNull"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PowersportsVehicle">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="VariationData" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Parentage">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="parent"/>
+                    <xsd:enumeration value="child"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="VariationTheme" minOccurs="0">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Color"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+        <xsd:element name="Season" type="HundredString" minOccurs="0"/>
+        <xsd:element name="ColorSpecification" minOccurs = "0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Color" type="StringNotNull"/>
+              <xsd:element name="ColorMap" type="StringNotNull"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="ManufacturerWarrantyDescription" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:maxLength value="1500"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="OEManufacturer" type="StringNotNull" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProtectiveGear">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="VariationData" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Parentage">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="parent"/>
+                    <xsd:enumeration value="child"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="VariationTheme" minOccurs="0">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Size"/>
+                    <xsd:enumeration value="Color"/>
+                    <xsd:enumeration value="Size-Color"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Department" type="StringNotNull" maxOccurs="10"/>
+        <xsd:element name="StyleKeywords" type="LongStringNotNull" maxOccurs="10"/>
+        <xsd:element name="ModelName" type="StringNotNull"/>
+        <xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+        <xsd:element name="Season" type="HundredString" minOccurs="0"/>
+        <xsd:element name="ColorSpecification" minOccurs = "0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Color" type="StringNotNull"/>
+              <xsd:element name="ColorMap" type="StringNotNull"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Fabric" type="LongString" minOccurs="0" maxOccurs="10"/>
+        <xsd:element name="Material" type="LongString" minOccurs="0"/>
+        <xsd:element name="InnerMaterial" type="LongString" minOccurs="0"/>
+        <xsd:element name="OuterMaterial" type="LongString" minOccurs="0"/>
+        <xsd:element name="SoleMaterial" type="LongString" minOccurs="0"/>
+        <xsd:element name="ShoeClosureType" type="String" minOccurs="0"/>
+        <xsd:element name="OccasionAndLifestyle" type="LongString" minOccurs="0" maxOccurs="10"/>
+        <xsd:element name="EventKeywords" type="LongString" minOccurs="0" maxOccurs="10"/>
+        <xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="MinimumHeightRecommended" type="LengthDimension" minOccurs="0"/>
+        <xsd:element name="MaximumHeightRecommended" type="LengthDimension" minOccurs="0"/>
+        <xsd:element name="CountryOfOrigin" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:length value="2" fixed="true"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="Size" type="String" minOccurs="0"/>
+        <xsd:element name="SizeMap" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="XXXXX-Small"/>
+              <xsd:enumeration value="XXXX-Small"/>
+              <xsd:enumeration value="XXX-Small"/>
+              <xsd:enumeration value="XX-Small"/>
+              <xsd:enumeration value="X-Small"/>
+              <xsd:enumeration value="Small"/>
+              <xsd:enumeration value="Medium"/>
+              <xsd:enumeration value="Large"/>
+              <xsd:enumeration value="X-Large"/>
+              <xsd:enumeration value="XX-Large"/>
+              <xsd:enumeration value="XXX-Large"/>
+              <xsd:enumeration value="XXXX-Large"/>
+              <xsd:enumeration value="XXXXX-Large"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="SpecialSizeType" type="String" minOccurs="0" maxOccurs="10"/>
+        <xsd:element name="WaistSize" type="ClothingSizeDimension" minOccurs="0"/>
+        <xsd:element name="InseamLength" type="ClothingSizeDimension" minOccurs="0"/>
+        <xsd:element name="SleeveLength" type="ClothingSizeDimension" minOccurs="0"/>
+        <xsd:element name="NeckSize" type="ClothingSizeDimension" minOccurs="0"/>
+        <xsd:element name="ChestSize" type="ClothingSizeDimension" minOccurs="0"/>
+        <xsd:element name="CupSize" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="A"/>
+              <xsd:enumeration value="B"/>
+              <xsd:enumeration value="C"/>
+              <xsd:enumeration value="D"/>
+              <xsd:enumeration value="DD"/>
+              <xsd:enumeration value="DDD"/>
+              <xsd:enumeration value="E"/>
+              <xsd:enumeration value="F"/>
+              <xsd:enumeration value="FF"/>
+              <xsd:enumeration value="G"/>
+              <xsd:enumeration value="H"/>
+              <xsd:enumeration value="I"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ShoeWidth" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="AAAA"/>
+              <xsd:enumeration value="AAA"/>
+              <xsd:enumeration value="AA"/>
+              <xsd:enumeration value="A"/>
+              <xsd:enumeration value="B"/>
+              <xsd:enumeration value="C"/>
+              <xsd:enumeration value="D"/>
+              <xsd:enumeration value="E"/>
+              <xsd:enumeration value="E"/>
+              <xsd:enumeration value="EE"/>
+              <xsd:enumeration value="EEE"/>
+              <xsd:enumeration value="EEEE"/>
+              <xsd:enumeration value="EEEEE"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="HeelHeight" type="LengthDimension" minOccurs="0"/>
+        <xsd:element name="HeelType" type="String" minOccurs="0"/>
+        <xsd:element name="ShaftHeight" type="StringLengthOptionalDimension" minOccurs="0"/>
+        <xsd:element name="BeltLength" type="LengthDimension" minOccurs="0"/>
+        <xsd:element name="BeltWidth" type="LengthDimension" minOccurs="0"/>
+        <xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1" minOccurs="0"/>
+        <xsd:element name="ManufacturerWarrantyDescription" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:maxLength value="1500"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Helmet">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="VariationData" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Parentage">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="parent"/>
+                    <xsd:enumeration value="child"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="VariationTheme" minOccurs="0">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Size"/>
+                    <xsd:enumeration value="Color"/>
+                    <xsd:enumeration value="Size-Color"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Department" type="StringNotNull" maxOccurs="10"/>
+        <xsd:element name="StyleKeywords" type="LongStringNotNull" maxOccurs="10"/>
+        <xsd:element ref="SafetyRating" maxOccurs="5"/>
+        <xsd:element name="ModelName" type="StringNotNull"/>
+        <xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+        <xsd:element name="Season" type="HundredString" minOccurs="0"/>
+        <xsd:element name="ColorSpecification" minOccurs = "0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Color" type="StringNotNull"/>
+              <xsd:element name="ColorMap" type="StringNotNull"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Material" type="LongString" minOccurs="0"/>
+        <xsd:element name="InnerMaterial" type="LongString" minOccurs="0"/>
+        <xsd:element name="OuterMaterial" type="LongString" minOccurs="0"/>
+        <xsd:element name="OccasionAndLifestyle" type="LongString" minOccurs="0" maxOccurs="10"/>
+        <xsd:element name="EventKeywords" type="LongString" minOccurs="0" maxOccurs="10"/>
+        <xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="CountryOfOrigin" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:length value="2" fixed="true"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="Size" type="String" minOccurs="0"/>
+        <xsd:element name="SizeMap" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="XXXXX-Small"/>
+              <xsd:enumeration value="XXXX-Small"/>
+              <xsd:enumeration value="XXX-Small"/>
+              <xsd:enumeration value="XX-Small"/>
+              <xsd:enumeration value="X-Small"/>
+              <xsd:enumeration value="Small"/>
+              <xsd:enumeration value="Medium"/>
+              <xsd:enumeration value="Large"/>
+              <xsd:enumeration value="X-Large"/>
+              <xsd:enumeration value="XX-Large"/>
+              <xsd:enumeration value="XXX-Large"/>
+              <xsd:enumeration value="XXXX-Large"/>
+              <xsd:enumeration value="XXXXX-Large"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="SpecialSizeType" type="String" minOccurs="0" maxOccurs="10"/>
+        <xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1" minOccurs="0"/>
+        <xsd:element name="ManufacturerWarrantyDescription" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:maxLength value="1500"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="RidingApparel">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="VariationData" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Parentage">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="parent"/>
+                    <xsd:enumeration value="child"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="VariationTheme" minOccurs="0">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Size"/>
+                    <xsd:enumeration value="Color"/>
+                    <xsd:enumeration value="Size-Color"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="ClothingType">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="Gloves"/>
+              <xsd:enumeration value="Jacket"/>
+              <xsd:enumeration value="Pants"/>
+              <xsd:enumeration value="Shirt"/>
+              <xsd:enumeration value="Shoes"/>
+              <xsd:enumeration value="Suit"/>
+              <xsd:enumeration value="Underwear"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Department" type="StringNotNull" maxOccurs="10"/>
+        <xsd:element name="StyleKeywords" type="LongStringNotNull" maxOccurs="10"/>
+        <xsd:element name="ModelName" type="StringNotNull"/>
+        <xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+        <xsd:element name="Season" type="HundredString" minOccurs="0"/>
+        <xsd:element name="ColorSpecification" minOccurs = "0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Color" type="StringNotNull"/>
+              <xsd:element name="ColorMap" type="StringNotNull"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Fabric" type="LongString" minOccurs="0" maxOccurs="10"/>
+        <xsd:element name="Material" type="LongString" minOccurs="0"/>
+        <xsd:element name="InnerMaterial" type="LongString" minOccurs="0"/>
+        <xsd:element name="OuterMaterial" type="LongString" minOccurs="0"/>
+        <xsd:element name="SoleMaterial" type="LongString" minOccurs="0"/>
+        <xsd:element name="ShoeClosureType" type="String" minOccurs="0"/>
+        <xsd:element name="OccasionAndLifestyle" type="LongString" minOccurs="0" maxOccurs="10"/>
+        <xsd:element name="EventKeywords" type="LongString" minOccurs="0" maxOccurs="10"/>
+        <xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>
+        <xsd:element name="MinimumHeightRecommended" type="LengthDimension" minOccurs="0"/>
+        <xsd:element name="MaximumHeightRecommended" type="LengthDimension" minOccurs="0"/>
+        <xsd:element name="CountryOfOrigin" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:length value="2" fixed="true"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="Size" type="String" minOccurs="0"/>
+        <xsd:element name="SizeMap" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="XXXXX-Small"/>
+              <xsd:enumeration value="XXXX-Small"/>
+              <xsd:enumeration value="XXX-Small"/>
+              <xsd:enumeration value="XX-Small"/>
+              <xsd:enumeration value="X-Small"/>
+              <xsd:enumeration value="Small"/>
+              <xsd:enumeration value="Medium"/>
+              <xsd:enumeration value="Large"/>
+              <xsd:enumeration value="X-Large"/>
+              <xsd:enumeration value="XX-Large"/>
+              <xsd:enumeration value="XXX-Large"/>
+              <xsd:enumeration value="XXXX-Large"/>
+              <xsd:enumeration value="XXXXX-Large"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="SpecialSizeType" type="String" minOccurs="0" maxOccurs="10"/>
+        <xsd:element name="WaistSize" type="ClothingSizeDimension" minOccurs="0"/>
+        <xsd:element name="InseamLength" type="ClothingSizeDimension" minOccurs="0"/>
+        <xsd:element name="SleeveLength" type="ClothingSizeDimension" minOccurs="0"/>
+        <xsd:element name="NeckSize" type="ClothingSizeDimension" minOccurs="0"/>
+        <xsd:element name="ChestSize" type="ClothingSizeDimension" minOccurs="0"/>
+        <xsd:element name="CupSize" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="A"/>
+              <xsd:enumeration value="B"/>
+              <xsd:enumeration value="C"/>
+              <xsd:enumeration value="D"/>
+              <xsd:enumeration value="DD"/>
+              <xsd:enumeration value="DDD"/>
+              <xsd:enumeration value="E"/>
+              <xsd:enumeration value="F"/>
+              <xsd:enumeration value="FF"/>
+              <xsd:enumeration value="G"/>
+              <xsd:enumeration value="H"/>
+              <xsd:enumeration value="I"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ShoeWidth" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="AAAA"/>
+              <xsd:enumeration value="AAA"/>
+              <xsd:enumeration value="AA"/>
+              <xsd:enumeration value="A"/>
+              <xsd:enumeration value="B"/>
+              <xsd:enumeration value="C"/>
+              <xsd:enumeration value="D"/>
+              <xsd:enumeration value="E"/>
+              <xsd:enumeration value="E"/>
+              <xsd:enumeration value="EE"/>
+              <xsd:enumeration value="EEE"/>
+              <xsd:enumeration value="EEEE"/>
+              <xsd:enumeration value="EEEEE"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="HeelHeight" type="LengthDimension" minOccurs="0"/>
+        <xsd:element name="HeelType" type="String" minOccurs="0"/>
+        <xsd:element name="ShaftHeight" type="StringLengthOptionalDimension" minOccurs="0"/>
+        <xsd:element name="BeltLength" type="LengthDimension" minOccurs="0"/>
+        <xsd:element name="BeltWidth" type="LengthDimension" minOccurs="0"/>
+        <xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1" minOccurs="0"/>
+        <xsd:element name="ManufacturerWarrantyDescription" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:maxLength value="1500"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SafetyRating">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:normalizedString">
+        <xsd:enumeration value="BSI 6658 Type A Certified"/>
+        <xsd:enumeration value="DOT Certified"/>
+        <xsd:enumeration value="EN 22/05 Certified"/>
+        <xsd:enumeration value="Novelty"/>
+        <xsd:enumeration value="Other"/>
+        <xsd:enumeration value="Snell K2005 Certified"/>
+        <xsd:enumeration value="Snell K-98 Certified"/>
+        <xsd:enumeration value="Snell M2000 Certified"/>
+        <xsd:enumeration value="Snell M2005 Certified"/>
+        <xsd:enumeration value="Snell M-95 Certified"/>
+        <xsd:enumeration value="Snell N-94 Certified"/>
+        <xsd:enumeration value="Snell RS-98 Certified"/>
+        <xsd:enumeration value="Snell S-98 Certified"/>
+        <xsd:enumeration value="Snell SA2000 Certified"/>
+        <xsd:enumeration value="Snell SA2006 Certified"/>
+        <xsd:enumeration value="Snell SA-95 Certified"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_product_listing_brand" model="ir.ui.view">
+            <field name="name">view.product.listing.brand</field>
+            <field name="model">product.listing</field>
+            <field name="inherit_id" ref="product_template_with_listing.view_product_listing_sell_with_loss_form" />
+            <field name="arch" type="xml">
+                <field name="sell_with_loss" position="after">
+                    <field name="brand_id"/>
+                    <field name="multiplier"/>
+                    <field name="brand_do_not_reprice"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="action_product_brand" model="ir.actions.act_window">
+            <field name="name">Brands</field>
+            <field name="res_model">product.brand</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_product_brand_tree" model="ir.ui.view">
+            <field name="name">view.product.brand.tree</field>
+            <field name="model">product.brand</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="code"/>
+                    <field name="brand_name"/>
+                    <field name="description"/>
+                    <field name="multiplier"/>
+                    <field name="do_not_reprice"/>
+                    <field name="use_supplier_price"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_product_brand_form" model="ir.ui.view">
+            <field name="name">view.product.brand.form</field>
+            <field name="model">product.brand</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="brand_name"/>
+                            </group>
+                            <group>
+                                <field name="multiplier"/>
+                                <field name="do_not_reprice"/>
+                                <field name="use_supplier_price"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_product_interchange" model="ir.actions.act_window">
+            <field name="name">Interchange Part Numbers</field>
+            <field name="res_model">product.interchange</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_product_interchange_tree" model="ir.ui.view">
+            <field name="name">view.product.interchange.tree</field>
+            <field name="model">product.interchange</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_tmpl_id"/>
+                    <field name="brand_id"/>
+                    <field name="part_number"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_product_interchange_form" model="ir.ui.view">
+            <field name="name">view.product.interchange.form</field>
+            <field name="model">product.interchange</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="product_tmpl_id"/>
+                                <field name="brand_id"/>
+                                <field name="part_number"/>
+                            </group>
+                            <group />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_product_interchange_search" model="ir.ui.view">
+            <field name="name">view.product.interchange.search</field>
+            <field name="model">product.interchange</field>
+            <field name="arch" type="xml">
+                <search string="Search Interchange Part Numbers">
+                    <field name="part_number"/>
+                    <field name="brand_id" operator="child_of"/>
+                    <field name="product_tmpl_id"/>
+               </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_template_form_view_interchange_button">
+            <field name="name">product.template.interchange.button</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" name="action_product_interchange_filtered_by_product"
+                        type="object" icon="fa-exchange" string="Interchange">
+                    </button>
+                </div>
+            </field>
+        </record>
+
+        <menuitem id="menu_sales_products" name="Catalog" parent="sales_team.menu_base_partner" sequence="8"/>
+
+        <!-- Transfer Products and Store Listings under this menu -->
+
+        <menuitem id="sale.menu_product_template_action" action="product.product_template_action" parent="menu_sales_products" sequence="10" />
+
+        <menuitem id="sale_store.menu_product_listing" name="Store Listings" action="sale_store.action_product_listing" parent="menu_sales_products" sequence="40"/>
+
+        <menuitem id="menu_sales_interchange" name="Interchange Part Numbers" parent="menu_sales_products" sequence="40" action="action_product_interchange"/>
+
+        <menuitem id="menu_sales_brands" name="Brands" parent="menu_sales_products" sequence="50" action="action_product_brand"/>
+
+        <menuitem id="menu_sales_sync_brands" name="Sync Brands" parent="sale_store.menu_sales_tools" sequence="8" action="action_sync_brands"/>
+
+        <menuitem id="menu_sales_sync_products" name="Sync Products" parent="sale_store.menu_sales_tools" sequence="9" action="action_sync_products"/>
+    </data>
+</odoo>

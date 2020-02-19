@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_repricer_product_template" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_repricer_product_template_tree" model="ir.ui.view">
+            <field name="name">view.repricer.product.template.tree</field>
+            <field name="model">product.template</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="auto_min_price"/>
+                    <field name="auto_max_price"/>
+                    <field name="dropship_cost"/>
+                    <field name="wh_sale_price"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_repricer_product_template_form" model="ir.ui.view">
+            <field name="name">view.repricer.scheme.form</field>
+            <field name="model">product.template</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="reprice_listings_with_min_cost" type="object" string="Reprice" groups="base.group_no_one"/>
+                        <button name="restock_listings" type="object" string="Restock" groups="base.group_no_one"/>
+                        <button name="set_qty_to_zero" type="object" string="Set Qty to 0" groups="base.group_no_one"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" default_focus="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="auto_min_price"/>
+                                <field name="auto_max_price"/>
+                                <field name="manual_min_price"/>
+                                <field name="manual_max_price"/>
+                                <field name="use_ebay_repricer"/>
+                                <field name="wh_sale_price"/>
+                            </group>
+                            <group>
+                                <field name="auto_wh_cost"/>
+                                <field name="manual_wh_cost"/>
+                                <label for="auto_wh_shipping_cost"/>
+                                <div class="o_row">
+                                    <field name="auto_wh_shipping_cost"/>
+                                    <button name="button_get_shipping_rate" string="Get shipping rate" type="object" class="oe_inline fa fa-arrow-right oe_link" />
+                                </div>
+                                <field name="manual_wh_shipping_cost"/>
+                                <field name="dropship_cost"/>
+                                <field name="always_set_to_zero_qty" groups="base.group_no_one" />
+                            </group>
+                        </group>
+                        <group>
+                            <button name="button_do_not_restock_all_listings" string="⇒ Do not restock all listings" type="object" class="oe_link"/>
+                            <button name="button_restock_all_listings" string="⇒ Automate restocking all listings" type="object" class="oe_link"/>
+                            <button name="button_do_not_reprice_all_listings" string="⇒ Do not reprice of all listings" type="object" class="oe_link"/>
+                            <button name="button_reprice_all_listings" string="⇒ Automate repricing of all listings" type="object" class="oe_link"/>
+                        </group>
+                        <notebook>
+                            <page string="Listings">
+                                <field name="listing_ids">
+                                    <tree editable="bottom">
+                                        <field name="store_id"/>
+                                        <field name="name"/>
+                                        <field name="current_price"/>
+                                        <field name="repricer_scheme_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Competitors">
+                                <field name="competitor_ids">
+                                    <tree editable="bottom">
+                                        <field name="item_id"/>
+                                        <field name="title"/>
+                                        <field name="seller"/>
+                                        <field name="price"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_repricer_product_template_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="stock_update_store_real_time.view_repricer_product_template_tree"/>
+            <field name="act_window_id" ref="action_repricer_product_template"/>
+        </record>
+
+        <record id="action_repricer_product_template_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock_update_store_real_time.view_repricer_product_template_form"/>
+            <field name="act_window_id" ref="action_repricer_product_template"/>
+        </record>
+
+        <menuitem id="menu_repricer_root" name="Repricer" parent="sales_team.menu_base_partner" sequence="10"/>
+
+        <menuitem id="menu_repricer_products" parent="menu_repricer_root" sequence="10" name="Products" action="action_repricer_product_template" groups="base.group_no_one"/>
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <record id="action_box_demand" model="ir.actions.act_url">
+        <field name="name">Box Demand</field>
+        <field name="url">/reports/box_demand</field>
+        <field name="target">new</field>
+    </record>
+        <menuitem name="Box Demand"
+                  id="menu_box_demand"
+                  parent="stock.menu_warehouse_report"
+                  action="action_box_demand_wizard"
+                  sequence="120"/>
+</data>
+</odoo>

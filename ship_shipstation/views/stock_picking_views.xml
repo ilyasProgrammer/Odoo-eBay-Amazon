@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_picking_with_carrier_out_form" model="ir.ui.view">
+            <field name="name">shipping.stock.picking_withcarrier.form.view</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+              <data>
+                <field name="min_date" position="before">
+                    <field name="store_id"/>
+                    <field name="sale_id"/>
+                </field>
+                <xpath expr="//button[@name='%(stock.action_report_delivery)d']" position="replace">
+                    <button name="%(stock.action_report_delivery)d" string="Print" type="action" groups="base.group_user" attrs="{'invisible': ['|', ('picking_type_code', '=', 'internal'), ('state', '!=', 'done')]}"/>
+                </xpath>
+                <button name="button_scrap" position="after">
+                    <button name="button_get_label" string="Get Label" class="btn-primary" type="object" attrs="{'invisible': ['|', ('picking_type_code', '!=', 'outgoing'), '&amp;', ('is_label_voided', '=', False), ('label', '!=', False)]}"/>
+                </button>
+                <xpath expr="//page[@name='extra']" position="before">
+                    <page string="Shipping Info" name="shipping" attrs="{'invisible': [('picking_type_code', '!=', 'outgoing')]}">
+                        <group>
+                            <group name='carrier_data'>
+                                <field name="carrier_id"/>
+                                <label for="service_id" string="Service Name"/>
+                                <div class="o_row">
+                                    <field name="service_id"/>
+                                    <button name="button_get_cheapest_service" string="Get cheapest service" type="object" class="oe_inline fa fa-arrow-right oe_link"/>
+                                </div>
+                                <field name="package_id"/>
+                                <label for="rate" string="Rate"/>
+                                <div class="o_row">
+                                    <field name="rate"/>
+                                    <button name="button_update_shipment_rate" string="Update rate" type="object" class="oe_inline fa fa-arrow-right oe_link" attrs="{'invisible':[('state','in',('done'))]}"/>
+                                </div>
+                                <field name="exceeds_limits"/>
+                                <field name="tracking_number"/>
+                                <field name="shipment_id"/>
+                                <field name="file_name" invisible="1"/>
+                                <field name="is_label_voided" invisible="1"/>
+                                <label for="label" string="File"/>
+                                <div>
+                                    <field name="label" attrs="{'invisible': [('label', '=', False)]}" filename="file_name" class='oe_inline'/>
+                                    <button name="button_lable_void" string="Void" type="object" attrs="{'invisible': ['|', ('label', '=', False), ('is_label_voided', '=', True)]}" class="oe_inline fa fa-arrow-right oe_link"/>
+                                    <span class="label label-danger oe_inline" attrs="{'invisible': [('is_label_voided', '=', False)]}">This label has been voided</span>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="warehouse_id" string="Ship From"/>
+                                <label for="length" string="L * W * H"/>
+                                <div class="o_row">
+                                    <field name="length"/>
+                                    <label string=" in. * "/>
+                                    <field name="width" class="oe_inline"/>
+                                    <label string=" in. * "/>
+                                    <field name="height" class="oe_inline"/>
+                                    <label string=" in."/>
+                                </div>
+                                <label for="weight"/>
+                                <div class="o_row">
+                                    <field name="weight"/>
+                                    <label string=" lbs."/>
+                                    <button name="button_set_dimension_from_first_order_line" string="Set dimension from first order line" type="object" class="oe_inline fa fa-arrow-right oe_link"/>
+                                    <button name="update_autoplus" string="Update Autoplus" type="object" class="oe_inline fa fa-arrow-right oe_link"/>
+                                </div>
+                                <field name="store_notified"/>
+                                <label for="carrier_tracking_status" string="Carrier Tracking Status"/>
+                                <div>
+                                    <field name="carrier_tracking_status" class="oe_inline"/>
+                                    <button name="button_get_tracking_details" string="Get Status" class="oe_inline fa fa-arrow-right oe_link" type="object" attrs="{'invisible': [('out_type', '=', False), (('label', '=', False))]}"/>
+                                </div>
+                                <field name="shipping_state"/>
+                                <field name="out_type" invisible="1"/>
+                            </group>
+                        </group>
+                        <button name="button_get_new_label" string="Get New Label" class="btn-primary oe_inline" type="object" />
+                        <separator string="Additional Tracking Nos."/>
+                        <field name="tracking_line_ids" attrs="{'invisible': [('picking_type_code', '!=', 'outgoing')]}">
+                            <tree>
+                                <field name="name"/>
+                                <field name="file_name" invisible="1"/>
+                                <field name="label" filename="file_name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+              </data>
+            </field>
+        </record>
+
+        <record id="custom_view_move_picking_tree" model="ir.ui.view">
+            <field name="name">stock.move.tree</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_tree"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="after">
+                    <field name="partslink"/>
+                    <field name="mfg_label"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_stock_picking_shipment_tree" model="ir.ui.view">
+            <field name="name">view.stock.picking.shipment.tree</field>
+            <field name="model">stock.picking</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="sale_id"/>
+                    <field name="store_id"/>
+                    <field name="carrier_id"/>
+                    <field name="service_id"/>
+                    <field name="tracking_number"/>
+                    <field name="shipping_state"/>
+                    <field name="create_date"/>
+                    <field name="state" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="custom_vpicktree" model="ir.ui.view">
+            <field name="name">custom.stock.picking.tree</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="before">
+                    <field name="store_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_stock_picking_shipment_form" model="ir.ui.view">
+            <field name="name">view.stock.picking.shipment.form</field>
+            <field name="model">stock.picking</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_mark_as_in_transit" string="Mark as In Transit" type="object" class="btn-primary" attrs="{'invisible': [('shipping_state', '!=', 'waiting_shipment')]}"/>
+                        <button name="action_mark_as_done" string="Mark as Done" type="object" class="btn-primary" attrs="{'invisible': [('shipping_state', '!=', 'in_transit')]}"/>
+                        <button name="action_mark_as_failed" string="Mark as Failed" type="object" attrs="{'invisible': [('shipping_state', '!=', 'in_transit')]}"/>
+                        <button name="action_reset_to_waiting_shipment" string="Reset" type="object" attrs="{'invisible': [('shipping_state', 'not in', ['failed','done'])]}"/>
+                        <field name="shipping_state" widget="statusbar" statusbar_visible="waiting_shipment,in_transit,done" />
+                    </header>
+                    <sheet>
+                        <h1>
+                            <field name="name" attrs="{'invisible': [('name','=','/')]}" readonly="1"/>
+                        </h1>
+                        <group string="Shipping Information">
+                            <group>
+                                <field name="sale_id"/>
+                                <field name="store_id"/>
+                                <field name="carrier_id"/>
+                                <field name="service_id"/>
+                                <field name="package_id"/>
+                                <field name="rate"/>
+                                <field name="tracking_number"/>
+                            </group>
+                            <group>
+                                <field name="warehouse_id" string="Ship From"/>
+                                <label for="length" string="L * W * H"/>
+                                <div class="o_row">
+                                    <field name="length"/>
+                                    <label string=" in. * "/>
+                                    <field name="width" class="oe_inline"/>
+                                    <label string=" in. * "/>
+                                    <field name="height" class="oe_inline"/>
+                                    <label string=" in."/>
+                                </div>
+                                <label for="weight"/>
+                                <div class="o_row">
+                                    <field name="weight"/>
+                                    <label string=" lbs"/>
+                                </div>
+                                <field name="file_name" invisible="1"/>
+                                <field name="label" attrs="{'invisible': [('label', '=', False)]}" filename="file_name"/>
+                                <field name="store_notified"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_stock_picking_shipment" model="ir.actions.act_window">
+            <field name="name">Shipments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_type">form</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_stock_picking_shipment_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_stock_picking_shipment_form')})]"/>
+            <field name="domain">[('location_dest_id.usage', '=', 'customer')]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Manage shipments in this menu.
+              </p>
+            </field>
+        </record>
+
+        <record id="view_picking_internal_search_inherit" model="ir.ui.view">
+            <field name="name">stock.picking.internal.search.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="inside">
+                    <filter name="group_carrier_id" string="Carrier" domain="[]" context="{'group_by': 'carrier_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="stock.stock_picking_action_picking_type" model="ir.actions.act_window">
+            <field name="context">{
+                    'search_default_picking_type_id': [active_id],
+                    'default_picking_type_id': active_id,
+                    'contact_display': 'partner_address',
+                    {'search_default_group_carrier_id': 1}
+            }</field>
+        </record>
+
+        <record id="stock_barcode.stock_picking_action_kanban" model="ir.actions.act_window">
+            <field name="context">{
+                'form_view_initial_mode': 'edit',
+                'search_default_picking_type_id': [active_id],
+                'default_picking_type_id': active_id,
+                'contact_display': 'partner_address',
+                'search_default_available': 1,
+                'search_default_group_carrier_id': 1
+            }</field>
+        </record>
+
+        <record model="ir.cron" id="get_tracking_status_cron">
+            <field name="name">Get Tracking Status</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model" eval="'stock.picking'"/>
+            <field name="function" eval="'run'"/>
+            <field name="args" eval="'()'" />
+        </record>
+
+        <menuitem
+            id="menu_stock_picking_shipment"
+            name="Direct Shipments"
+            action="action_stock_picking_shipment"
+            parent="sales_team.menu_sales"
+            sequence="24"/>
+
+        <template id="assets_backend_inherit" name="base_report_to_printer_assets" inherit_id="web.assets_backend">
+            <xpath expr="//script[last()]" position="after">
+                <script type="text/javascript" src="/lable_zabra_printer/static/src/lib/jsrsasign-latest-all-min.js"></script>
+                <script type="text/javascript" src="/lable_zabra_printer/static/src/lib/rsvp-3.1.0.min.js"></script>
+                <script type="text/javascript" src="/lable_zabra_printer/static/src/lib/sha-256.min.js"></script>
+                <script type="text/javascript" src="/lable_zabra_printer/static/src/lib/qz-tray.js"></script>
+                <script type="text/javascript" src="/ship_shipstation/static/src/js/qweb_form_widgets.js" />
+            </xpath>
+        </template>
+    </data>
+</odoo>

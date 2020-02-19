@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_stock_wh_margins_report_wizard_form" model="ir.ui.view">
+            <field name="name">view.stock.wh.margins.report.wizard.form</field>
+            <field name="model">stock.wh.margins.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="WH Margins Report">
+                    <group>
+                        <group>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                        </group>
+                    </group>
+                    <footer>
+                      <button name="button_download_report" type="object" string="Download Report" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_stock_wh_margins_report_wizard" model="ir.actions.act_window">
+            <field name="name">WH Margins Report</field>
+            <field name="res_model">stock.wh.margins.report.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem name="WH Margins Report"
+            id="menu_wh_margins_report"
+            parent="stock.menu_warehouse_report"
+            action="action_stock_wh_margins_report_wizard"
+            sequence="75"/>
+    </data>
+</odoo>

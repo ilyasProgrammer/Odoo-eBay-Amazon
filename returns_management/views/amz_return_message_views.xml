@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_amz_return_message" model="ir.actions.act_window">
+            <field name="name">Amazon Return Messages</field>
+            <field name="res_model">sale.store.amz.return.message</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_amz_return_message_tree" model="ir.ui.view">
+            <field name="name">view.amz.return.meesage.tree</field>
+            <field name="model">sale.store.amz.return.message</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="store_id"/>
+                    <field name="return_id"/>
+                    <field name="create_uid"/>
+                    <field name="create_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_amz_return_message_form" model="ir.ui.view">
+            <field name="name">view.amz.return.meesage.form</field>
+            <field name="model">sale.store.amz.return.message</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="create_return" type="object" class="oe_highlight" string="Create Return" attrs="{'invisible': [('return_id', '!=', False)]}"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="store_id"/>
+                                <field name="return_id"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="raw_content"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="menu_amz_return_messages" name="Amazon Return Messages" parent="sales_team.menu_sales" sequence="34" action="action_amz_return_message" groups="base.group_no_one"/>
+    </data>
+</odoo>

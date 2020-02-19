@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_cron_get_tracking_status" model="ir.cron">
+            <field name="name">[ODOO] Get Tracking Status</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">8</field>
+            <field name="interval_type">hours</field>
+            <field name="priority">320</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="False" name="active"/>
+            <field eval="'stock.picking'" name="model"/>
+            <field eval="'cron_get_tracking_status'" name="function"/>
+            <field eval="()" name="args"/>
+        </record>
+
+        <record id="ir_cron_amz_submit" model="ir.cron">
+            <field name="name">[AMAZON] Upload Amazon Tracking Numbers</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">8</field>
+            <field name="interval_type">hours</field>
+            <field name="priority">320</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="False" name="active"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'cron_amz_submit_tracking_numbers'" name="function"/>
+            <field eval="()" name="args"/>
+        </record>
+    </data>
+</odoo>

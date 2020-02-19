@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="qz_print_assets" inherit_id="web.assets_backend" name="QZ Tray Printing Assets">
+    <xpath expr="." position="inside">
+        <script type="text/javascript" src="/stock_qz_print/static/js/rsvp-3.1.0.min.js"></script>
+        <script type="text/javascript" src="/stock_qz_print/static/js/deployJava.js"></script>
+        <!-- <script type="text/javascript" src="/stock_qz_print/static/js/qz-websocket.js"></script> -->
+        <script type="text/javascript" src="/stock_qz_print/static/js/web_qz_print.js"/>
+    </xpath>
+</template>
+
+</odoo>

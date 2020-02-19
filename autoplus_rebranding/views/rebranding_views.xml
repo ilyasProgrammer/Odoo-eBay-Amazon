@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets_backend" name="autoplus_rebranding assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/autoplus_rebranding/static/src/js/script.js"></script>
+
+                <link rel="stylesheet" type="text/css" href="/autoplus_rebranding/static/src/css/autoplus_rebranding.css"/>
+            </xpath>
+        </template>
+
+        <template id="autoplus_rebranding_layout" inherit_id="web.layout" name="autoplus_rebranding layout" priority="170">
+            <xpath expr="//title" position="replace">
+                <title t-esc="title or 'Opsyst'"/>
+            </xpath>
+            <xpath expr="//head//link" position="after">
+                <link rel="shortcut icon" href="/autoplus_rebranding/static/src/img/favicon.png" type="image/x-icon"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_update_vendor_qty_wizard_form" model="ir.ui.view">
+            <field name="name">view.update.vendor.qty.wizard.form</field>
+            <field name="model">purchase.update.vendor.qty.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Update Vendor Qty">
+                    <group>
+                        <group>
+                            <field name="product_tmpl_id" invisible="1"/>
+                            <field name="qty"/>
+                        </group>
+                    </group>
+                    <footer>
+                      <button name="button_update_vendor_qty" type="object" string="Update Qty" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_update_vendor_qty_wizard" model="ir.actions.act_window">
+            <field name="name">Update Vendor Qty</field>
+            <field name="res_model">purchase.update.vendor.qty.wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

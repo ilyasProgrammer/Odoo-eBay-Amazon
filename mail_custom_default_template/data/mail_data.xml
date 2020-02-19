@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mail.mail_template_data_notification_email_default" model="mail.template">
+            <field name="body_html"><![CDATA[
+<div>
+% if ctx.get('has_button_access'):
+<div itemscope itemtype="http://schema.org/EmailMessage">
+    <div itemprop="potentialAction" itemscope itemtype="http://schema.org/ViewAction">
+        <link itemprop="target" href="${ctx['button_access']['url']}"/>
+        <link itemprop="url" href="${ctx['button_access']['url']}"/>
+        <meta itemprop="name" content="View ${ctx['model_name']}"/>
+    </div>
+</div>
+% endif
+% if not ctx['is_discussion'] or not len(ctx['actions']) == 0 or ctx.get('has_button_access'):
+<div summary="o_mail_notification" style="padding: 0px; width:600px;">
+<table cellspacing="0" cellpadding="0" border="0" style="width: 600px; margin-top: 5px;">
+<tbody><tr>
+    <td valign="center">
+        % if ctx.get('has_button_access'):
+        <a href="${ctx['button_access']['url']}" style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px">${ctx['button_access']['title']}</a>
+        % endif
+
+        % if ctx.get('has_button_follow'):
+        % if ctx.get('has_button_access'):
+           |
+        % endif
+        <a href="${ctx['button_follow']['url']}" style="color: #875A7B; text-decoration: none !important;">${ctx['button_follow']['title']}</a>
+        % elif ctx.get('has_button_unfollow'):
+        % if ctx.get('has_button_access'):
+           |
+        % endif
+        <a href="${ctx['button_unfollow']['url']}" style="color: #875A7B; text-decoration: none !important;">${ctx['button_unfollow']['title']}</a>
+        % endif
+
+        % if ctx.get('actions'):
+        % for action in ctx['actions']:
+        |
+        <a href="${action['url']}" style="color: #875A7B; text-decoration:none !important;">${action['title']}</a>
+        % endfor
+        % endif
+    </td>
+    <td valign="center" align="right">
+        <img src="/logo.png" style="padding: 0px; margin: 0px; height: auto; width: 80px;" alt="${user.company_id.name}">
+    </td>
+</tr>
+<tr>
+    <td colspan="2" style="text-align:center;">
+        <hr width="100%"
+            style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:10px 0;">
+        % if ctx.get('subtype') and ctx.get('subtype').internal:
+        <span style="background-color: #f2dede; padding: 5px;">
+            <strong>Internal note</strong>: replies are not sent to followers.
+        </span>
+        % endif
+    </td>
+</tr>
+</tbody></table>
+</div>
+% endif
+${object.body | safe}
+% if ctx.get('tracking'):
+    <ul>
+    % for tracking in ctx['tracking']
+        <li>${tracking[0]} : ${tracking[1]} -&gt; ${tracking[2]}</li>
+    % endfor
+    </ul>
+% endif
+
+% if ctx.get('signature'):
+    ${ctx['signature'] | safe}
+% endif
+<br/>
+</div>]]></field>
+        </record>
+    </data>
+</odoo>

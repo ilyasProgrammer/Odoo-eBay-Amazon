@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+      <record id="view_stock_order_processing_report_pivot" model="ir.ui.view">
+         <field name="name">view.stock.order.processing.report.pivot</field>
+         <field name="model">stock.order.processing.report</field>
+         <field name="arch" type="xml">
+             <pivot string="Order Processing Report" disable_linking="True">
+                 <field name="processed_by_uid" type="col"/>
+                 <field name="processed_date" interval="month" type="row"/>
+             </pivot>
+         </field>
+    </record>
+
+      <record id="view_stock_order_processing_report_graph" model="ir.ui.view">
+        <field name="name">view.stock.order.processing.report.graph</field>
+        <field name="model">stock.order.processing.report</field>
+           <field name="arch" type="xml">
+               <graph string="Order Processing Report">
+                   <field name="processed_date" type="row"/>
+                   <field name="name" type="measure"/>
+               </graph>
+           </field>
+      </record>
+
+      <record id="view_stock_order_processing_search" model="ir.ui.view">
+          <field name="name">view.stock.order.processing.search</field>
+          <field name="model">stock.order.processing.report</field>
+          <field name="arch" type="xml">
+              <search string="Order Processing Report">
+                  <field name="processed_date"/>
+                      <filter string="Today" name="today" domain="[('processed_date','&gt;=',time.strftime('%%Y-%%m-%%d'))]"/>
+                  <separator/>
+                  <field name="processed_by_uid"/>
+                  <group expand="1" string="Group By">
+                      <filter string="User" name="User" context="{'group_by':'processed_by_uid'}"/>
+                      <separator/>
+                      <filter string="Month" context="{'group_by':'processed_date:month'}"/>
+                      <filter string="Week" context="{'group_by':'processed_date:week'}"/>
+                      <filter string="Day" context="{'group_by':'processed_date:day'}"/>
+                  </group>
+              </search>
+          </field>
+      </record>
+
+        <record id="action_order_processing_report" model="ir.actions.act_window">
+            <field name="name">Order Processing Report</field>
+            <field name="res_model">stock.order.processing.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">pivot,graph</field>
+            <field name="view_id"></field>
+            <field name="context">{"search_default_today": 1}</field>
+            <field name="search_view_id" ref="view_stock_order_processing_search"/>
+        </record>
+
+        <menuitem name="Order Processing Report"
+            id="menu_order_processing_report"
+            parent="stock.menu_warehouse_report"
+            action="action_order_processing_report"
+            sequence="70"/>
+    </data>
+</odoo>

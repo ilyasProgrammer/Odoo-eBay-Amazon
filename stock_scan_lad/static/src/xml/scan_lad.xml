@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+    <t t-name="scan_lad_main_menu">
+        <div class="op_main_menu_container">
+            <div class="op_header">
+                <h1 class="header">Scan item barcode, partslink, LKQ, PFG, part number, or whatever</h1>
+            </div>
+            <div class="warnings_container">
+                <h1 class="warning" id="too_many_warning">Warning! More than 1 item found for barcode: <span class="barcode"/></h1>
+                <h1 class="warning" id="not_found_warning">Warning! Product not found for barcode: <span class="barcode"/></h1>
+            </div>
+            <label>Print straightway <input id="print_straightway" type="checkbox" checked="1"/></label>
+            <label>Barcode: <input id="barcode"/></label>
+            <button class="btn-primary" id="search">Search</button>
+            <div class="container">
+                <div class="row">
+                    <div class="items_container"></div>
+                </div>
+            </div>
+        </div>
+    </t>
+    <t t-name="scan_lad_item">
+        <div class="col-sm-3">
+            <div class="item">
+                <!--<div id="scan_lad_product_id" class="scan_field">ID:-->
+                    <!--<span class="scan_value">-->
+                        <!--<t t-esc="widget.id" class="scan_value"/>-->
+                    <!--</span>-->
+                <!--</div>-->
+                <div id="scan_lad_product_id" class="scan_field">Name:
+                    <span class="scan_value">
+                        <t t-esc="widget.name" class="scan_value"/>
+                    </span>
+                </div>
+                <div id="scan_lad_mfg_label" class="scan_field">Mfg label:
+                    <span class="scan_value">
+                        <t t-esc="widget.mfg_label"/>
+                    </span>
+                </div>
+                <div id="scan_lad_mfg_code_id" class="scan_field">Mfg code:
+                    <span class="scan_value">
+                        <t t-esc="widget.mfg_code" class="scan_value"/>
+                    </span>
+                </div>
+                <div id="qty_to_print">Copies to print:
+                    <input id="copy" value="1"/>
+                </div>
+                <button  class="btn-primary"  id="print_label">Print label</button>
+            </div>
+        </div>
+    </t>
+</templates>

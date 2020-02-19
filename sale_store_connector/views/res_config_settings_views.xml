@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_general_configuration_with_endpoint_token" model="ir.ui.view">
+            <field name="name">General Settings with Endpoint Token</field>
+            <field name="inherit_id" ref="base_setup.view_general_configuration"/>
+            <field name="model">base.config.settings</field>
+            <field name="arch" type="xml">
+                <group name="google_analytics" position="after">
+                    <group string="Endpoints Auth Token" name="endpoint_auth_token">
+                        <label for="endpoint_auth_token"/>
+                        <div>
+                            <field name="endpoint_auth_token" class="oe_inline"/>
+                            <button type="object" name="generate_new_endpoint_token" string="Generate New Token" icon="fa-cogs" class="oe_inline oe_link"/>
+                        </div>
+                    </group>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

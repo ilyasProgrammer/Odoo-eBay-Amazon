@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="sale_report_salesteams_view_form" model="ir.ui.view">
+        <field name="name">crm.team.form.sale.report</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='options_active']" position="inside">
+                <div class="o_row">
+                    <field name="use_excep_quot"/>
+                    <label for="use_excep_quot"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_report_salesteams_view_kanban" model="ir.ui.view">
+        <field name="name">crm.team.kanban.sale.report</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_salesteams_view_kanban"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//templates" position="before">
+                    <field name="use_excep_quot"/>
+                </xpath>
+                <xpath expr="//div[contains(@class, 'o_kanban_primary_left')]" position="inside">
+                    <button t-if="record.use_excep_quot.raw_value" class="btn btn-primary" name="%(sale_dropship.action_orders_with_exceptions)d" type="action">Exception Quotations</button>
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

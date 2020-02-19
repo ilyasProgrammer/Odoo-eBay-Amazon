@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_scan_lad" model="ir.actions.client">
+            <field name="name">Scan LAD</field>
+            <field name="tag">stock_scan_lad_main_menu</field>
+        </record>
+
+        <menuitem id="menu_scan_lad"
+                  parent="stock.menu_stock_root"
+                  action="action_scan_lad"
+                  groups="stock.group_stock_user"
+                  sequence="1000"
+                  name="Scan LAD"/>
+    </data>
+</odoo>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_stock_check_inventory_report" model="ir.actions.act_window">
+            <field name="name">Stock Check Data</field>
+            <field name="res_model">stock.check.inventory.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_stock_check_inventory_report_tree" model="ir.ui.view">
+            <field name="name">view.stock.check.inventory.report.tree</field>
+            <field name="model">stock.check.inventory.report</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="item_id"/>
+                    <field name="store_id"/>
+                    <field name="wh_availability"/>
+                    <field name="vendor_availability"/>
+                    <field name="new_qty"/>
+                    <field name="new_price"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_stock_check_inventory_report_form" model="ir.ui.view">
+            <field name="name">view.stock.check.inventory.report.form</field>
+            <field name="model">stock.check.inventory.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="item_id"/>
+                                <field name="store_id"/>
+                                <field name="product_tmpl_id"/>
+                                <field name="is_a_kit"/>
+                            </group>
+                            <group>
+                                <field name="sku"/>
+                                <field name="create_date"/>
+                            </group>
+                            <group>
+                                <field name="old_qty"/>
+                                <field name="wh_availability"/>
+                                <field name="vendor_availability"/>
+                                <field name="new_qty"/>
+                                <field name="min_handling_time"/>
+                            </group>
+                            <group>
+                                <field name="old_price"/>
+                                <field name="wh_shipping_price"/>
+                                <field name="wh_cost"/>
+                                <field name="vendor_cost"/>
+                                <field name="new_price"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_stock_check_inventory_report_search" model="ir.ui.view">
+            <field name="name">view.stock.check.inventory.report.search</field>
+            <field name="model">stock.check.inventory.report</field>
+            <field name="arch" type="xml">
+                <search string="Search Stock Check Data">
+                    <field name="item_id"/>
+                    <field name="sku"/>
+                    <field name="store_id"/>
+                    <field name="product_tmpl_id"/>
+                    <filter string="Kits" name="kits" domain="[('is_a_kit', '=', True)]"/>
+               </search>
+            </field>
+        </record>
+
+        <menuitem
+            id="menu_stock_check_inventory_report"
+            action="action_stock_check_inventory_report"
+            name="Stock Check Data"
+            parent="sale_store.menu_sale_store_root"
+            sequence="25"
+            groups="base.group_system"/>
+    </data>
+</odoo>

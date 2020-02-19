@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+    <t t-name="NoOfCopyWidget">
+        <div class="row">
+            <div class="col-md-3">
+                No Of Copy:
+            </div>
+            <div class="col-md-9">
+                <input type="text" id="copy"/>
+            </div>
+        </div>
+    </t>
+    <t t-extend="FormView.buttons">
+        <t t-jquery=".o_form_buttons_view" t-operation="replace">
+            <div class="o_form_buttons_view" t-if="widget.show_buttons !== false">
+                <button t-if="widget.is_action_enabled('edit')" type="button"
+                        class="btn btn-primary btn-sm o_form_button_edit" accesskey="a">
+                    Edit
+                </button>
+                <button t-if="widget.is_action_enabled('create')" type="button"
+                        class="btn btn-default btn-sm o_form_button_create" accesskey="c">
+                    Create
+                </button>
+                <button type="button" class="btn btn-default btn-sm o_single_copy" t-if="widget.dataset.model == 'product.template'">Single Copy</button>
+                <button type="button" class="btn btn-default btn-sm o_multiple_copy" t-if="widget.dataset.model == 'product.template'">Multiple Copy</button>
+            </div>
+        </t>
+        <t t-jquery=".o_form_buttons_edit" t-operation="replace">
+            <div class="o_form_buttons_edit" t-if="widget.show_buttons !== false">
+                <button type="button"
+                        class="btn btn-primary btn-sm o_form_button_save" accesskey="s">
+                    Save
+                </button>
+                <button type="button"
+                        class="btn btn-default btn-sm o_form_button_cancel" accesskey="j">
+                    Discard
+                </button>
+                <button type="button" class="btn btn-default btn-sm o_single_copy" t-if="widget.dataset.model == 'product.template'">Single Copy</button>
+                <button type="button" class="btn btn-default btn-sm o_multiple_copy" t-if="widget.dataset.model == 'product.template'">Multiple Copy</button>
+            </div>
+        </t>
+    </t>
+    <t t-extend="ListView.buttons">
+        <t t-jquery="button.o_list_button_discard" t-operation="after">
+            <button type="button" class="btn btn-default btn-sm o_single_copy" t-if="widget.dataset.model == 'product.template'">Single Copy</button>
+            <button type="button" class="btn btn-default btn-sm o_multiple_copy" t-if="widget.dataset.model == 'product.template'">Multiple Copy</button>
+        </t>
+    </t>
+</templates>

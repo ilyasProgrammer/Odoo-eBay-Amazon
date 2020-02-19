@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_template_more_info_form_view" model="ir.ui.view">
+            <field name="name">product.template.more.info.form</field>
+            <field name="model">product.template</field>
+            <field name="sequence">2</field>
+            <field name="inherit_id" ref="sale_store.custom_product_template_form_view" />
+            <field name="arch" type="xml">
+                <field name="long_description" position="after">
+                    <field name="more_info_url" widget="short_url"/>
+                </field>
+                <xpath expr="//group/group[2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <group name="group_standard_price" position="before">
+                    <group name="Dropship">
+                        <field name="dropship_base_cost"/>
+                        <field name="dropship_shipping_cost"/>
+                        <field name="dropship_handling_cost"/>
+                        <field name="dropship_total_cost"/>
+                        <button name="%(action_update_vendor_qty_wizard)d" string="Update Vendor Qty" type="action" class="fa fa-arrow-right oe_link"/>
+                    </group>
+                </group>
+            </field>
+        </record>
+
+        <record id="product_template_form_remove_purchase_info" model="ir.ui.view">
+            <field name="name">product.template.form.remove.purchase.info</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="sale_dropship.product_template_form_view_inherit_sale_dropship"/>
+            <field name="arch" type="xml">
+                <page name="purchase_information" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </page>
+                <page name="forecasting_information" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </page>
+            </field>
+        </record>
+    </data>
+</odoo>

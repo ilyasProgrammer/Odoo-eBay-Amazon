@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="potential_loss_notification" model="mail.template">
+            <field name="name">Loss Notification</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="email_from"><![CDATA[Opsyst Admin <admin@opsyst.com>]]></field>
+            <field name="email_to">james@dataroot.asia</field>
+            <field name="subject"><![CDATA[ Potential Losses: Please Review Pricing ]]></field>
+            <field name="body_html"><![CDATA[
+<style>
+td {
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+}
+table {
+    border-right:1px solid black;
+    border-bottom:1px solid black;
+}
+</style>
+
+<p>Please check the pricing for following orders:</p>
+<table cellpadding="0" cellspacing="0">
+    <tr>
+        <td width="160px"><strong>Store</strong></td>
+        <td width="160px"><strong>Order ID</strong></td>
+        <td width="80px"><strong>Sales Order</strong></td>
+        <td width="80px"><strong>Product</strong></td>
+        <td width="50px"><strong>Price Sold</strong></td>
+        <td width="50px"><strong>Fee</strong></td>
+        <td width="50px"><strong>Dropship Cost</strong></td>
+        <td width="50px"><strong>Loss</strong></td>
+    </tr>
+    % for line in ctx.get('losses'):
+        <tr>
+            <td>${line['store']}</td>
+            <td>${line['order_id']}</td>
+            <td>${line['sales_order']}</td>
+            <td align="right">${line['product']}</td>
+            <td align="right">${line['price_unit']}</td>
+            <td align="right">${line['fee']}</td>
+            <td align="right">${line['dropship_cost']}</td>
+            <td align="right">${line['loss']}</td>
+        </tr>
+    %endfor
+</table>
+]]></field>
+            <field name="user_signature" eval="False"/>
+        </record>
+
+        <record id="send_po_to_ppr" model="mail.template">
+            <field name="name">PPR Purchase Orders</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="email_from"><![CDATA[Opsyst Admin <admin@opsyst.com>]]></field>
+            <field name="email_to">ajporlante@gmail.com; a.majeed@vertical4.com; xtremejeeperz@gmail.com; brandon@ppric.com; adnanmahboob66@gmail.com</field>
+            <field name="subject"><![CDATA[ PPRIC Orders ${ctx.get('order_date')}]]></field>
+            <field name="body_html"><![CDATA[
+<p><strong>Hi Brandon,</strong></p>
+<br/>
+<p>Please find attached our orders dated ${ctx.get('order_date')}.</p>
+<br/>
+
+<p>Best Regards,</p>
+<p><strong>Aamir Majeed</strong></p>
+
+]]></field>
+            <field name="user_signature" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

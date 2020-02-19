@@ -1,0 +1,826 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- 
+            Let's standardize cron jobs/scripts
+            1. Always set to inactive in data file
+            2. Naming and sequencing
+                [ODOO] 200
+                [AUTOPLUS] 300
+                [EBAY] 400
+                [AMAZON] 500
+                [STORE] 600
+                [DIGITALOCEAN] 800
+                [MISC] 900
+            3. Set up scripts should have priority in 50+ range, eg. 351 for [AUTOPLUS] Get Kits
+        -->
+
+        <record id="module_category_opsyst" model="ir.module.category">
+            <field name="name">Opsyst</field>
+            <field name="sequence">18</field>
+        </record>
+
+        <record id="sale.seq_sale_order" model="ir.sequence">
+            <field name="name">Sales Order</field>
+            <field name="code">sale.order</field>
+            <field name="prefix">SO</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="ir_cron_autoplus_get_kits" model="ir.cron">
+            <field name="name">[AUTOPLUS] Get Kits</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model" eval="'mrp.bom'"/>
+            <field name="priority">311</field>
+            <field name="function" eval="'get_kits_from_autoplus'"/>
+            <field name="active" eval="False"/>
+            <field name="args" eval="(10, 0)"/>
+        </record>
+
+        <record id="ir_cron_store_update_quatities" model="ir.cron">
+            <field name="name">[STORE] Update Quantities</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'cron_update_quantities'" name="function"/>
+            <field name="active" eval="False"/>
+            <field eval="()" name="args"/>
+        </record>
+
+        <record id="ir_cron_store_getorder" model="ir.cron">
+            <field name="name">[STORE] Get Order Scheduler</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field name="active" eval="False"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'cron_getorder'" name="function"/>
+            <field eval="(5,)" name="args"/>
+        </record>
+
+        <record id="ir_cron_store_getorder_external_stores" model="ir.cron">
+            <field name="name">[STORE] Get Order Scheduler for external stores</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">90</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field name="active" eval="False"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'cron_getorder_external_stores'" name="function"/>
+            <field eval="(5,)" name="args"/>
+        </record>
+
+        <record id="ir_cron_store_submit_tracking_number" model="ir.cron">
+            <field name="name">[STORE] Store Submit Tracking Number</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">30</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="'cron_store_submit_tracking_number'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+
+        <record id="seq_ship_shipment" model="ir.sequence">
+            <field name="name">Shipment</field>
+            <field name="code">ship.shipment</field>
+            <field name="prefix">SHIP</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="carrier_fedex" model="ship.carrier">
+            <field name="name">FedEx</field>
+            <field name="ss_code">fedex</field>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="carrier_usps" model="ship.carrier">
+            <field name="name">USPS</field>
+            <field name="ss_code">stamps_com</field>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="carrier_ups" model="ship.carrier">
+            <field name="name">UPS</field>
+            <field name="ss_code">ups</field>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="package_ups_package" model="ship.carrier.package">
+            <field name="name">Package</field>
+            <field name="ss_code">package</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_ups_express_box_large" model="ship.carrier.package">
+            <field name="name">UPS Express Box Large</field>
+            <field name="ss_code">ups__express_box_large</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_ups_10_kg_box" model="ship.carrier.package">
+            <field name="name">UPS 10 KG Box</field>
+            <field name="ss_code">ups_10_kg_box</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="domestic" eval="False"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_ups_25_kg_box" model="ship.carrier.package">
+            <field name="name">UPS 25 KG Box</field>
+            <field name="ss_code">ups_25_kg_box</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="domestic" eval="False"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_ups_express_box" model="ship.carrier.package">
+            <field name="name">UPS Express Box</field>
+            <field name="ss_code">ups_express_box</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_ups_express_box_medium" model="ship.carrier.package">
+            <field name="name">UPS Express Box - Medium</field>
+            <field name="ss_code">ups_express_box_medium</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_ups_express_box_small" model="ship.carrier.package">
+            <field name="name">UPS Express Box - Small</field>
+            <field name="ss_code">ups_express_box_small</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_ups_express_pak" model="ship.carrier.package">
+            <field name="name">UPS Express Pak</field>
+            <field name="ss_code">ups_express_pak</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_ups_letter" model="ship.carrier.package">
+            <field name="name">UPS Letter</field>
+            <field name="ss_code">ups_letter</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_ups_tube" model="ship.carrier.package">
+            <field name="name">UPS Tube</field>
+            <field name="ss_code">ups_tube</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="service_ups_standard_international" model="ship.carrier.service">
+            <field name="name">UPS Standard</field>
+            <field name="ss_code">ups_standard_international</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="package_id" ref="package_ups_package"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="service_ups_next_day_early_am" model="ship.carrier.service">
+            <field name="name">UPS Next Day Air Early</field>
+            <field name="ss_code">ups_next_day_early_am</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="package_id" ref="package_ups_package"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">108</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_ups_worldwide_express" model="ship.carrier.service">
+            <field name="name">UPS WorldWide Express</field>
+            <field name="ss_code">ups_worldwide_expresss</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="package_id" ref="package_ups_package"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="service_ups_next_day_air" model="ship.carrier.service">
+            <field name="name">UPS Next Day Air</field>
+            <field name="ss_code">ups_next_day_air</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="package_id" ref="package_ups_package"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">108</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_ups_ground_international" model="ship.carrier.service">
+            <field name="name">UPS Ground (International)</field>
+            <field name="ss_code">ups_ground_international</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="package_id" ref="package_ups_package"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="service_ups_worldwide_express_plus" model="ship.carrier.service">
+            <field name="name">UPS Worldwide Express Plus</field>
+            <field name="ss_code">ups_worldwide_express_plus</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="package_id" ref="package_ups_package"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="service_ups_next_day_air_saver" model="ship.carrier.service">
+            <field name="name">UPS Next Day Air Saver</field>
+            <field name="ss_code">ups_next_day_air_saver</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="package_id" ref="package_ups_package"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">108</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_ups_worldwide_expedited" model="ship.carrier.service">
+            <field name="name">UPS Worldwide Expedited</field>
+            <field name="ss_code">ups_next_day_air_saver</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="package_id" ref="package_ups_package"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="service_ups_2nd_day_air_am" model="ship.carrier.service">
+            <field name="name">UPS 2nd Day Air AM</field>
+            <field name="ss_code">ups_2nd_day_air_am</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="package_id" ref="package_ups_package"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">108</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_ups_2nd_day_air" model="ship.carrier.service">
+            <field name="name">UPS 2nd Day Air</field>
+            <field name="ss_code">ups_2nd_day_air</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="package_id" ref="package_ups_package"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">108</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_ups_worldwide_saver" model="ship.carrier.service">
+            <field name="name">UPS Worldwide Saver</field>
+            <field name="ss_code">ups_worldwide_saver</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="package_id" ref="package_ups_package"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="service_ups_2nd_day_air_international" model="ship.carrier.service">
+            <field name="name">UPS 2nd Day Air International</field>
+            <field name="ss_code">ups_2nd_day_air_international</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="package_id" ref="package_ups_package"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="service_ups_3_day_select" model="ship.carrier.service">
+            <field name="name">UPS 3 Day Select</field>
+            <field name="ss_code">ups_3_day_select</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="package_id" ref="package_ups_package"/>
+            <field name="max_weight">150</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_ups_ground" model="ship.carrier.service">
+            <field name="name">UPS Ground</field>
+            <field name="ss_code">ups_ground</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="package_id" ref="package_ups_package"/>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_ups_2nd_day_air" model="ship.carrier.service">
+            <field name="name">UPS 2nd Day Air</field>
+            <field name="ss_code">ups_2nd_day_air</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="package_id" ref="package_ups_package"/>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_ups_next_day_air_international" model="ship.carrier.service">
+            <field name="name">UPS Next Day Air (International)</field>
+            <field name="ss_code">ups_next_day_air_international</field>
+            <field name="carrier_id" ref="carrier_ups"/>
+            <field name="package_id" ref="package_ups_package"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_usps_package" model="ship.carrier.package">
+            <field name="name">Package</field>
+            <field name="ss_code">package</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_usps_flat" model="ship.carrier.package">
+            <field name="name">Flat Rate Envelope</field>
+            <field name="ss_code">flat_rate_envelope</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_usps_flat_legal" model="ship.carrier.package">
+            <field name="name">Flat Rate Legal Envelope</field>
+            <field name="ss_code">flat_rate_legal_envelope</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_usps_flat_padded" model="ship.carrier.package">
+            <field name="name">Flat Rate Padded Envelope</field>
+            <field name="ss_code">flat_rate_padded_envelope</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_usps_large_or_flat" model="ship.carrier.package">
+            <field name="name">Large Envelope or Flat</field>
+            <field name="ss_code">large_envelope_or_flat</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_usps_large_package" model="ship.carrier.package">
+            <field name="name">Large Package (any side > 12)</field>
+            <field name="ss_code">large_package</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_usps_letter" model="ship.carrier.package">
+            <field name="name">Letter</field>
+            <field name="ss_code">letter</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_usps_medium_flat" model="ship.carrier.package">
+            <field name="name">Medium Flat Rate Box</field>
+            <field name="ss_code">medium_flat_rate_box</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_usps_regional_a" model="ship.carrier.package">
+            <field name="name">Regional Rate Box A</field>
+            <field name="ss_code">regional_rate_box_a</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="package_usps_regional_b" model="ship.carrier.package">
+            <field name="name">Regional Rate Box B</field>
+            <field name="ss_code">regional_rate_box_b</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="package_usps_small_flat" model="ship.carrier.package">
+            <field name="name">Small Flat Rate Box</field>
+            <field name="ss_code">small_flat_rate_box</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_usps_small_flat" model="ship.carrier.package">
+            <field name="name">Small Flat Rate Box</field>
+            <field name="ss_code">small_flat_rate_box</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_usps_thick_envelope" model="ship.carrier.package">
+            <field name="name">Thick Envelope</field>
+            <field name="ss_code">thick_envelope</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="service_usps_first_class_mail" model="ship.carrier.service">
+            <field name="name">USPS First Class Mail</field>
+            <field name="ss_code">usps_first_class_mail</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="package_id" ref="package_usps_package"/>
+            <field name="max_weight">0.81</field>
+            <field name="max_length">108</field>
+            <field name="max_length_plus_girth">108</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_usps_media_mail" model="ship.carrier.service">
+            <field name="name">USPS Media Mail</field>
+            <field name="ss_code">usps_media_mail</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="package_id" ref="package_usps_package"/>
+            <field name="max_weight">70.0</field>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="service_usps_parcel_select" model="ship.carrier.service">
+            <field name="name">USPS Parcel Select Ground</field>
+            <field name="ss_code">usps_parsel_select</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="package_id" ref="package_usps_package"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="service_usps_priority_mail" model="ship.carrier.service">
+            <field name="name">USPS Priority Mail</field>
+            <field name="ss_code">usps_priority_mail</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="package_id" ref="package_usps_package"/>
+            <field name="max_weight">70.0</field>
+            <field name="max_length">108</field>
+            <field name="max_length_plus_girth">108</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_usps_priority_mail_express" model="ship.carrier.service">
+            <field name="name">USPS Priority Mail Express</field>
+            <field name="ss_code">usps_priority_mail_express</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="package_id" ref="package_usps_package"/>
+            <field name="max_weight">70.0</field>
+            <field name="max_length">108</field>
+            <field name="max_length_plus_girth">108</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_usps_first_class_mail_international" model="ship.carrier.service">
+            <field name="name">USPS First Class Mail International</field>
+            <field name="ss_code">usps_first_class_mail_international</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="package_id" ref="package_usps_package"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="service_usps_priority_mail_international" model="ship.carrier.service">
+            <field name="name">USPS Priority Mail Intl</field>
+            <field name="ss_code">usps_priority_mail_international</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="package_id" ref="package_usps_package"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="service_usps_priority_mail_express_international" model="ship.carrier.service">
+            <field name="name">USPS Priority Mail Express Intl</field>
+            <field name="ss_code">usps_priority_mail_express_international</field>
+            <field name="carrier_id" ref="carrier_usps"/>
+            <field name="package_id" ref="package_usps_package"/>
+            <field name="international" eval="True"/>
+        </record>
+        
+        <record id="package_fedex_package" model="ship.carrier.package">
+            <field name="name">Package</field>
+            <field name="ss_code">package</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_fedex_10_kg" model="ship.carrier.package">
+            <field name="name">FedEx 10kg Box</field>
+            <field name="ss_code">fedex_10kg_box</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_fedex_25_kg" model="ship.carrier.package">
+            <field name="name">FedEx 25kg Box</field>
+            <field name="ss_code">fedex_25kg_box</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_fedex_box" model="ship.carrier.package">
+            <field name="name">FedEx Box</field>
+            <field name="ss_code">fedex_box</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_fedex_envelope" model="ship.carrier.package">
+            <field name="name">FedEx Envelope</field>
+            <field name="ss_code">fedex_envelope</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_fedex_pak" model="ship.carrier.package">
+            <field name="name">FedEx Pak</field>
+            <field name="ss_code">fedex_pak</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_fedex_tube" model="ship.carrier.package">
+            <field name="name">FedEx Tube</field>
+            <field name="ss_code">fedex_tube</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="domestic" eval="True"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="package_fedex_envelope_onerate" model="ship.carrier.package">
+            <field name="name">One Rate Envelope</field>
+            <field name="ss_code">fedex_envelope_onerate</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="package_fedex_extra_large_box_onerate" model="ship.carrier.package">
+            <field name="name">One Rate Extra Large Box</field>
+            <field name="ss_code">fedex_extra_large_box_onerate</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="package_fedex_large_box_onerate" model="ship.carrier.package">
+            <field name="name">One Rate Large Box</field>
+            <field name="ss_code">fedex_large_box_onerate</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="package_fedex_medium_box_onerate" model="ship.carrier.package">
+            <field name="name">One Rate Medium Box</field>
+            <field name="ss_code">fedex_medium_box_onerate</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="package_fedex_pak_box_onerate" model="ship.carrier.package">
+            <field name="name">One Rate Pak</field>
+            <field name="ss_code">fedex_pak_onerate</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="package_fedex_small_box_onerate" model="ship.carrier.package">
+            <field name="name">One Rate Small Box</field>
+            <field name="ss_code">fedex_small_box_onerate</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="package_fedex_tube_onerate" model="ship.carrier.package">
+            <field name="name">One Rate Tube</field>
+            <field name="ss_code">fedex_tube_onerate</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="domestic" eval="True"/>
+        </record>
+
+        <record id="service_fedex_ground" model="ship.carrier.service">
+            <field name="name">FedEx Ground</field>
+            <field name="ss_code">fedex_ground</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="max_weight">70</field>
+            <field name="max_length">108</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_fedex_home_delivery" model="ship.carrier.service">
+            <field name="name">FedEx Home Delivery</field>
+            <field name="ss_code">fedex_home_delivery</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="max_weight">70</field>
+            <field name="max_length">108</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_fedex_2day" model="ship.carrier.service">
+            <field name="name">FedEx 2Day</field>
+            <field name="ss_code">fedex_2day</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">119</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_fedex_2day_am" model="ship.carrier.service">
+            <field name="name">FedEx 2Day A.M.</field>
+            <field name="ss_code">fedex_2day_am</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">119</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_fedex_express_saver" model="ship.carrier.service">
+            <field name="name">FedEx Express Saver</field>
+            <field name="ss_code">fedex_express_saver</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="max_weight">150</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_fedex_standard_overnight" model="ship.carrier.service">
+            <field name="name">FedEx Standard Overnight</field>
+            <field name="ss_code">fedex_standard_overnight</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">119</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_fedex_priority_overnight" model="ship.carrier.service">
+            <field name="name">FedEx Priority Overnight</field>
+            <field name="ss_code">fedex_priority_overnight</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="max_weight">2400</field>
+            <field name="max_length">119</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_fedex_first_overnight" model="ship.carrier.service">
+            <field name="name">FedEx First Overnight</field>
+            <field name="ss_code">fedex_first_overnight</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">119</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_fedex_1_day_freight" model="ship.carrier.service">
+            <field name="name">FedEx 1Day Freight</field>
+            <field name="ss_code">fedex_1_day_freight</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">119</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_fedex_2_day_freight" model="ship.carrier.service">
+            <field name="name">FedEx 2Day Freight</field>
+            <field name="ss_code">fedex_2_day_freight</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">119</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_fedex_3_day_freight" model="ship.carrier.service">
+            <field name="name">FedEx 3Day Freight</field>
+            <field name="ss_code">fedex_3_day_freight</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">119</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_fedex_first_overnight_freight" model="ship.carrier.service">
+            <field name="name">FedEx First Overnight Freight</field>
+            <field name="ss_code">fedex_first_overnight_freight</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">119</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+
+        <record id="service_fedex_ground_international" model="ship.carrier.service">
+            <field name="name">FedEx International Ground</field>
+            <field name="ss_code">fedex_ground_international</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="service_fedex_international_economy" model="ship.carrier.service">
+            <field name="name">FedEx International Economy</field>
+            <field name="ss_code">fedex_international_economy</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="service_fedex_international_priority" model="ship.carrier.service">
+            <field name="name">FedEx International Priority</field>
+            <field name="ss_code">fedex_international_priority</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="service_fedex_international_first" model="ship.carrier.service">
+            <field name="name">FedEx International First</field>
+            <field name="ss_code">fedex_international_first</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="service_fedex_international_economy_freight" model="ship.carrier.service">
+            <field name="name">FedEx International Economy Freight</field>
+            <field name="ss_code">fedex_international_economy_freight</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="international" eval="True"/>
+        </record>
+
+        <record id="service_fedex_international_priority_freight" model="ship.carrier.service">
+            <field name="name">FedEx International Priority Freight</field>
+            <field name="ss_code">fedex_international_priority_freight</field>
+            <field name="carrier_id" ref="carrier_fedex"/>
+            <field name="package_id" ref="package_fedex_package"/>
+            <field name="international" eval="True"/>
+        </record>
+    </data>
+</odoo>

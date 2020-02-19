@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="zero_quants_tree_view" model="ir.ui.view">
+        <field name="name">stock.quant.tree.view</field>
+        <field name="model">stock.quant</field>
+        <field name="arch" type="xml">
+            <tree string="Zero Quants">
+                <field name="product_id"/>
+                <field name="qty"/>
+                <field name="location_id"/>
+                <field name="product_cost"/>
+                <field name="landed_cost"/>
+                <!--<field name="amz_fba_shipping_cost"/>-->
+                <field name="cost"/>
+                <field name="inventory_value"/>
+                <field name="in_date"/>
+                <field name="reservation_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="zero_quants_search_view" model="ir.ui.view">
+        <field name="name">stock.quant.search</field>
+        <field name="model">stock.quant</field>
+        <field name="arch" type="xml">
+            <search string="Groups">
+                <filter string="WH Stock" name="stock" domain="[('location_id', 'child_of', 15)]"/>
+                <!--<filter string="Returned" name="returned" domain="[('location_id', 'child_of', 15)]"/>-->
+                <group expand="1" string="Group By">
+                    <filter string="Location" name="location" context="{'group_by': 'location_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="zero_quants_act" model="ir.actions.act_window">
+        <field name="name">Zero Quants</field>
+        <field name="res_model">stock.quant</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="zero_quants_search_view"/>
+        <field name="context">{'search_default_location':1}</field>
+        <field name="domain">[('cost', '=', 0), ('location_id.usage','!=','customer'), ('location_id.usage','!=','supplier')]</field>
+        <field name="view_id" ref="zero_quants_tree_view"/>
+    </record>
+
+    <menuitem action="zero_quants_act" id="zero_quants_menu" parent="stock.menu_stock_inventory_control" sequence="1"/>
+
+    <record id="suspicious_quants_act" model="ir.actions.act_window">
+        <field name="name">Suspicious Quants</field>
+        <field name="res_model">stock.quant</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="zero_quants_search_view"/>
+        <field name="context">{'search_default_location':1}</field>
+        <field name="domain">[('cost', '&lt;', 5), ('cost', '>', 0), ('location_id.usage','!=','customer'), ('location_id.usage','!=','supplier')]</field>
+        <field name="view_id" ref="zero_quants_tree_view"/>
+    </record>
+
+    <menuitem action="suspicious_quants_act" id="suspicious_quants_menu" parent="stock.menu_stock_inventory_control" sequence="2"/>
+
+</odoo>

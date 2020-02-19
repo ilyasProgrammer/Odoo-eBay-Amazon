@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_zebra_producttemplatelabel">
+        <t t-call="report.html_container">
+            <div class="page">
+                <t t-foreach="docs" t-as="template">
+                    <t t-foreach="template.product_variant_ids" t-as="product">
+                         <div class="col-xs-12" style="padding:0;">
+                            <table style="border-spacing:0;margin-bottom:0;height:122px;" class="table">
+                                <thead>
+                                    <tr style="width: 3in;">
+                                        <td style="border: 2px solid black;width: 2.63in;" colspan="2" class="col-xs-8 danger">
+                                            <t t-if="product.default_code">
+                                                [<strong t-field="product.default_code"/>]
+                                            </t>
+                                            <strong t-field="product.name"/>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="width: 1in;">
+                                        <td style="border: 2px solid black;text-align: center; vertical-align: middle;" class="col-xs-5">
+                                            <img t-if="product.barcode" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', product.barcode, 600, 150)" style="width:100%;height:20%;"/>
+                                            <span t-field="product.barcode"/>
+                                        </td>
+                                        <td style="border: 2px solid black; text-align: center;" class="col-xs-7">
+                                            <h4>
+                                                <strong t-field="product.company_id.currency_id.symbol"/>
+                                                <strong t-field="product.list_price"/>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </div>
+        </t>
+    </template>
+    <report
+            id="report_product_template_label"
+            string="Products Labels"
+            model="product.template"
+            report_type="qweb-pdf"
+            name="lable_zabra_printer.report_zebra_producttemplatelabel"
+            file="lable_zabra_printer.report_zebra_producttemplatelabel"
+            attachment_use="True"
+            attachment="('product_label.pdf')"/>
+
+
+    <template id="report_zebra_shipmentlabel">
+        <t t-call="report.html_container">
+            <div class="page">
+                <t t-foreach="docs" t-as="template">
+                </t>
+            </div>
+        </t>
+    </template>
+    <report
+            id="report_shipment_label"
+            string="Shipment Label"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            name="lable_zabra_printer.report_zebra_shipmentlabel"
+            file="lable_zabra_printer.report_zebra_shipmentlabel"
+            attachment_use="True"
+            attachment="('shipment_label.pdf')"/>
+
+
+     <template id="assets_backend" name="zebra printer" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/lable_zabra_printer/static/src/lib/rsvp-3.1.0.min.js"></script>
+            <script type="text/javascript" src="/lable_zabra_printer/static/src/lib/sha-256.min.js"></script>
+            <script type="text/javascript" src="/lable_zabra_printer/static/src/lib/qz-tray.js"></script>
+            <script type="text/javascript" src="/lable_zabra_printer/static/src/lib/jsrsasign-latest-all-min.js"></script>
+            <!-- <script type="text/javascript" src="/lable_zabra_printer/static/src/lib/crypto-js.js"></script> -->
+            <!-- <script type="text/javascript" src="/lable_zabra_printer/static/src/lib/sha256.js"></script> -->
+            <!-- <script type="text/javascript" src="/lable_zabra_printer/static/src/lib/qz_io.js"></script> -->
+            <script type="text/javascript" src="/lable_zabra_printer/static/src/js/models.js"></script>
+            <script type="text/javascript" src="/lable_zabra_printer/static/src/js/lable_picking_barcode.js" />
+            <script type="text/javascript" src="/lable_zabra_printer/static/src/js/multi_copy.js" />
+        </xpath>
+    </template>
+     <template id="assets_backend_report" name="base_report_to_printer assets" inherit_id="report.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/lable_zabra_printer/static/src/lib/jsrsasign-latest-all-min.js"></script>
+            <script type="text/javascript" src="/lable_zabra_printer/static/src/lib/rsvp-3.1.0.min.js"></script>
+            <script type="text/javascript" src="/lable_zabra_printer/static/src/lib/sha-256.min.js"></script>
+            <script type="text/javascript" src="/lable_zabra_printer/static/src/lib/qz-tray.js"></script>
+            <script type="text/javascript" src="/lable_zabra_printer/static/src/js/qweb_action_manager.js" />
+        </xpath>
+    </template>
+</odoo>

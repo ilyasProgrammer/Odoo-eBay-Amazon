@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_create_quotation_wizard" model="ir.ui.view">
+        <field name="name">view.create.quotation.wizard</field>
+        <field name="model">create.quotation.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Quotation">
+                <group>
+                    <group>
+                        <field name='customer_name'/>
+                        <field name='street'/>
+                        <field name='street2'/>
+                        <field name='city'/>
+                        <field name='state'/>
+                    </group>
+                    <group>
+                        <field name='zip'/>
+                        <field name='phone'/>
+                        <field name='store_code'/>
+                        <field name='web_order_id'/>
+                        <field name='route'/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name='sku1'/>
+                        <field name='qty1'/>
+                        <field name='price1'/>
+                    </group>
+                    <group>
+                        <field name='sku2'/>
+                        <field name='qty2'/>
+                        <field name='price2'/>
+                    </group>
+                    <group>
+                        <field name='sku3'/>
+                        <field name='qty3'/>
+                        <field name='price3'/>
+                    </group>
+                    <group>
+                        <field name='sku4'/>
+                        <field name='qty4'/>
+                        <field name='price4'/>
+                    </group>
+                    <group>
+                        <field name='sku5'/>
+                        <field name='qty5'/>
+                        <field name='price5'/>
+                    </group>
+                </group>
+                <footer>
+                  <button name="create_quotation" type="object" string="Create" class="oe_highlight"/>
+                  or
+                  <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_create_quotation_wizard" model="ir.actions.act_window">
+        <field name="name">Create Quotation</field>
+        <field name="res_model">create.quotation.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_create_quotation_wizard"/>
+        <field name="target">new</field>
+    </record>
+    <menuitem name="Create Sale Order Wizard"
+            id="create_quotation_wizard"
+            parent="sale_store.menu_sales_tools"
+            action="action_create_quotation_wizard" sequence="7"/>
+</odoo>

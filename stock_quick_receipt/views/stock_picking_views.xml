@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_stock_picking_receipts_set_to_zero_form" model="ir.ui.view">
+            <field name="name">view.stock.picking.receipts.set.to.zero.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">
+              <div class="oe_button_box" position="inside">
+                  <button type="object"
+                      name="button_view_pending_picks"
+                      class="oe_stat_button"
+                      icon="fa-truck" attrs="{'invisible':[('pending_picks_count', '=', 0)]}">
+                      <field name="pending_picks_count" widget="statinfo" string="Pending Picks" help="Pending Picks"/>
+                  </button>
+              </div>
+                <group position="after">
+                    <group>
+                        <button name="show_current_stocks" string="⇒ Show Current Stocks" type="object" class="oe_link" groups="stock.group_stock_user" states='draft'/>
+                    </group>
+                </group>
+
+                <field name="recompute_pack_op" position="before">
+                    <button name="set_qty_done_to_zero" string="⇒ Set quantities to 0" type="object" class="oe_link oe_right" groups="stock.group_stock_user"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_picking_type_with_full_stock_form" model="ir.ui.view">
+            <field name="name">view.stock.picking.type.with.full.stock.form</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.view_picking_type_form"/>
+            <field name="arch" type="xml">
+                <field name="barcode_nomenclature_id" position="after">
+                    <field name="show_all_stocks" groups="base.group_no_one"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

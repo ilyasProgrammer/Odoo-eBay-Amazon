@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_ebay_recon" model="ir.actions.act_window">
+            <field name="name">eBay Recon Documents</field>
+            <field name="res_model">ebay.recon</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_ebay_recon_tree" model="ir.ui.view">
+            <field name="name">view.ebay.recon.tree</field>
+            <field name="model">ebay.recon</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="vendor_reference"/>
+                    <field name="total_amt"/>
+                    <field name="total_variance"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_ebay_recon_form" model="ir.ui.view">
+            <field name="name">view.ebay.recon.form</field>
+            <field name="model">ebay.recon</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="button_reconcile" type="object" string="Reconcile" states="draft" class="oe_highlight" />
+                        <button name="button_download_summary" type="object" string="Download Summary" states="done"/>
+                        <button name="button_undo_recon" type="object" string="Undo Recon" states="done"/>
+                        <button name="button_unlink_recon_lines" type="object" string="Clear Recon Lines" states="draft"/>
+                        <field name="state" widget="statusbar" readonly="1"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                name="action_view_recon_lines"
+                                class="oe_stat_button"
+                                icon="fa-edit" attrs="{'invisible':[('recon_lines_count', '=', 0)]}">
+                                <field name="recon_lines_count" widget="statinfo" string="Invoice Lines" help="Invoice Lines"/>
+                                <field name="recon_line_ids" invisible="1"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" class="oe_inline"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <label for="import_file"/>
+                                <div class="o_row">
+                                    <field name="import_file" filename="import_filename"/>
+                                    <button name="button_import_lines_from_file" string="Import" type="object" class="oe_inline fa fa-arrow-right oe_link"/>
+                                </div>
+                                <field name="import_filename" invisible="1"/>
+                                <field name="vendor_reference"/>
+                                <field name="total_amt" />
+                                <field name="total_variance"/>
+                            </group>
+                            <group/>
+                        </group>
+                        <group>
+                            <field name="notes"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_ebay_recon_line" model="ir.actions.act_window">
+            <field name="name">eBay Invoice Recon Lines</field>
+            <field name="res_model">ebay.recon.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_ebay_recon_line_tree" model="ir.ui.view">
+            <field name="name">view.ebay.recon.line.tree</field>
+            <field name="model">ebay.recon.line</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="store_id"/>
+                    <field name="partner_id"/>
+                    <field name="name"/>
+                    <field name="vendor_ref"/>
+                    <field name="variance"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_ebay_recon_line_form" model="ir.ui.view">
+            <field name="name">view.ebay.recon.form</field>
+            <field name="model">ebay.recon.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" clickable="True"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="name"/>
+                                <field name="vendor_ref"/>
+                                <field name="sale_order_id"/>
+                            </group>
+                            <group>
+                                <field name="price"/>
+                                <field name="variance"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="note"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_ebay_recon_line_search" model="ir.ui.view">
+            <field name="name">view.ebay.recon.line.search</field>
+            <field name="model">ebay.recon.line</field>
+            <field name="arch" type="xml">
+                <search string="Search ebay Recon Lines">
+                    <field name="name"/>
+                    <field name="vendor_ref"/>
+                    <field name="partner_id"/>
+                    <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                    <filter string="Matched" name="matched" domain="[('state', '=', 'matched')]"/>
+                    <filter string="Duplicate" name="duplicate" domain="[('state', '=', 'duplicate')]"/>
+                    <filter string="Not Found" name="notfound" domain="[('state', '=', 'notfound')]"/>
+               </search>
+            </field>
+        </record>
+
+        <menuitem id="menu_ebay_recon" action="action_ebay_recon" parent="menu_recon" sequence="15"/>
+        <menuitem id="menu_ebay_recon_line" action="action_ebay_recon_line" parent="menu_recon" sequence="16"/>
+    </data>
+</odoo>

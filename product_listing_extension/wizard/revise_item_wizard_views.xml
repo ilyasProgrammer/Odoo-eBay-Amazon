@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sale_store_ebay.view_revise_item" model="ir.ui.view">
+            <field name="name">view.revise.item</field>
+            <field name="model">sale.store.ebay.revise.item</field>
+            <field name="arch" type="xml">
+                <form string="Revise Item">
+                    <group>
+                        <field name="site"/>
+                        <field name="revise_compatibility" attrs="{'invisible': [('site', '!=', 'ebay')]}"/>
+                        <field name="revise_item_specifics" attrs="{'invisible': [('site', '!=', 'ebay')]}"/>
+                        <field name="revise_title"/>
+                    </group>
+                    <div attrs="{'invisible': [('revise_title', '!=', True)]}">
+                      <label for="new_title"/>
+                      <field name="new_title"/>
+                    </div>
+                    <div attrs="{'invisible': [('revise_item_specifics', '!=', True)]}">
+                      <label for="item_specific_line_ids"/>
+                      <field name="item_specific_line_ids">
+                          <tree editable="bottom">
+                              <field name="item_specific_attribute_id"/>
+                              <field name="value_id" options="{'no_edit': True}" domain="[('item_specific_attribute_id', '=', item_specific_attribute_id)]" context="{'default_item_specific_attribute_id': item_specific_attribute_id}"/>
+                          </tree>
+                      </field>
+                    </div>
+
+                    <footer>
+                        <button name="button_revise_item" type="object" string="Revise Item" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

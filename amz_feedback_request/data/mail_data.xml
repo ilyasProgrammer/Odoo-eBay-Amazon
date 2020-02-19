@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="email_amz_thank_you" model="mail.template">
+            <field name="name">Amazon Order - Thank you Email</field>
+            <field name="email_from">admin@opsyst.com</field>
+            <field name="subject">Thank you for your order! ${object.web_order_id}</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+<p>Dear ${object.partner_id.name},</p>
+<br/>
+<p>Thank you for placing an order with us and choosing ${ctx.get('titles')}. Your order will be dispatched and our delivery team shall get in touch with you. Thanks again, for your order and if you have any queries please contact us.</p>
+<br/>
+<p>Regards,
+<br/>
+Amazon Sales Center
+<br/>
+Theoria International
+</p>
+]]></field>
+        </record>
+
+        <record id="email_amz_feedback_request" model="mail.template">
+            <field name="name">Amazon Order - Feedback Request</field>
+            <field name="email_from">admin@opsyst.com</field>
+            <field name="subject">We need your help!</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+<p>Dear ${object.partner_id.name},</p>
+<br/>
+<p>My name is Waqar Ali and I am a customer representative of Make Auto Parts Manufacturing. We noticed that your order ${object.web_order_id} was delivered recently and I just wanted to make sure that you're happy with your ${ctx.get('title')}. If you have any issues, please reply to this message so I correct them immediately.</p>
+<br/>
+<p>As I am sure that you are aware, Amazon thrives on customer feedback and reviews.  We Need Your HELP!  If you think we've done a good job and you believe that the item you received is a high quality product, I would really appreciate it if you would leave us your feedback by clicking the link below OR copy link and paste in browser.</p>
+<br/>
+%if ctx.get('mapm'):
+    <p><a target="_blank" href="http://www.amazon.com/review/create-review?&asin=${ctx.get('asin')}">http://www.amazon.com/review/create-review?&asin=${ctx.get('asin')}</a></p>
+%endif
+%if not ctx.get('mapm'):
+    <p><a target="_blank" href="http://www.amazon.com/feedback">http://www.amazon.com/feedback</a></p>
+%endif
+<br/>
+<p>Feedback is so important to us! If you're not satisfied, before leaving negative feedback, let us make it right. Email us and we will do whatever it takes to correct any issues, and make sure you are completely satisfied. I want to personally thank you for being one of our customers. We LOVE our customers and will always be here if you need us.</p>
+<br/>
+<p>Take care,
+<br/>
+Waqar Ali
+</p>
+]]></field>
+        </record>
+
+        <record id="email_resend_amz_feedback_request" model="mail.template">
+            <field name="name">Amazon Order - Resend Feedback Request</field>
+            <field name="email_from">admin@opsyst.com</field>
+            <field name="email_to"> ${ctx.get('email')}</field>
+            <field name="subject">Tell Us How We Did!</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="body_html"><![CDATA[
+<p>Good morning ${ctx.get('name')},</p>
+<br/>
+<p>Thank you for your purchase. As we are sure you know, product feedback is extremely important to us, so we are asking that you please take a few moments to leave an honest feedback for our product:</p>
+<p><a target="_blank" href="http://www.amazon.com/review/create-review?&asin=${ctx.get('asin')}">http://www.amazon.com/review/create-review?&asin=${ctx.get('asin')}</a></p>
+<p>If for any reason you are not satisfied, kindly reply to this email or contact Amazon customer service right away at:
+<p><a target="_blank" href="https://www.amazon.com/gp/help/customer/display.html">https://www.amazon.com/gp/help/customer/display.html</a></p>
+<br />
+<br />
+<p>Thank you for your time and thank you for supporting our business,</p>
+<p>Shelly Adams</p>
+]]></field>
+        </record>
+    </data>
+</odoo>

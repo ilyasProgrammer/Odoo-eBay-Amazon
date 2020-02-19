@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="label_printer_assets_backend" name="return_label_printer_assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/returns_management/static/src/js/return_label_printer.js" />
+            </xpath>
+        </template>
+    </data>
+</odoo>
+
+

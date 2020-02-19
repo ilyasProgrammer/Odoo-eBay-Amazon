@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_store_ebay_form" model="ir.ui.view">
+            <field name="name">view.store.ebay.form</field>
+            <field name="model">sale.store</field>
+            <field name="inherit_id" ref="sale_store.view_sale_store_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='credentials']" position='after'>
+                    <page string="Proxy settings" name="proxy">
+                        <h4>For external stores we use proxy servers. For eBay HTTPS is required. HTTP proxy might be used for other purposes.</h4>
+                        <group>
+                            <field name="is_external_store"/>
+                            <field name="http_proxy" placeholder="192.168.168.101" attrs="{'readonly': [('is_external_store', '=', False)]}"/>
+                            <field name="http_port" placeholder="6578" attrs="{'readonly': [('is_external_store', '=', False)]}"/>
+                            <field name="https_proxy" placeholder="192.168.168.101" attrs="{'readonly': [('is_external_store', '=', False)]}"/>
+                            <field name="https_port" placeholder="3128" attrs="{'readonly': [('is_external_store', '=', False)]}"/>
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//page[@name='credentials']" position='inside'>
+                    <group attrs="{'invisible': [('site', '!=', 'ebay')]}" string="eBay Credentials">
+                        <field name="ebay_domain"/>
+                        <field name="ebay_site_id"/>
+                        <field name="ebay_dev_id"/>
+                        <field name="ebay_app_id"/>
+                        <field name="ebay_cert_id"/>
+                        <field name="ebay_token"/>
+                        <field name="ebay_last_record_number"/>
+                    </group>
+                </xpath>
+                <xpath expr="//notebook" position='inside'>
+                    <page string="eBay Listing Settings" attrs="{'invisible': [('site', '!=', 'ebay')]}">
+                        <separator string="Title"/>
+                        <field name="ebay_title"/>
+                        <separator string="Description"/>
+                        <field name="ebay_description"/>
+                        <group string="Other Listing Settings">
+                            <group>
+                                <field name="ebay_paypal"/>
+                                <field name="ebay_brand"/>
+                                <field name="ebay_dispatch_time"/>
+                                <field name="ebay_use_tax_table"/>
+                                <field name="ebay_warranty"/>
+                            </group>
+                            <group>
+                                <field name="ebay_returns_accepted_option"/>
+                                <field name="ebay_refund_option"/>
+                                <field name="ebay_returns_within_option"/>
+                                <field name="ebay_shipping_cost_paid_by"/>
+                                <field name="ebay_return_description"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="eBay Inventory Control" attrs="{'invisible': [('site', '!=', 'ebay')]}">
+                        <separator string="Pricing Formula"/>
+                        <field name="ebay_pricing_formula"/>
+                        <group>
+                            <group>
+                                <field name="ebay_min_quantity"/>
+                                <field name="ebay_max_quantity"/>
+                            </group>
+                            <group>
+                                <field name="ebay_rate"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_ebay_revise_listing_form" model="ir.ui.view">
+            <field name="name">view.ebay.revise.listing.form</field>
+            <field name="inherit_id" ref="sale_store.view_product_listing_form"/>
+            <field name="model">product.listing</field>
+            <field name="arch" type="xml">
+                <button name="button_end_item" position="before">
+                    <!--<button name="button_ebay_revise_item" type='object' string='Revise Item' class="oe_highlight" attrs="{'invisible': [('site', '!=', 'ebay')]}"/>-->
+                    <button name="button_ebay_revise_item" type='object' string='Revise Item' class="oe_highlight"/>
+                </button>
+            </field>
+        </record>
+
+    </data>
+</odoo>

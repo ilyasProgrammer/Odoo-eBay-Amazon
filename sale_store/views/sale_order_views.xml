@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="store_sale_view_order_form" model="ir.ui.view">
+            <field name="name">store.sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <button name="action_quotation_send" position="before">
+                    <button name="button_split_kits" string="Split Kits" type="object" class="oe_highlight" attrs="{'invisible': [('has_kit', '=', False)]}"/>
+                    <field name="has_kit" invisible="1"/>
+                </button>
+                <xpath expr="//sheet/group[1]/group[1]" position="inside">
+                    <field name="date_order"/>
+                    <field name="confirmation_date"/>
+                </xpath>
+                <xpath expr="//sheet/group[1]/group[2]" position="replace">
+                    <group>
+                        <field name="store_id"/>
+                        <field name="web_order_id"/>
+                        <field name="order_url" widget="url"/>
+                        <field name="ebay_sales_record_number"/>
+                        <field name="currency_id" invisible="1"/>
+                    </group>
+                </xpath>
+                <xpath expr="//notebook/page[1]" position="after">
+                    <page string="Kit Order Lines" attrs="{'invisible': [('kit_line_ids', '=', [])]}">
+                        <field name="kit_line_ids">
+                            <tree>
+                                <field name="product_id"/>
+                                <field name="product_qty"/>
+                                <field name="price_unit"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+                <xpath expr="//notebook/page[1]" position="after">
+                    <page string="Related Orders" attrs="{'invisible': [('related_ids', '=', [])]}">
+                        <field name="related_ids"/>
+                    </page>
+                </xpath>
+                <xpath expr="//field[@name='order_line']//form//group/group[2]" position="inside">
+                    <field name="web_orderline_id" />
+                </xpath>
+                <xpath expr="//field[@name='order_line']//form//group/group[2]" position="inside">
+                    <field name="kit_line_id" attrs="{'invisible': [('kit_line_id', '=', False)]}"/>
+                </xpath>
+                <group name="sales_person" position="inside">
+                    <field name="pricelist_id" groups="product.group_sale_pricelist"/>
+                    <field name="payment_term_id"/>
+                </group>
+            </field>
+        </record>
+
+        <record id="store_sale_view_with_shipment_order_form" model="ir.ui.view">
+            <field name="name">store.sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock" />
+            <field name="arch" type="xml">
+                <field name="warehouse_id" position="replace">
+                    <field name="has_dimension_warning" invisible="1"/>
+                    <field name="show_btn" invisible="1"/>
+                    <field name="warehouse_id"/>
+                    <label for="length" string="L * W * H"/>
+                    <div class="o_row">
+                        <field name="length"/>
+                        <label string=" in. * "/>
+                        <field name="width" class="oe_inline"/>
+                        <label string=" in. * "/>
+                        <field name="height" class="oe_inline"/>
+                        <label string=" in."/>
+                    </div>
+                    <label for="weight"/>
+                    <div class="o_row">
+                        <field name="weight"/>
+                        <label string=" lbs"/>
+                        <button name="button_set_dimension_from_first_order_line" string="Set dimension from first order line" type="object" class="oe_inline fa fa-arrow-right oe_link" attrs="{'invisible':['|',('has_dimension_warning','=', False),('state','in',('done'))]}"/>
+                        <button name="update_autoplus" string="Update Autoplus" type="object" attrs="{'invisible': [('show_btn', '=', False)]}"/>
+                    </div>
+                    <field name="service_id"/>
+                    <field name="carrier_id" readonly="1"/>
+                    <field name="package_id"/>
+                    <field name='rate' widget='monetary' class="oe_inline" options="{'currency_field': 'currency_id'}" attrs="{'invisible': [('service_id','=', False)]}"/>
+                    <field name="exceeds_limits"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_store_order_tree" model="ir.ui.view">
+            <field name="name">store.sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="priority">3</field>
+            <field name="inherit_id" ref="sale.view_order_tree" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="store_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_store_quotation_tree" model="ir.ui.view">
+            <field name="name">store.sale.quotation.tree</field>
+            <field name="model">sale.order</field>
+            <field name="priority">3</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="store_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_sale_order_store_search" model="ir.ui.view">
+            <field name="name">view.sale.order.store.search</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="web_order_id"/>
+                    <field name="ebay_sales_record_number"/>
+                    <field name="store_id"/>
+                </field>
+            </field>
+        </record>
+
+        <menuitem id="menu_sales_tools" name="Tools" parent="sales_team.menu_base_partner" sequence="10"/>
+        <menuitem id="menu_sales_bulk_list" name="Bulk Listing" parent="menu_sales_tools" sequence="100" action="action_store_bulk_listing"/>
+        <menuitem id="menu_sales_get_order" name="Get Order by Order ID" parent="menu_sales_tools" sequence="50" action="action_get_order_by_order_id"/>
+    </data>
+</odoo>

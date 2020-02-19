@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_warehouse_with_returns_type_form" model="ir.ui.view">
+            <field name="name">Stock Warehouse With Returns Type</field>
+            <field name="model">stock.warehouse</field>
+            <field name="inherit_id" ref="stock.view_warehouse"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='default_resupply_wh_id']" position="before">
+                    <field name="process_returns" />
+                </xpath>
+                <xpath expr="//field[@name='out_type_id']" position="after">
+                    <field name="return_type_id" readonly="True"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

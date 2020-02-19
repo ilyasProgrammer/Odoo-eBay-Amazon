@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="purchase.email_template_edi_purchase" model="mail.template">
+            <field name="report_template" eval="False"/>
+        </record>
+
+        <record id="purchase.email_template_edi_purchase_done" model="mail.template">
+            <field name="report_template" eval="False"/>
+        </record>
+    </data>
+</odoo>

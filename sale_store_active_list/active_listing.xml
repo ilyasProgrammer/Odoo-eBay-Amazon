@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_cron_ebay_get_duplicate_listing" model="ir.cron">
+            <field name="name">[eBay] Get Duplicate Listing</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store.active.listing'" name="model"/>
+            <field eval="False" name="active"/>
+            <field name="priority">100</field>
+            <field eval="'ir_cron_ebay_get_duplicate_listing'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+    </data>
+</odoo>

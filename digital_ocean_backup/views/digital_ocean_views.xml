@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_digital_ocean_form" model="ir.ui.view">
+        <field name="name">digital.ocean.form</field>
+        <field name="model">digital.ocean</field>
+        <field name="arch" type="xml">
+            <form string="Digital Ocean">
+                <header>
+                    <button name="get_droplets" string="Get Droplets" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="token_name"/>
+                            <field name="token_id"/>
+                        </group>
+                    </group>
+                    <group string="Droplets">
+                        <field name="droplet_line_ids" nolabel="1">
+                            <tree>
+                                <field name="droplet_id"/>
+                                <field name="droplet_name"/>
+                                <field name="droplet_size"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_digital_ocean" model="ir.actions.act_window">
+        <field name="name">Digital Ocean Config</field>
+        <field name="res_model">digital.ocean</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_digital_ocean_droplet_form" model="ir.ui.view">
+        <field name="name">digital.ocean.droplet.form</field>
+        <field name="model">digital.ocean.droplet</field>
+        <field name="arch" type="xml">
+            <form string="Digital Ocean Droplet">
+                <header>
+                    <button name="create_snapshot" string="Create Snapshot" type="object" class="oe_highlight"/>
+                    <button name="update_snapshot" string="Update Snapshot" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="droplet_name" placeholder="Droplet Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="digitalocean_token"/>
+                            <field name="droplet_id"/>
+                            <field name="droplet_size"/>
+                            <field name="droplet_region"/>
+                            <field name="droplet_status"/>
+                            <field name="droplet_image_distribution"/>
+                            <field name="droplet_image_name"/>
+                            <field name="autosnapshot"/>
+                            <field name="cron_id" attrs="{'invisible': [('autosnapshot', '=', False)]}"/>
+                        </group>
+                    </group>
+                    <group string="Snapshots">
+                        <field name="snapshot_line_ids" nolabel="1">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_digital_ocean_droplet_tree" model="ir.ui.view">
+        <field name="name">digital.ocean.droplet.tree</field>
+        <field name="model">digital.ocean.droplet</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="droplet_name"/>
+                <field name="droplet_id"/>
+                <field name="droplet_size"/>
+                <field name="droplet_status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_digital_ocean_droplet" model="ir.actions.act_window">
+        <field name="name">Digital Ocean Droplets</field>
+        <field name="res_model">digital.ocean.droplet</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.cron" id="autosnapshot_digital_ocean_cron">
+        <field name="name">Auto Snapshot Digital Ocean</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model" eval="'digital.ocean.droplet'"/>
+        <field name="function" eval="'run'"/>
+        <field name="args" eval="'()'" />
+    </record>
+
+    <menuitem
+            id="menu_digital_ocean_root"
+            name="Digital Ocean Integration"
+            parent="base.menu_administration"
+            sequence="20"
+            groups="base.group_system"/>
+
+    <menuitem
+            id="menu_digital_ocean"
+            action="action_digital_ocean"
+            name="Configuration"
+            parent="menu_digital_ocean_root"
+            sequence="100"
+            groups="base.group_system"/>
+
+    <menuitem
+            id="menu_digital_ocean_droplet"
+            action="action_digital_ocean_droplet"
+            name="Droplets"
+            parent="menu_digital_ocean_root"
+            sequence="80"
+            groups="base.group_system"/>
+</odoo>

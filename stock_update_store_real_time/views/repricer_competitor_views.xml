@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_repricer_competitor" model="ir.actions.act_window">
+            <field name="name">eBay Repricer Competitors</field>
+            <field name="res_model">repricer.competitor</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_repricer_competitor_tree" model="ir.ui.view">
+            <field name="name">view.repricer.competitor.tree</field>
+            <field name="model">repricer.competitor</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="item_id"/>
+                    <field name="product_tmpl_id"/>
+                    <field name="seller"/>
+                    <field name="price"/>
+                    <field name="price_write_date"/>
+                    <field name="quantity_sold"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_repricer_competitor_form" model="ir.ui.view">
+            <field name="name">view.repricer.competitor.form</field>
+            <field name="model">repricer.competitor</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="button_deactivate" type="object" string="Deactivate" states="active"/>
+                        <button name="button_activate" type="object" string="Activate" states="inactive" class="btn-primary"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box"/>
+                        <group>
+                            <group>
+                                <field name="item_id"/>
+                                <field name="title"/>
+                                <field name="product_tmpl_id"/>
+                                <field name="seller"/>
+                                <field name="quantity_sold"/>
+                            </group>
+                            <group>
+                                <field name="price"/>
+                                <field name="previous_price"/>
+                                <field name="quantity"/>
+                                <field name="price_write_date"/>
+                                <field name="sequence"/>
+                                <field name="listing_url" widget="listing_url"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_repricer_competitor_search" model="ir.ui.view">
+            <field name="name">view.repricer.competitor.search</field>
+            <field name="model">repricer.competitor</field>
+            <field name="arch" type="xml">
+                <search string="eBay Competitors">
+                    <field name="item_id"/>
+                    <field name="product_tmpl_id"/>
+                    <field name="seller"/>
+                    <filter string="Active" name="active" domain="[('state', '=', 'active')]"/>
+                    <filter string="Inactive" name="inactive" domain="[('state', '=', 'inactive')]"/>
+               </search>
+            </field>
+        </record>
+
+        <menuitem id="menu_repricer_competitor" parent="menu_repricer_root" sequence="45" name="eBay Competitors" action="action_repricer_competitor" groups="base.group_user"/>
+    </data>
+</odoo>

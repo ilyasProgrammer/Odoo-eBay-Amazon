@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_add_listing_ext" model="ir.ui.view">
+        <field name="name">sale.store.add.listing ext</field>
+        <field name="model">sale.store.add.listing</field>
+        <field name="inherit_id" ref="sale_store.view_add_listing"/>
+        <field name="arch" type="xml">
+            <field name="site" position="after">
+                <field name="template_id"/>
+            </field>
+            <field name="store_id" position="replace">
+                <field name="store_id" invisible="1"/>
+            </field>
+            <field name="ebay_category_id" position="replace">
+                <field name="ebay_category_id" invisible="0"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="store_sale_view_order_form_paypal_fee_inh" model="ir.ui.view">
+        <field name="name">sale.order.form.paypalfee.inh</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_store.store_sale_view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="ebay_sales_record_number" position="after">
+                <field name="paypal_fee"/>
+                <field name="paypal_transaction"/>
+            </field>
+        </field>
+    </record>
+</odoo>

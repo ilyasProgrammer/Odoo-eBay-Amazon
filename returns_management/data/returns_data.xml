@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Sequences for sale.order -->
+        <record id="seq_sale_retrun" model="ir.sequence">
+            <field name="name">Sales Returns</field>
+            <field name="code">sale.return</field>
+            <field name="prefix">RET</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="process_amazon_returns_message" model="ir.actions.server">
+            <field name="name">Process Amazon Returns Message</field>
+            <field name="model_id" ref="model_sale_store_amz_return_message"/>
+            <field name="condition">True</field>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">record.process_message()</field>
+        </record>
+
+        <record id="seq_stock_quick_return" model="ir.sequence">
+            <field name="name">Quick Return</field>
+            <field name="code">stock.quick.return</field>
+            <field name="prefix">WHQRET</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_wh_return" model="ir.sequence">
+            <field name="name">WH Returns</field>
+            <field name="code">wh.return.picking.type</field>
+            <field name="prefix">WH/RET/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+    <data noupdate="0">
+        <record id="seq_replacement" model="ir.sequence">
+            <field name="name">Replacement seq</field>
+            <field name="code">replacement.seq</field>
+            <field name="prefix">REPL</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="replacement_picking_type" model="stock.picking.type">
+            <field name="name">Replacement</field>
+            <field name="code">outgoing</field>
+            <field name="sequence_id" ref="seq_replacement"/>
+            <field name="warehouse_id" search="[('code','=','WH')]" model="stock.warehouse"/>
+            <field name="default_location_src_id" search="[('name','=','Output')]" model="stock.location"/>
+            <field name="default_location_dest_id" search="[('barcode','=','customers')]" model="stock.location"/>
+        </record>
+    </data>
+    <data noupdate="0">
+        <record id="returns_transit_location" model="stock.location">
+            <field name="name">Returns Transit</field>
+            <field name="barcode">returns-transit</field>
+            <field name="location_id">11</field>
+            <field name="location_type">internal</field>
+            <field name="scrap_location">True</field>
+        </record>
+    </data>
+</odoo>

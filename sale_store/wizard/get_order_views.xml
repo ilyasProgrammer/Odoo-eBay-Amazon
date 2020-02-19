@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="view_get_order_by_order_id" model="ir.ui.view">
+        <field name="name">view.get.order.by.order.id</field>
+        <field name="model">sale.store.get.order</field>
+        <field name="arch" type="xml">
+            <form string="Get Order by Order ID">
+                <group>
+                    <group>
+                        <field name="store_id"/>
+                        <field name="web_order_id"/>
+                    </group>
+                </group>
+                <footer>
+                  <button name="get_order" type="object" string="Get Order" class="oe_highlight"/>
+                  or
+                  <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_get_order_by_order_id" model="ir.actions.act_window">
+        <field name="name">Get Order by Order ID</field>
+        <field name="res_model">sale.store.get.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_get_order_by_order_id"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

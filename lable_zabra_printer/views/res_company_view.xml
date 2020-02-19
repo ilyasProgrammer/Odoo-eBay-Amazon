@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <record id="company_form_zabra" model="ir.ui.view">
+        <field name="name">res.company.form.zabra.inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook[last()]" position="inside">
+                <page string="Printer Configuration" name="printer_config">
+                    <group>
+                        <field name="product_printer"/>
+                        <field name="location_printer"/>
+                        <field name="shipping_printer"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

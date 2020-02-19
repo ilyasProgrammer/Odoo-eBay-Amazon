@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+       <template id="assets_backend" name="quick_receipt_barcode assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/stock_quick_receipt/static/src/js/quick_receipt_barcode.js"></script>
+                <script type="text/javascript" src="/stock_quick_receipt/static/src/js/quick_transfer_barcode.js"></script>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

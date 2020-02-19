@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_shipment_from_vendor_user,shipment.from.vendor.user,model_sale_shipment_from_vendor,base.group_user,1,1,1,1
+access_tracking_line_user,tracking.line.user,model_stock_picking_tracking_line,stock.group_stock_user,1,1,1,1

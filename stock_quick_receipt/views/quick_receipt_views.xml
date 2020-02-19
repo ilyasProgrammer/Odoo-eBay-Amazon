@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_stock_quick_receipt" model="ir.actions.act_window">
+            <field name="name">Quick Receipts</field>
+            <field name="res_model">stock.quick.receipt</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_stock_quick_receipt_tree" model="ir.ui.view">
+            <field name="name">Quick Receipts</field>
+            <field name="model">stock.quick.receipt</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="pick_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_stock_quick_receipt_form" model="ir.ui.view">
+            <field name="name">Quick Receipts</field>
+            <field name="model">stock.quick.receipt</field>
+            <field name="arch" type="xml">
+                <form string="Quick Receipts">
+                    <header>
+                        <button name="button_process" string="Process" type="object" class="btn-primary" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                        <button name="button_reset" string="Reset" type="object" attrs="{'invisible': [('state', '!=', 'processed')]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,processed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="pick_id"/>
+                            </group>
+                            <group>
+                                <field name="scanned_code" readonly="1"/>
+                                <field name="total_scanned_qty"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Products">
+                                <field name="receipt_line_ids">
+                                    <tree editable="bottom">
+                                        <field name="scanned_code"/>
+                                        <field name="quantity"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <field name="_barcode_scanned" widget="quick_receipts_barcode_handler"/>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="menu_quick_receipts" name="Quick Receipts" parent="stock.menu_stock_warehouse_mgmt" sequence="3" action="action_stock_quick_receipt" groups="stock.group_stock_user"/>
+    </data>
+</odoo>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_shipment_from_vendor" model="ir.actions.act_window">
+            <field name="name">Vendor Shipments</field>
+            <field name="res_model">sale.shipment.from.vendor</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Manage shipments from vendors in this menu.
+              </p>
+            </field>
+        </record>
+
+        <record id="view_shipment_from_vendor_tree" model="ir.ui.view">
+            <field name="name">view.stock.picking.shipment.tree</field>
+            <field name="model">sale.shipment.from.vendor</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="sale_id"/>
+                    <field name="store_id"/>
+                    <field name="carrier_id"/>
+                    <field name="service_id"/>
+                    <field name="tracking_number"/>
+                    <field name="shipping_state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_stock_picking_shipment_form" model="ir.ui.view">
+            <field name="name">view.stock.picking.shipment.form</field>
+            <field name="model">sale.shipment.from.vendor</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_mark_as_in_transit" string="Mark as In Transit" type="object" class="btn-primary" attrs="{'invisible': [('shipping_state', '!=', 'waiting_shipment')]}"/>
+                        <button name="action_mark_as_done" string="Mark as Done" type="object" class="btn-primary" attrs="{'invisible': [('shipping_state', '!=', 'in_transit')]}"/>
+                        <button name="action_mark_as_failed" string="Mark as Failed" type="object" attrs="{'invisible': [('shipping_state', '!=', 'in_transit')]}"/>
+                        <button name="action_reset_to_waiting_shipment" string="Reset" type="object" attrs="{'invisible': [('shipping_state', 'not in', ['failed','done'])]}"/>
+                        <field name="shipping_state" widget="statusbar" statusbar_visible="waiting_shipment,in_transit,done" />
+                    </header>
+                    <sheet>
+                        <group string="Shipping Information">
+                            <group>
+                                <field name="sale_id"/>
+                                <field name="store_id"/>
+                                <field name="carrier_id"/>
+                                <field name="service_id"/>
+                                <field name="tracking_number"/>
+                                <field name="store_notified"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem
+            id="menu_shipment_from_vendor"
+            name="Vendor Shipments"
+            action="action_shipment_from_vendor"
+            parent="sales_team.menu_sales"
+            sequence="25"/>
+    </data>
+</odoo>

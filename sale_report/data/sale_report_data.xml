@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="crm.team" id="salesteam_quotation_exception">
+        <field name="name">Quotation With Exception</field>
+        <field name='use_opportunities' eval="False"/>
+        <field name='use_invoices' eval="False"/>
+        <field name='use_quotations' eval="False"/>
+    </record>
+</odoo>

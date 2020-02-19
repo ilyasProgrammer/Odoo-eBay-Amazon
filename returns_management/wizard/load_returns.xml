@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <record id="view_load_returns_form" model="ir.ui.view">
+        <field name="name">Load Returns</field>
+        <field name="model">load.returns.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Load Returns">
+                <h2>Select file to import</h2>
+                <field name="data_file" filename="filename" placeholder="Choose a file to import..."/>
+                <field name="filename" invisible="1"/>
+                <footer>
+                    <button name="import_file" string="_Import" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_load_returns" model="ir.actions.act_window">
+        <field name="name">Load Returns</field>
+        <field name="res_model">load.returns.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem name="Load Returns"
+            id="menu_load_returns_wizard"
+            parent="sale_store.menu_sales_tools"
+            action="action_load_returns" sequence="8"/>
+</data>
+</odoo>

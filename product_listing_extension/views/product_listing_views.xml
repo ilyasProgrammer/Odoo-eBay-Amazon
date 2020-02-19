@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_product_listing_extended_form" model="ir.ui.view">
+            <field name="name">view.product.listing.extended.form</field>
+            <field name="model">product.listing</field>
+            <field name="inherit_id" ref="sale_store.view_product_listing_form" />
+            <field name="arch" type="xml">
+                <button name="button_end_item" position="before">
+                    <button name="button_sync_item" type='object' string='Sync' class="oe_highlight" attrs="{'invisible': [('site', '!=', 'ebay')]}"/>
+                </button>
+                <xpath expr="//sheet" position="inside">
+                    <group col="4" colspan="2" >
+                        <!--<label for="price_explain" string="Price explanation:"/>-->
+                        <field name="price_explain" nolabel="1"/>
+                        <field name="price_history" nolabel="1"/>
+                    </group>
+                </xpath>
+                <xpath expr="//group/group" position="after">
+                    <group>
+                        <field name="custom_label" attrs="{'invisible': [('site', '!=', 'ebay')]}"/>
+                        <field name="current_price"/>
+                        <field name="previous_price"/>
+                        <field name="keep_manual"/>
+                        <field name="manual_price"/>
+                        <field name="current_min_price" attrs="{'invisible': [('site', '!=', 'amz')]}"/>
+                        <field name="current_max_price" attrs="{'invisible': [('site', '!=', 'amz')]}"/>
+                        <field name="qty_sold" attrs="{'invisible': [('site', '!=', 'ebay')]}"/>
+                        <field name="title"/>
+                        <field name="asin" attrs="{'invisible': [('site', '!=', 'amz')]}"/>
+                        <field name="brand" attrs="{'invisible': [('site', '!=', 'amz')]}"/>
+                        <field name="listing_url" widget="listing_url"/>
+                    </group>
+                </xpath>
+                <field name="listing_url" position="after">
+                    <field name="dumping_percent"/>
+                    <field name="dumping_amount"/>
+                    <field name="min_store_qty"/>
+                    <field name="max_store_qty"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

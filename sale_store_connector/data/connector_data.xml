@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="missing_order_notification" model="mail.template">
+            <field name="name">Missing Order Notification</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="email_from"><![CDATA[Opsyst Admin <admin@opsyst.com>]]></field>
+            <field name="email_to">ajporlante@gmail.com</field>
+            <field name="subject"><![CDATA[ We have unprocessed orders! ]]></field>
+            <field name="body_html"><![CDATA[
+<style>
+td {
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+}
+table {
+    border-right:1px solid black;
+    border-bottom:1px solid black;
+}
+</style>
+
+<p>Please check the following orders:</p>
+<table cellpadding="0" cellspacing="0">
+    <tr>
+        <td width="160px"><strong>Store</strong></td>
+        <td width="160px"><strong>Order ID</strong></td>
+        <td width="200px"><strong>Customer Name</strong></td>
+    </tr>
+    % for store in ctx.get('stores'):
+        % for order in ctx.get('stores')[store]:
+            <tr>
+                <td>${store}</td>
+                <td>${order['order_id']}</td>
+                <td>${order['name']}</td>
+            </tr>
+        %endfor
+% endfor
+</table>
+]]></field>
+            <field name="user_signature" eval="False"/>
+        </record>
+
+        <record id="unmapped_listings_notification" model="mail.template">
+            <field name="name">Unmapped Listings Notification</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="email_from"><![CDATA[Opsyst Admin <admin@opsyst.com>]]></field>
+            <field name="email_to">ajporlante@gmail.com</field>
+            <field name="subject"><![CDATA[ Unmapped Listings ]]></field>
+            <field name="body_html"><![CDATA[
+<style>
+td {
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+}
+table {
+    border-right:1px solid black;
+    border-bottom:1px solid black;
+}
+</style>
+
+<p>The following listings are unmapped:</p>
+<table cellpadding="0" cellspacing="0">
+    <tr>
+        <td width="160px"><strong>Store</strong></td>
+        <td width="160px"><strong>Item ID</strong></td>
+    </tr>
+    % for listing in ctx.get('listings'):
+        <tr>
+            <td>${listing['store']}</td>
+            <td>${listing['item_id']}</td>
+        </tr>
+    % endfor
+</table>
+<p>Total unmapped listings: ${ctx.get('unmapped_listings_total')}</p>
+]]></field>
+            <field name="user_signature" eval="False"/>
+        </record>
+
+        <record id="stock_check_with_repricer_notification" model="mail.template">
+            <field name="name">Stock Check With Repricer Notification</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="email_from"><![CDATA[Opsyst Admin <admin@opsyst.com>]]></field>
+            <field name="email_to">ajporlante@gmail.com</field>
+            <field name="subject"><![CDATA[ ${ctx.get('subject')} ]]></field>
+            <field name="body_html"><![CDATA[
+<p>${ctx.get('content')}</p>
+]]></field>
+            <field name="user_signature" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

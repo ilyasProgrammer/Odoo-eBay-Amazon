@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sale_store.view_get_order_by_order_id" model="ir.ui.view">
+        <field name="name">view.get.order.by.order.id</field>
+        <field name="model">sale.store.get.order</field>
+        <field name="arch" type="xml">
+            <form string="Get Order by Order ID">
+                <group>
+                    <group>
+                        <field name="store_id"/>
+                        <field name="site" invisible="1"/>
+                        <!--<field name="web_order_id" attrs="{'invisible': [('site', '!=', 'ebay')]}"/>-->
+                        <field name="web_order_id" attrs="{'invisible': [('site', 'not in', ['ebay','amz'])]}"/>
+                        <field name="buyer_email_address" attrs="{'invisible': [('site', '!=', 'amz')]}"/>
+                        <field name="send_feedback_request" attrs="{'invisible': [('site', '!=', 'amz')]}"/>
+                        <field name="created_before" attrs="{'invisible': [('site', '!=', 'amz')]}"/>
+                    </group>
+                </group>
+                <footer>
+                  <button name="get_order" type="object" string="Get Order" class="oe_highlight"/>
+                  or
+                  <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="delete_repeated_price_history" model="ir.cron">
+        <field name="name">Delete price history</field>
+        <field name="interval_number">3</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="model">product.price.history</field>
+        <field name="active">False</field>
+        <field name="function">delete_repeated_price_history</field>
+    </record>
+</odoo>

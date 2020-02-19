@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="email_template_amazon_message" model="mail.template">
+            <field name="name">Email Template - Amazon Messages</field>
+            <field name="model_id" ref="sale_store_messaging.model_amz_message"/>
+            <field name="email_from"><![CDATA[${ctx.get('email_from_name')} <${ctx.get('email_from')|safe}>]]></field>
+            <field name="email_to">${ctx.get('email_to')}</field>
+            <field name="subject"><![CDATA[Re: ${object.subject}]]></field>
+            <field name="body_html"><![CDATA[
+<p>Hi ${object.partner_id.name},</p>
+
+<p>Best regards,</p>
+<p><b>${ctx.get('email_from_name')}</b></p>
+]]></field>
+        </record>
+    </data>
+</odoo>

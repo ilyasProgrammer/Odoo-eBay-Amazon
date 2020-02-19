@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_update_shipping_template_wizard_form" model="ir.ui.view">
+            <field name="name">Update Shipping Template</field>
+            <field name="model">product.update.shipping.template.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Update Shipping Template">
+                    <group>
+                        <field name="title"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="listing_id" invisible="1"/>
+                            <field name="store_id" invisible="1"/>
+                            <field name="shipping_template_id" domain="[('store_id', '=', store_id)]"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="button_update_shipping_template" string="Update" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+         <record id="action_update_shipping_template_wizard" model="ir.actions.act_window">
+            <field name="name">Update Shipping Template</field>
+            <field name="res_model">product.update.shipping.template.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+         </record>
+
+    </data>
+</odoo>

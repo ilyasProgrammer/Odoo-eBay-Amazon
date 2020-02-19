@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_cron_store_get_my_messages" model="ir.cron">
+            <field name="name">[eBay] Get My Messages</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field name="active" eval="False"/>
+            <field name="priority">404</field>
+            <field name="model" eval="'sale.store.ebay.message'"/>
+            <field name="function" eval="'cron_ebay_get_my_messages'"/>
+            <field eval="(10,)" name="args"/>
+        </record>
+    </data>
+</odoo>

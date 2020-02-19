@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_lossy_dnrl_wizard" model="ir.ui.view">
+            <field name="name">view.lossy.dnrl.form</field>
+            <field name="model">lossy.dnrl.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Lossy Do Not Reprice Listings MAPM">
+                    <footer>
+                      <button name="button_download_report" type="object" string="Download Report" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--ACTIONS-->
+        <record id="action_lossy_dnrl_wizard" model="ir.actions.act_window">
+            <field name="name">Lossy Do Not Reprice Listings MAPM</field>
+            <field name="res_model">lossy.dnrl.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>
+

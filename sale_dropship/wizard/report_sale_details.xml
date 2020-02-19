@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="csv_output_view" model="ir.ui.view">
+        <field name="name">CSV Output</field>
+        <field name="model">output</field>
+        <field name="arch" type="xml">
+            <form string="CSV Output">
+                <group>
+                    <field name="name" invisible="1" />
+                    <h1>
+                        <field name="csv_output" filename="name" />
+                    </h1>
+                </group>
+                <footer>
+                    <button special="cancel" string="_Close" class="oe_link" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_report_sale_details_wizard" model="ir.ui.view">
+        <field name="name">view.report.sale.details.wizard</field>
+        <field name="model">report.sale.details</field>
+        <field name="arch" type="xml">
+            <form string="Sale Details">
+                <h2>Enter a range of SO to print report</h2>
+                <group>
+                    <group>
+                        <field name="from_so" placeholder="SO0001"/>
+                    </group>
+                    <group>
+                        <field name="to_so" placeholder="SO0005"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="print_report" string="Print" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_report_sale_details_wizard" model="ir.actions.act_window">
+        <field name="name">Sale Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">report.sale.details</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_report_sale_details_wizard"/>
+    </record>
+    <menuitem name="Sale Details"
+            id="report_sale_details_wizard"
+            parent="sales_team.menu_sale_report"
+            action="action_report_sale_details_wizard"/>
+</odoo>

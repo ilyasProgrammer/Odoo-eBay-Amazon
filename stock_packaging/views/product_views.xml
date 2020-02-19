@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_template_form_with_pacakaging" model="ir.ui.view">
+            <field name="name">product.template.form.with.packaging</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="sale_store.custom_view_template_property_form"/>
+            <field name="arch" type="xml">
+                <group name="group_lots_and_weight" position="inside">
+                    <field name="no_packaging"/>
+                    <field name="packaging_product_id" attrs="{'invisible': [('no_packaging', '=', True)]}"/>
+                </group>
+                <notebook position="inside">
+                    <page name="Boxes" string="Boxes">
+                        <field name="boxes_ids">
+                            <tree>
+                                <field name="name"/>
+                                <field name="box_id"/>
+                                <field name="qty"/>
+                                <field name="comment"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record id="product_template_form_with_pacakaging_check_box" model="ir.ui.view">
+            <field name="name">product.template.form.with.packaging.check.box</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <div name="options" position="inside">
+                    <div>
+                        <field name="is_packaging_product"/>
+                        <label for="is_packaging_product"/>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

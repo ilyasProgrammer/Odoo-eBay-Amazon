@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_import_from_file_po_form" model="ir.ui.view">
+            <field name="name">view.import.file.po.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Uploads" name="uploads">
+                        <separator string="Import Order Lines from File"/>
+                        <div><p>Required columns: Product, Quantity; Optional Columns: Unit Price, Vendor Code, Cu Ft Per Piece</p></div>
+                        <group>
+                            <group>
+                                <label for="import_file"/>
+                                <div class="o_row">
+                                    <field name="import_file" filename="import_filename"/>
+                                    <button name="button_import_lines_from_file" string="Import" type="object" class="oe_inline fa fa-arrow-right oe_link"/>
+                                </div>
+                                <field name="import_filename" invisible="1"/>
+                            </group>
+                            <group/>
+                        </group>
+                        <group>
+                            <field name="import_logs"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_sale_margin_wizard" model="ir.ui.view">
+            <field name="name">view.sale.margin.wizard.form</field>
+            <field name="model">sale.margin.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Sales Margins">
+                    <group>
+                        <group>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                            <field name="store"/>
+                            <field name="report_timezone"/>
+                        </group>
+                    </group>
+                    <footer>
+                      <button name="button_download_report" type="object" string="Download Report" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="view_sale_margin_ret_wizard" model="ir.ui.view">
+            <field name="name">view.sale.margin.ret.wizard.form</field>
+            <field name="model">sale.margin.returns.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Sales Margins with Returns">
+                    <group>
+                        <group>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                        </group>
+                    </group>
+                    <footer>
+                      <button name="button_download_report" type="object" string="Download Report" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="view_sale_margin_states_wizard" model="ir.ui.view">
+            <field name="name">view.sale.margin.states.wizard.form</field>
+            <field name="model">sale.margin.states.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Sales Margins by States">
+                    <group>
+                        <group>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                            <field name="store_id"/>
+                        </group>
+                    </group>
+                    <footer>
+                      <button name="button_download_report" type="object" string="Download Report" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="view_sale_margin_mapm_wizard" model="ir.ui.view">
+            <field name="name">view.sale.margin.mapm.wizard.form</field>
+            <field name="model">sale.margin.mapm.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Sales Margins MAPM">
+                    <group>
+                        <group>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                        </group>
+                    </group>
+                    <footer>
+                      <button name="button_download_report" type="object" string="Download Report" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="view_sale_margin_mapm_pbl_wizard" model="ir.ui.view">
+            <field name="name">view.sale.margin.mapm.pbl.wizard.form</field>
+            <field name="model">sale.margin.mapm.pbl.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Sales Margins MAPM PBL">
+                    <group>
+                        <group>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                        </group>
+                    </group>
+                    <footer>
+                      <button name="button_download_report" type="object" string="Download Report" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="view_sale_margin_grouped_wizard" model="ir.ui.view">
+            <field name="name">view.sale.margin.grouped.wizard.form</field>
+            <field name="model">sale.margin.grouped.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Sales Margins Grouped">
+                    <group>
+                        <group>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                        </group>
+                    </group>
+                    <footer>
+                      <button name="button_download_report" type="object" string="Download Report" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--ACTIONS-->
+        <record id="action_sales_margin_wizard" model="ir.actions.act_window">
+            <field name="name">Sales Margins</field>
+            <field name="res_model">sale.margin.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <record id="action_sales_margin_ret_wizard" model="ir.actions.act_window">
+            <field name="name">Sales Margins Returns</field>
+            <field name="res_model">sale.margin.returns.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <record id="action_sales_margin_states_wizard" model="ir.actions.act_window">
+            <field name="name">Sales Margins by States</field>
+            <field name="res_model">sale.margin.states.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <record id="action_sales_margin_mapm_wizard" model="ir.actions.act_window">
+            <field name="name">Sales Margins MAPM</field>
+            <field name="res_model">sale.margin.mapm.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <record id="action_sales_margin_mapm_pbl_wizard" model="ir.actions.act_window">
+            <field name="name">Sales Margins MAPM PBL</field>
+            <field name="res_model">sale.margin.mapm.pbl.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <record id="action_sales_margin_grouped_wizard" model="ir.actions.act_window">
+            <field name="name">Sales Margins Grouped</field>
+            <field name="res_model">sale.margin.grouped.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>
+

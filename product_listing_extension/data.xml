@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="cron_clear_price_history" model="ir.cron">
+            <field name="name">cron_clear_price_history</field>
+            <field name="model">product.listing</field>
+            <field name='interval_type'>days</field>
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+            <field name="function">cron_clear_price_history</field>
+            <field name="args">()</field>
+        </record>
+    </data>
+</odoo>

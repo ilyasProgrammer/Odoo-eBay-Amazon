@@ -1,0 +1,204 @@
+Service ( Ordering ) tns="LKQCorp.LKQIntegrationService"
+   Prefixes (5)
+      ns0 = "LKQCorp.LKQIntegrationService"
+      ns1 = "http://schemas.datacontract.org/2004/07/LKQIntegrationService.Core.Entities"
+      ns2 = "http://schemas.datacontract.org/2004/07/LKQIntegrationService.Core.Ordering.Entities"
+      ns3 = "http://schemas.microsoft.com/2003/10/Serialization/"
+      ns4 = "http://schemas.microsoft.com/2003/10/Serialization/Arrays"
+   Ports (1):
+      (BasicHttpBinding_Ordering.svc)
+         Methods (1):
+            CreateOrder(ns2:OrderingRequest request)
+         Types (108):
+            ns1:AccountNumberBusinessType
+            ns2:ArrayOfOrderLineItem
+            ns4:ArrayOfstring
+            ns1:CallResponse
+            ns1:CallResponseOfOrderingResponse4MCb5AyH
+            xs:ENTITIES
+            xs:ENTITY
+            xs:ID
+            xs:IDREF
+            xs:IDREFS
+            ns2:KeyTrackOrderInfo
+            xs:NCName
+            xs:NMTOKEN
+            xs:NMTOKENS
+            xs:NOTATION
+            xs:Name
+            ns2:OrderCopyMethodType
+            ns2:OrderLineItem
+            ns2:OrderPartType
+            ns2:OrderShipToAddress
+            ns2:OrderingRequest
+            ns2:OrderingResponse
+            xs:QName
+            ns2:ShippingAddressType
+            ns1:UserInformation
+            ns1:UserRequest
+            xs:all
+            xs:allNNI
+            xs:annotated
+            xs:anyType
+            xs:anyURI
+            xs:attribute
+            xs:attributeGroup
+            xs:attributeGroupRef
+            xs:base64Binary
+            xs:blockSet
+            xs:boolean
+            xs:byte
+            ns3:char
+            xs:complexRestrictionType
+            xs:complexType
+            xs:date
+            xs:dateTime
+            xs:decimal
+            xs:derivationControl
+            xs:derivationSet
+            xs:double
+            ns3:duration
+            xs:duration
+            xs:element
+            xs:explicitGroup
+            xs:extensionType
+            xs:facet
+            xs:float
+            xs:formChoice
+            xs:fullDerivationSet
+            xs:gDay
+            xs:gMonth
+            xs:gMonthDay
+            xs:gYear
+            xs:gYearMonth
+            xs:group
+            xs:groupRef
+            ns3:guid
+            xs:hexBinary
+            xs:int
+            xs:integer
+            xs:keybase
+            xs:language
+            xs:localComplexType
+            xs:localElement
+            xs:localSimpleType
+            xs:long
+            xs:namedAttributeGroup
+            xs:namedGroup
+            xs:namespaceList
+            xs:narrowMaxMin
+            xs:negativeInteger
+            xs:noFixedFacet
+            xs:nonNegativeInteger
+            xs:nonPositiveInteger
+            xs:normalizedString
+            xs:numFacet
+            xs:openAttrs
+            xs:positiveInteger
+            xs:public
+            xs:realGroup
+            xs:reducedDerivationControl
+            xs:restrictionType
+            xs:short
+            xs:simpleDerivationSet
+            xs:simpleExplicitGroup
+            xs:simpleExtensionType
+            xs:simpleRestrictionType
+            xs:simpleType
+            xs:string
+            xs:time
+            xs:token
+            xs:topLevelAttribute
+            xs:topLevelComplexType
+            xs:topLevelElement
+            xs:topLevelSimpleType
+            xs:typeDerivationControl
+            xs:unsignedByte
+            xs:unsignedInt
+            xs:unsignedLong
+            xs:unsignedShort
+            xs:wildcard
+
+(OrderShipToAddress){
+   AddressLine1 = None
+   AddressLine2 = None
+   AddressLine3 = None
+   City = None
+   Country = None
+   PhoneNumber = None
+   PostalCode = None
+   ShipToCode = None
+   ShipToCodeType = 
+      (ShippingAddressType){
+         value = None
+      }
+   ShipToName = None
+   ShipVia = None
+   StateProvince = None
+ }
+
+
+
+ (OrderingRequest){
+   UserRequestInfo = 
+      (UserInformation){
+         AccountNumber = None OK
+         BusinessTypeForAccountNumber = 
+            (AccountNumberBusinessType){
+               value = None OK
+            }
+         UserName = None OK
+         UserPassword = None OK
+         VerificationCode = None OK
+      }
+   AMPurchaseOrderNumber = None NA
+   ContactName = None NA
+   CopyMethod = 
+      (OrderCopyMethodType){
+         value = None OK
+      }
+   EmailAddress = None OK
+   FaxNumber = None NA
+   FreightCharges = None NA
+   KeyTrackInfo = 
+      (KeyTrackOrderInfo){
+         ClaimNumber = None
+         InsuranceCompanyName = None
+         KeyTrackRepairOrderNumber = None
+         VINNumber = None
+      } NA
+   LineItemTypes = 
+      (OrderPartType){
+         value = None
+      } OK
+   LineItems = 
+      (ArrayOfOrderLineItem){
+         OrderLineItem[] = <empty>
+      }
+   PartnerCode = None OK
+   RepairOrderNumber = None
+   SalvagePurchaseOrderNumber = None
+   ShipFromWarehouse = None
+   ShipToAddress = 
+      (OrderShipToAddress){
+         AddressLine1 = None
+         AddressLine2 = None
+         AddressLine3 = None
+         City = None
+         Country = None
+         PhoneNumber = None
+         PostalCode = None
+         ShipToCode = None
+         ShipToCodeType = 
+            (ShippingAddressType){
+               value = None
+            }
+         ShipToName = None
+         ShipVia = None
+         StateProvince = None
+      } OK
+   SpecialInstructions = None
+   WrittenBy = None
+ }
+
+

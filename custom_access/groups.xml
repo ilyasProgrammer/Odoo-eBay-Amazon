@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mapm" model="res.groups">
+        <field name="name">MAPM</field>
+        <field name="comment">MAPM</field>
+    </record>
+
+</odoo>

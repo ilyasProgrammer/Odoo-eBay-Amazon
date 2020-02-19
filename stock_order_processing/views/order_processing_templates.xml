@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+       <template id="assets_backend" name="stock_order_processing assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/stock_order_processing/static/src/js/order_processing.js"></script>
+                <link rel="stylesheet" href="/stock_order_processing/static/src/less/order_processing.less"/>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

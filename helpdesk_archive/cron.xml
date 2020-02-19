@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+<data noupdate="1">
+    <record id="archive_helpdesk_tickets" model="ir.cron">
+        <field name="name">[ODOO] Archive old helpdesk tickets</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="function">archive_old</field>
+    </record>
+</data>
+
+</openerp>

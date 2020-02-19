@@ -1,0 +1,96 @@
+.o_web_client 
+{
+    background-color: #ffffff !important;
+}
+
+.o_main_navbar
+{
+	background-color: #ffffff !important;
+	border: #ffffff !important;
+	margin-top: 25px;
+}
+
+.o_web_client > .o_application_switcher
+{
+	border-top-left-radius: 21px;
+    border-top-right-radius: 21px;
+    margin-left: 25px;
+    margin-right: 25px;
+    background: none !important;
+	background-color: #d5e1ec !important;
+}
+
+.o_web_client > .o_application_switcher >
+.o_application_switcher_scrollable >
+.o_apps
+{
+    padding-left: 15%;
+    padding-right: 15%;
+}
+.o_web_client > .o_application_switcher >
+.o_application_switcher_scrollable > .o_apps >
+.o_app
+{
+	width: 17.66% !important;
+	margin: 0px !important;
+	border-color: #d5e1ec !important;
+	border-radius: 0% !important;
+	background-color: #ffffff !important;
+}
+.o_caption{
+	color: black !important;
+	font-weight: none !important;
+	font-weight:lighter !important;
+}
+.fa-comments
+{
+	color: #acacac;
+}
+.fa-at
+{
+	color: #acacac;
+}
+.o_notification_counter
+{
+	color: black;
+}
+.oe_topbar_name
+{
+	color: black;
+	margin-left: -120px;
+    margin-right: 43px;
+    /*padding-right: 30px;*/
+}
+.o_mail_navbar_item.o_no_notification
+{
+	margin-right: 100px;
+}
+
+.caret
+{
+	color: #acacac;
+}
+.o_user_menu
+{
+	padding-right: 30px;
+}
+
+.o_main_navbar > ul > li > a:hover {
+    background-color: #ef9100;
+}
+.fa.o_menu_toggle.fa-th
+{
+    background-color: #ef9100;
+}
+.o_main_navbar > ul > li > a 
+{
+	color: black !important;
+}
+.o_main_navbar.o_menu_brand {
+{
+	color: black !important;
+}
+.fa.o_menu_toggle.fa-chevron-left
+{
+	background-color: #ef9100;
+}

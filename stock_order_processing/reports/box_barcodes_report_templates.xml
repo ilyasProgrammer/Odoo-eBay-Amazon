@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="stock_box_barcodes_report">
+        <t t-call="report.html_container">
+            <div class="page">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <h4><strong>Box Barcodes</strong></h4>
+                    </div>
+                </div>
+
+                <div class="row mt16">
+                    <div class="col-xs-6 text-center mb16">
+                        <img class="barcode" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', 'no-box', 400, 50)"/>
+                        <p><strong>NO BOX</strong></p>
+                    </div>
+                    <t t-foreach="product_tmpl_ids" t-as="p">
+                        <t t-if="p.barcode">
+                            <div class="col-xs-6 text-center mb16">
+                                <img class="barcode" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', p.barcode, 400, 50)"/>
+                                <p><t t-esc="p.name.upper()"/></p>
+                            </div>
+                        </t>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
+

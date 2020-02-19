@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="sale_store.service_usps_priority_mail_expresss" model="ship.carrier.service">
+            <field name="amz_fbm_code">USPS_PTP_EXP</field>
+        </record>
+
+        <record id="sale_store.service_fedex_ground" model="ship.carrier.service">
+            <field name="amz_fbm_code">FEDEX_PTP_GROUND</field>
+        </record>
+
+        <record id="sale_store.service_fedex_ground" model="ship.carrier.service">
+            <field name="amz_fbm_code">FEDEX_PTP_GROUND</field>
+        </record>
+
+        <record id="service_usps_priority_mail_express_flat_rate_envelope" model="ship.carrier.service">
+            <field name="name">USPS Priority Mail Express Flat Rate Envelope</field>
+            <field name="amz_fbm_code">USPS_PTP_EXP_FRE</field>
+            <field name="ss_code">usps_priority_mail_express_flat_rate_envelope</field>
+            <field name="carrier_id" ref="sale_store.carrier_usps"/>
+            <field name="package_id" ref="sale_store.package_usps_flat"/>
+            <field name="max_weight">0.81</field>
+            <field name="max_length">108</field>
+            <field name="max_length_plus_girth">108</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+        </record>
+    </data>
+</odoo>

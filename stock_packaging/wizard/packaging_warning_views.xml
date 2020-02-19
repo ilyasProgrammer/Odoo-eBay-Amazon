@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_packaging_warning_wizard" model="ir.ui.view">
+        <field name="name">view.packaging.warning.wizard</field>
+        <field name="model">stock.packaging.warning.wizard</field>
+        <field name="arch" type="xml">
+            <form string="No Packaging Specified">
+                <group>
+                    <p>
+                        Do you wish to validate without packaging specified for this order?
+                    </p>
+                </group>
+                <footer>
+                    <button name="process" string="Proceed" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

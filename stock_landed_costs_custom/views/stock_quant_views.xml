@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="stock_quant_form_with_landed_cost" model="ir.ui.view">
+            <field name="name">stock.quant.form.with.landed.cost</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_form" />
+            <field name="arch" type="xml">
+                <form position="replace">
+                    <form string="Inventory Valuation" create="false" delete="false">
+                        <sheet>
+                            <group>
+                                <group>
+                                    <field name="product_id" readonly="1"/>
+                                    <field name="qty" readonly="1"/>
+                                    <field name="product_uom_id" groups="product.group_uom" readonly="1"/>
+                                    <field name="lot_id" groups="stock.group_production_lot" readonly="1"/>
+                                    <field name="package_id" groups="stock.group_tracking_lot" readonly="1"/>
+                                    <field name="location_id" readonly="1"/>
+                                    <field name="owner_id" groups="stock.group_tracking_owner" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="in_date" readonly="1"/>
+                                    <field name="reservation_id" readonly="1"/>
+                                    <field name="propagated_from_id" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="product_cost"/>
+                                    <field name="landed_cost"/>
+                                    <field name="cost"/>
+                                    <field name="inventory_value" readonly="1"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="history_ids" string="History">
+                                    <tree readonly="1" default_order="date">
+                                        <field name="picking_id"/>
+                                        <button type="object" name="show_picking" icon="fa-list-alt" attrs="{'invisible': [('picking_id', '=', False)]}"/>
+                                        <field name="product_uom_qty"/>
+                                        <field name="date"/>
+                                        <field name="location_id" groups="stock.group_stock_multi_locations" string="Source Location Zone"/>
+                                        <field name="location_dest_id" groups="stock.group_stock_multi_locations" string="Destination Location Zone"/>
+                                        <field name="state" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </sheet>
+                    </form>
+                </form>
+            </field>
+        </record>
+
+        <record id="stock_quant_tree_with_landed_cost" model="ir.ui.view">
+            <field name="name">stock.quant.tree.with.landed.cost</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree" />
+            <field name="arch" type="xml">
+                <field name="inventory_value" position="before">
+                    <field name="product_cost"/>
+                    <field name="landed_cost"/>
+                    <field name="cost"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

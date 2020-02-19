@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+    <t t-name="order_processing_main_menu">
+        <div class="op_main_menu_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="op_header">
+                            <div class="processed_counter_container" />
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="op_header">
+                            <div class="prime_orders_counter_container" />
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="op_header">
+                            <div class="late_counter_container" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="op_pick_details_container"></div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="op_processed_counter">
+        <p>Processed Today</p>
+        <h2><t t-esc="widget.count"/></h2>
+    </t>
+
+    <t t-name="op_prime_orders_counter">
+        <p>Prime Orders</p>
+        <h2><t t-esc="widget.count"/></h2>
+    </t>
+
+    <t t-name="op_late_counter">
+        <p>Late Orders</p>
+        <h2><t t-esc="widget.count"/></h2>
+    </t>
+
+    <t t-name="op_pick_details">
+        <t t-if="widget.message">
+            <div t-att-class="'op_message ' + widget.message_type">
+                <h4 class="text-center"><t t-esc="widget.message"/></h4>
+            </div>
+        </t>
+        <t t-if="widget.display_missing_rate_error">
+            <div class="op_message error">
+                <h4 class="text-center">Please get shipping rate first!</h4>
+            </div>
+        </t>
+        <t t-if="widget.display_margin_warning &amp;&amp; !widget.bypass_margin_warning">
+            <div class="op_message warning">
+                <h4 class="text-center">
+                    This shipment will cause a loss of <t t-esc="widget.loss_amount"/>.
+                </h4>
+                <h4 class="text-center">
+                    <a href="#" class="bypass_margin_warning_button">Click here to bypass this warning.</a>
+                </h4>
+            </div>
+        </t>
+        <t t-if="widget.display_package_warning">
+            <div class="op_message warning">
+                <h4 class="text-center">
+                    Scan package barcode please
+                </h4>
+            </div>
+        </t>
+        <div class="op_pick_details">
+            <h1><t t-esc="widget.pick_data.name"/></h1>
+            <p t-if="widget.pick_data.store"><t t-esc="widget.pick_data.store"/></p>
+            <p t-if="widget.pick_data.order"><t t-esc="widget.pick_data.order"/></p>
+            <div class="row mt32" t-if="widget.pick_data.ops">
+                <t t-foreach="widget.pick_data.ops" t-as="o">
+                    <div class="col-md-6 mt16" t-att-data-op-id="o['id']">
+                        <h2><span id="op_qty_done"><t t-esc="o['qty_done']"/></span> / <t t-esc="o['qty_to_do']"/></h2>
+                        <p><t t-esc="o['product']"/></p>
+                        <p><t t-esc="o['mfg_label']"/></p>
+                        <p><t t-esc="o['location']"/></p>
+                    </div>
+                </t>
+            </div>
+            <div class="row mt32">
+                <div class="col-md-6">
+                    <p><strong>PACKAGING:</strong></p>
+                    <p t-if="widget.pick_data.packaging_not_required">No packaging required</p>
+                    <t t-foreach="widget.pick_data.packages" t-as="package">
+                        <p>(<t t-esc="package['quantity']"/>) <t t-esc="package['name']"/></p>
+                    </t>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>SHIPPING INFO:</strong></p>
+                    <p>
+                        <t t-if="widget.dimension_edit_mode">
+                            <input type="text" name="length" class="op-dim-input length" t-att-value="widget.pick_data.length"/> in. x
+                            <input type="text" name="width" class="op-dim-input width" t-att-value="widget.pick_data.width"/> in. x
+                            <input type="text" name="height" class="op-dim-input height" t-att-value="widget.pick_data.height"/> in. |
+                            <input type="text" name="weight" class="op-dim-input weight" t-att-value="widget.pick_data.weight"/> lbs.
+                            <button class="button_save_dimensions">Save</button>
+                        </t>
+                        <t t-if="!widget.dimension_edit_mode">
+                            <t t-esc="widget.pick_data.length"/> in. x
+                            <t t-esc="widget.pick_data.width"/> in. x
+                            <t t-esc="widget.pick_data.height"/> in. |
+                            <t t-esc="widget.pick_data.weight"/> lbs.
+                            <button class="button_edit_dimensions">Edit</button>
+                        </t>
+                    </p>
+                    <p>
+                        <t t-if="widget.pick_data.carrier"><t t-esc="widget.pick_data.carrier"/></t>
+                        <t t-if="widget.pick_data.service">| <t t-esc="widget.pick_data.service"/></t>
+                        <t t-if="widget.pick_data.rate > 0">| <t t-esc="widget.pick_data.rate"/></t>
+                    </p>
+                    <t t-if="widget.pick_data.tracking_number">
+                        <p><t t-esc="widget.pick_data.tracking_number"/></p>
+                    </t>
+                    <t t-foreach="widget.pick_data.tracking_lines" t-as="t">
+                        <p>
+                            <t t-if="t.tracking_number"><t t-esc="t.tracking_number"/></t>
+                        </p>
+                    </t>
+                </div>
+            </div>
+            <div class="row mt32">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <t t-if="widget.show_get_new_label">
+                        <button class="btn btn-default button_get_new_label">Get New Label</button>
+                    </t>
+                    <button class="btn btn-default button_open_order">Open Order</button>
+                    <button class="btn btn-default button_skip">Skip</button>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

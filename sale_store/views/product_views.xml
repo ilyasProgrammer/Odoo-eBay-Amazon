@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_product_listing" model="ir.actions.act_window">
+            <field name="name">Listings</field>
+            <field name="res_model">product.listing</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_product_listing_tree" model="ir.ui.view">
+            <field name="name">view.product.listing.tree</field>
+            <field name="model">product.listing</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_id"/>
+                    <field name="store_id"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_product_listing_form" model="ir.ui.view">
+            <field name="name">view.product.listing.form</field>
+            <field name="model">product.listing</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="button_end_item" type='object' string='End Item'/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="product_tmpl_id"/>
+                                <field name="store_id"/>
+                                <field name="name"/>
+                                <field name="site" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_product_listing_search" model="ir.ui.view">
+            <field name="name">view.product.listing.search</field>
+            <field name="model">product.listing</field>
+            <field name="arch" type="xml">
+                <search string="Store Listings">
+                    <field name="name"/>
+                    <field name="product_tmpl_id" string="Product"/>
+                    <field name="store_id"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="custom_product_template_form_view" model="ir.ui.view">
+            <field name="name">custom.product.template.from.base.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view" />
+            <field name="arch" type="xml">
+                <div class="oe_title" position="after">
+                    <group>
+                        <field name="mfg_label"/>
+                        <field name="short_description"/>
+                        <field name="long_description"/>
+                    </group>
+                </div>
+                <group name="group_standard_price" position="before">
+                    <group>
+                        <field name="part_type"/>
+                        <field name="ccc_part_type"/>
+                        <field name="grade"/>
+                        <field name="country_origin_id"/>
+                        <field name="date_created"/>
+                        <field name="flat_rate_hours"/>
+                        <field name="tariff_code"/>
+                        <field name="voc"/>
+                        <field name="inspection"/>
+                    </group>
+                </group>
+                <page name="general_information" position="inside">
+                    <separator string="Alternate Parts" />
+                    <field name="alternate_ids">
+                        <tree editable="bottom">
+                            <field name="mfg_name"/>
+                            <field name="part_number"/>
+                            <field name="partslink"/>
+                            <field name="standard_price"/>
+                            <field name="dropship_total_cost"/>
+                            <field name="list_price"/>
+                        </tree>
+                    </field>
+                </page>
+                <notebook position="inside">
+                    <page name="web" string="Web">
+                        <separator string="Listings"/>
+                        <field name="listing_ids">
+                            <tree>
+                                <field name="store_id"/>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record id="custom_product_template_only_form_view" model="ir.ui.view">
+            <field name="name">custom.product.template.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view" />
+            <field name="arch" type="xml">
+                <!--Remove internal reference field-->
+                <field name="default_code" position="replace">
+                </field>
+                <field name="barcode" position="before">
+                    <field name="part_number"/>
+                    <field name="partslink"/>
+                    <field name="inventory_id"/>
+                </field>
+                <field name="barcode" position="after">
+                    <field name="barcode_case"/>
+                    <field name="qty_case"/>
+                    <field name="barcode_inner_case"/>
+                    <field name="qty_inner_case"/>
+                    <field name="mfg_name"/>
+                    <field name="mfg_code"/>
+                    <field name="mfg_pop_code"/>
+                </field>
+                
+            </field>
+        </record>
+
+        <record id="custom_product_normal_form_view" model="ir.ui.view">
+            <field name="name">product.product.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <!--Remove internal reference field-->
+                <field name="default_code" position="replace">
+                </field>
+                <field name="barcode" position="before">
+                    <field name="part_number"/>
+                    <field name="partslink"/>
+                    <field name="inventory_id"/>
+                </field>
+                <field name="barcode" position="after">
+                    <field name="barcode_case"/>
+                    <field name="qty_case"/>
+                    <field name="barcode_inner_case"/>
+                    <field name="qty_inner_case"/>
+                    <field name="mfg_name"/>
+                    <field name="mfg_code" />
+                    <field name="mfg_pop_code"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="custom_product_variant_easy_edit_view" model="ir.ui.view">
+            <field name="name">custom.product.product.view.form.easy</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+            <field name="arch" type="xml">
+                <group name="weight" position="replace">
+                    <group name="weight">
+                        <group name="weight" string="Dimension">
+                            <label for="length"/> 
+                            <div class="o_row">
+                                <field name="length"/>
+                                <span>in.</span>
+                            </div>
+                            <label for="width"/> 
+                            <div class="o_row">
+                                <field name="width"/>
+                                <span>in.</span>
+                            </div>
+                            <label for="height"/> 
+                            <div class="o_row">
+                                <field name="height"/>
+                                <span>in.</span>
+                            </div>
+                            <label for="weight"/>
+                            <div class="o_row">
+                                <field name="weight"/>
+                                <span>lbs</span>
+                            </div>
+                        </group>
+                    </group>
+                </group>
+            </field>
+        </record>
+
+        <record id="custom_view_template_property_form" model="ir.ui.view">
+            <field name="name">product.template.stock.property.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.view_template_property_form"/>
+            <field name="arch" type="xml">
+                <group name="group_lots_and_weight" position="replace">
+                    <group name="group_lots_and_weight">
+                        <label for="length" attrs="{'invisible':['|', ('type', 'not in', ['product', 'consu']), ('product_variant_count', '&gt;', 1)]}"/>
+                        <div class="o_row" name="length" attrs="{'invisible':['|', ('type', 'not in', ['product', 'consu']), ('product_variant_count', '&gt;', 1)]}">
+                            <field name="length"/>
+                            <span>in.</span>
+                        </div>
+                        <label for="width" attrs="{'invisible':['|', ('type', 'not in', ['product', 'consu']), ('product_variant_count', '&gt;', 1)]}"/>
+                        <div class="o_row" name="width" attrs="{'invisible':['|', ('type', 'not in', ['product', 'consu']), ('product_variant_count', '&gt;', 1)]}">
+                            <field name="width"/>
+                            <span>in.</span>
+                        </div>
+                        <label for="height" attrs="{'invisible':['|', ('type', 'not in', ['product', 'consu']), ('product_variant_count', '&gt;', 1)]}"/>
+                        <div class="o_row" name="weight" attrs="{'invisible':['|', ('type', 'not in', ['product', 'consu']), ('product_variant_count', '&gt;', 1)]}">
+                            <field name="height"/>
+                            <span>in.</span>
+                        </div>
+                        <label for="weight" attrs="{'invisible':['|', ('type', 'not in', ['product', 'consu']), ('product_variant_count', '&gt;', 1)]}"/>
+                        <div class="o_row" name="weight" attrs="{'invisible':['|', ('type', 'not in', ['product', 'consu']), ('product_variant_count', '&gt;', 1)]}">
+                            <field name="weight"/>
+                            <span>lbs.</span>
+                            <button name="update_autoplus" string="Update Autoplus" type="object" class="oe_inline fa fa-arrow-right oe_link"/>
+                        </div>
+                        <field name="tracking" widget="radio" attrs="{'invisible':[('type', 'in', ['service', 'digital'])]}" groups="stock.group_production_lot"/>
+                    </group>
+                </group>
+            </field>
+        </record>
+
+        <record id="custom_product_template_search_view" model="ir.ui.view">
+            <field name="name">custom.product.template.search</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="part_number"/>
+                    <field name="mfg_code"/>
+                    <field name="partslink"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="custom_product_template_view" model="ir.ui.view">
+            <field name="name">custom.product.template.view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.product_template_form_view_procurement_button" />
+            <field name="arch" type="xml">
+                <field name="qty_available" position="after">
+                    <button type="object"
+                        name="action_open_quants"
+                        class="oe_stat_button" icon="fa-building-o">
+                        <field name="qty_onhand" widget="statinfo" string="Vendor Qty"/>
+                    </button>
+                </field>
+            </field>
+        </record>
+
+        <record id="server_action_product_product_sync_with_autoplus" model="ir.actions.server">
+            <field name="name">Sync with AutoPlus</field>
+            <field name="model_id" ref="product.model_product_product"/>
+            <field name="state">code</field>
+            <field name="code">
+                object.browse(object.env.context['active_ids']).button_sync_with_autoplus()
+            </field>
+        </record>
+
+        <record id="menu_product_product_sync_with_autoplus" model="ir.values">
+            <field name="model_id" ref="product.model_product_product" />
+            <field name="name">Sync with AutoPlus</field>
+            <field name="key2">client_action_multi</field>
+            <field name="key">action</field>
+            <field name="model">product.product</field>
+            <field name="value" eval="'ir.actions.server,' + str(ref('server_action_product_product_sync_with_autoplus'))" />
+        </record>
+
+        <record id="server_action_product_template_sync_with_autoplus" model="ir.actions.server">
+            <field name="name">Sync with AutoPlus</field>
+            <field name="model_id" ref="product.model_product_template"/>
+            <field name="state">code</field>
+            <field name="code">
+                object.browse(object.env.context['active_ids']).button_sync_with_autoplus()
+            </field>
+        </record>
+
+        <record id="menu_product_template_sync_with_autoplus" model="ir.values">
+            <field name="model_id" ref="product.model_product_template" />
+            <field name="name">Sync with AutoPlus</field>
+            <field name="key2">client_action_multi</field>
+            <field name="key">action</field>
+            <field name="model">product.template</field>
+            <field name="value" eval="'ir.actions.server,' + str(ref('server_action_product_template_sync_with_autoplus'))" />
+        </record>
+
+        <record id="product_template_push_to_store_view" model="ir.ui.view">
+            <field name="name">product.template.push.to.store.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.product_template_form_view_procurement_button"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="%(action_store_add_listing)d" type='action' string='Add Listing'/>
+                </xpath>
+            </field> 
+        </record>
+
+        <menuitem id="menu_product_listing" name="Store Listings" action="action_product_listing" parent="sales_team.menu_sales" sequence="30"/>
+    </data>
+</odoo>

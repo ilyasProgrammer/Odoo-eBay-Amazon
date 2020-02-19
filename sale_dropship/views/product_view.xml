@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_template_form_view_inherit_sale_dropship" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.sale.dropship</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <page name="general_information" position="after">
+                <page string="Purchase Information" name="purchase_information">
+                    <group>
+                        <group>
+                            <field name="alternate_cost"/>
+                            <field name="last_received"/>
+                            <field name="first_sold"/>
+                            <field name="last_sold"/>
+                            <field name="last_returned"/>
+                            <field name="part_min"/>
+                            <field name="part_max"/>
+                            <field name="primary_supplier_id"/>
+                            <field name="lost_sale"/>
+                            <field name="qty_defect_rate"/>
+                            <field name="inv_turns"/>
+                        </group>
+                        <group>
+                            <field name="current_month_sale_qty"/>
+                            <field name="current_month_sale_amt"/>
+                            <field name="current_year_sale_qty"/>
+                            <field name="current_year_sale_amt"/>
+                            <field name="last_month_sale_qty"/>
+                            <field name="last_month_sale_amt"/>
+                            <field name="last_year_sale_qty"/>
+                            <field name="last_year_sale_amt"/>
+                            <field name="past_year_qty1"/>
+                            <field name="past_year_qty2"/>
+                        </group>
+                    </group>
+                </page>
+                <page string="FORECASTING INFORMATION" name="forecasting_information">
+                    <group>
+                        <group>
+                            <field name="reorder"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>

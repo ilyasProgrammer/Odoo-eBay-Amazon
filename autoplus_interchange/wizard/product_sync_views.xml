@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <record id="view_product_sync_form" model="ir.ui.view">
+        <field name="name">Sync Products</field>
+        <field name="model">product.sync.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Sync AutoPlus Products">
+                <h4 attrs="{'invisible': [('for_vendor_pns', '=', True)]}">Import products from AutoPlus by LAD SKU's</h4>
+                <h4 attrs="{'invisible': [('for_vendor_pns', '!=', True)]}">Import products from AutoPlus by Vendor Part Numbers</h4>
+                <label for="for_vendor_pns">By Vendors SKUs</label>
+                <field name="for_vendor_pns"/>
+                <br/>
+                <label for="vendor_id"  attrs="{'invisible': [('for_vendor_pns', '!=', True)]}">Vendor</label>
+                <field name="vendor_id" attrs="{'invisible': [('for_vendor_pns', '!=', True)]}"/>
+                <br/>
+                <label for="vendor_pns" attrs="{'invisible': [('for_vendor_pns', '!=', True)]}">Vendor Part Numbers:</label>
+                <field name="vendor_pns" attrs="{'invisible': [('for_vendor_pns', '!=', True)]}"/>
+                <label for="lads" attrs="{'invisible': [('for_vendor_pns', '=', True)]}">LADs to import:</label>
+                <field name="lads"  attrs="{'invisible': [('for_vendor_pns', '=', True)]}" placeholder="02-1024-00848,02-1024-00245,02-1024-00634,02-13115-00016 ... "/>
+                <footer>
+                    <button name="button_sync_products" string="Sync Products" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sync_products" model="ir.actions.act_window">
+        <field name="name">Sync Products</field>
+        <field name="res_model">product.sync.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</data>
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <record id="view_stock_bulk_move_form" model="ir.ui.view">
+        <field name="name">Bulk Move</field>
+        <field name="model">stock.bulk.move</field>
+        <field name="arch" type="xml">
+            <form string="Bulk Move">
+                <sheet>
+                <group>
+                    <field name="source_location" placeholder="Press /A or /B for fast search"/>
+                    <field name="dest_location" placeholder="Press /A or /B for fast search"/>
+                    <field name="include_descendants"/>
+                </group>
+                <button name="load_stock" string="Load stock" type="object" class="oe_highlight" style="margin-right: 40px;"/>
+                <button name="uncheck_all" string="Uncheck all" type="object" class="oe_highlight"/>
+                <field name="lines" widget="one2many_list">
+                    <tree editable="top">
+                        <field name="marked" widget="checkbox"/>
+                        <field name="product_id"/>
+                        <field name="location_id"/>
+                        <field name="qty" class="oe_inline"/>
+                        <field name="quant"/>
+                    </tree>
+                </field>
+                <label for="pickings" name="Result pickings:" string="Result pickings:"/>
+                <field name="pickings" readonly="1"  create="false">
+                    <tree create="false">
+                        <field name="name"/>
+                        <field name="location_id"/>
+                        <field name="location_dest_id"/>
+                        <field name="create_date"/>
+                        <field name="state"/>
+                    </tree>
+                </field>
+                <footer>
+                    <button name="move_all_quants" type="object" string="Move marked" class="btn-primary"/>
+                    <button string="_Close" special="cancel" class="oe_link"/>
+                </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_stock_bulk_move" model="ir.actions.act_window">
+        <field name="name">Bulk Move</field>
+        <field name="res_model">stock.bulk.move</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_stock_bulk_move" name="Bulk Move" string="'Bulk Move"
+              parent="stock.menu_stock_warehouse_mgmt" sequence="99" action="action_stock_bulk_move"/>
+</data>
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_competition_demand_wizard" model="ir.ui.view">
+            <field name="name">view.competition.demand.wizard</field>
+            <field name="model">sale.competition.demand.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Competition Demand">
+                    <group>
+                        <group>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                            <field name="group_by"/>
+                        </group>
+                    </group>
+                    <footer>
+                      <button name="button_download_report" type="object" string="Download Report" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_competition_demand_wizard" model="ir.actions.act_window">
+            <field name="name">Competition Demand</field>
+            <field name="res_model">sale.competition.demand.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

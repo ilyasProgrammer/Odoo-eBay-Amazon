@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_form_mfg_codes" model="ir.ui.view">
+            <field name="name">partner.form.mfg.codes</field>
+            <field name="model">res.partner</field>
+            <field name="priority">5</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <group name="purchase" position="inside">
+                    <field name="mfg_codes" attrs="{'invisible': [('supplier', '=', False)]}"/>
+                    <field name="purchase_lead_time" attrs="{'invisible': [('supplier', '=', False)]}"/>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

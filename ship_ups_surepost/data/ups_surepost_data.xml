@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="service_ups_surepost_less_1_lb" model="ship.carrier.service">
+            <field name="name">UPS SurePost Less Than 1 lb</field>
+            <field name="carrier_id" ref="sale_store.carrier_ups"/>
+            <field name="package_id" ref="sale_store.package_ups_package"/>
+            <field name="max_weight">1</field>
+            <field name="max_length_plus_girth">130</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+            <field name="api_code">92</field>
+        </record>
+
+        <record id="service_ups_surepost_1_lb_or_greater" model="ship.carrier.service">
+            <field name="name">UPS SurePost 1 lb or Greater</field>
+            <field name="carrier_id" ref="sale_store.carrier_ups"/>
+            <field name="package_id" ref="sale_store.package_ups_package"/>
+            <field name="max_weight">70</field>
+            <field name="max_length_plus_girth">130</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+            <field name="api_code">93</field>
+        </record>
+
+        <record id="sale_store.package_ups_package" model="ship.carrier.package">
+            <field name="api_code">02</field>
+        </record>
+
+        <record id="sale_store.package_ups_express_box_large" model="ship.carrier.package">
+            <field name="api_code">2c</field>
+        </record>
+
+        <record id="sale_store.package_ups_10_kg_box" model="ship.carrier.package">
+            <field name="api_code">24</field>
+        </record>
+
+        <record id="sale_store.package_ups_25_kg_box" model="ship.carrier.package">
+            <field name="api_code">25</field>
+        </record>
+
+        <record id="sale_store.package_ups_express_box" model="ship.carrier.package">
+            <field name="api_code">21</field>
+        </record>
+
+        <record id="sale_store.package_ups_express_box_medium" model="ship.carrier.package">
+            <field name="api_code">2b</field>
+        </record>
+
+        <record id="sale_store.package_ups_express_box_small" model="ship.carrier.package">
+            <field name="api_code">2a</field>
+        </record>
+
+        <record id="sale_store.package_ups_express_pak" model="ship.carrier.package">
+            <field name="api_code">04</field>
+        </record>
+
+        <record id="sale_store.package_ups_letter" model="ship.carrier.package">
+            <field name="api_code">01</field>
+        </record>
+
+        <record id="sale_store.package_ups_tube" model="ship.carrier.package">
+            <field name="api_code">03</field>
+        </record>
+
+        <record id="sale_store.service_ups_standard_international" model="ship.carrier.service">
+            <field name="api_code">11</field>
+        </record>
+
+        <record id="sale_store.service_ups_next_day_early_am" model="ship.carrier.service">
+            <field name="api_code">14</field>
+        </record>
+
+        <record id="sale_store.service_ups_worldwide_express" model="ship.carrier.service">
+            <field name="api_code">07</field>
+        </record>
+
+        <record id="sale_store.service_ups_next_day_air" model="ship.carrier.service">
+            <field name="api_code">01</field>
+        </record>
+
+        <record id="sale_store.service_ups_worldwide_express_plus" model="ship.carrier.service">
+            <field name="api_code">54</field>
+        </record>
+
+        <record id="sale_store.service_ups_next_day_air_saver" model="ship.carrier.service">
+            <field name="api_code">13</field>
+        </record>
+
+        <record id="sale_store.service_ups_worldwide_expedited" model="ship.carrier.service">
+            <field name="api_code">08</field>
+        </record>
+
+        <record id="sale_store.service_ups_2nd_day_air_am" model="ship.carrier.service">
+            <field name="api_code">59</field>
+        </record>
+
+        <record id="sale_store.service_ups_2nd_day_air" model="ship.carrier.service">
+            <field name="api_code">02</field>
+        </record>
+
+        <record id="sale_store.service_ups_worldwide_saver" model="ship.carrier.service">
+            <field name="api_code">65</field>
+        </record>
+
+        <record id="sale_store.service_ups_3_day_select" model="ship.carrier.service">
+            <field name="api_code">12</field>
+        </record>
+
+        <record id="sale_store.service_ups_ground" model="ship.carrier.service">
+            <field name="api_code">03</field>
+        </record>
+
+        <record id="sale_store.service_ups_2nd_day_air" model="ship.carrier.service">
+            <field name="api_code">02</field>
+        </record>
+    </data>
+</odoo>

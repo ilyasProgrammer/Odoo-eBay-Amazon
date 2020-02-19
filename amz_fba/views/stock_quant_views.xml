@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <record id="stock_landed_cost_custom_form_inherit" model="ir.ui.view">
+        <field name="name">stock.quant.form.inherit</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock_landed_costs_custom.stock_quant_form_with_landed_cost"/>
+        <field name="arch" type="xml">
+            <field name="cost" position="before">
+                <field name="amz_fba_shipping_cost"/>
+            </field>
+        </field>
+    </record>
+
+</data>
+</odoo>

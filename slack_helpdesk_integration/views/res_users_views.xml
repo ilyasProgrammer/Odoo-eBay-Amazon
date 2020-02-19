@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_users_form_with_slack" model="ir.ui.view">
+            <field name="name">view.res.users.form.with.slack</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form_simple_modif" />
+            <field name="arch" type="xml">
+                <button name="preference_change_password" position="after">
+                    <button name="preference_connect_with_slack" type="object" string="Connect with Slack" class="oe_link"/>
+                    <button name="preference_connect_with_slack_bot" type="object" string="Connect with Slack as bot" class="oe_link"/>
+                </button>
+            </field>
+        </record>
+
+        <record id="view_users_form_with_slack_credentials" model="ir.ui.view">
+            <field name="name">view.res.users.form.with.slack.credentials</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page name="slack" string="Slack Credentials" groups="base.group_no_one">
+                        <group>
+                          <field name="slack_user_id"/>
+                          <field name="slack_access_token"/>
+                          <field name="slack_scope"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

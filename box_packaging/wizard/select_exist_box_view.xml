@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_select_exist_box" model="ir.ui.view">
+        <field name="name">view.select.exist.box.wizard</field>
+        <field name="model">select.exist.box</field>
+        <field name="arch" type="xml">
+            <form string="Select Box">
+                <group>
+                    <group>
+                        <field name='package_box'/>
+                    </group>
+                </group>
+                <footer>
+                  <button name="confirm" type="object" string="Confrim" class="oe_highlight"/>
+                  or
+                  <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_select_exist_box_wizard" model="ir.actions.act_window">
+        <field name="name">Select Box</field>
+        <field name="res_model">select.exist.box</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_select_exist_box"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_ebay_stock_wizard" model="ir.ui.view">
+            <field name="name">view.ebay.stock.wizard.form</field>
+            <field name="model">ebay.stock.wizard</field>
+            <field name="arch" type="xml">
+                <form string="ebay_stock">
+                    <group>
+                        <group>
+                            <field name="store_id"/>
+                        </group>
+                    </group>
+                    <footer>
+                      <button name="button_download_report" type="object" string="Download Report" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--ACTIONS-->
+        <record id="action_ebay_stock_wizard" model="ir.actions.act_window">
+            <field name="name">ebay_stock</field>
+            <field name="res_model">ebay.stock.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>
+

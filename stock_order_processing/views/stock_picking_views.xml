@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sale_order_action_form" model="ir.actions.act_window">
+            <field name="name">Sales Order</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">form</field>
+        </record>
+        
+        <record id="sale_return_action_form" model="ir.actions.act_window">
+            <field name="name">Return</field>
+            <field name="res_model">sale.return</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <record id="action_stock_order_processing" model="ir.actions.client">
+            <field name="name">Order Processing</field>
+            <field name="tag">stock_order_processing_main_menu</field>
+        </record>
+
+        <menuitem
+            id="menu_stock_order_processing"
+            action="action_stock_order_processing"
+            icon="fa-barcode"
+            web_icon="stock_barcode,static/description/icon.png"
+            sequence="55"
+            groups="stock.group_stock_user"
+            name="Order Processing" />
+
+        <record id="view_picking_with_processing_form" model="ir.ui.view">
+            <field name="name">view.stock.picking.with.processing.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='extra']/group/group[2]" position="inside">
+                    <field name="processed_by_uid" readonly="1"/>
+                    <field name="processed_date" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

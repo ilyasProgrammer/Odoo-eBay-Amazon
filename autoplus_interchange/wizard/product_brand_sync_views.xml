@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_product_brand_sync_form" model="ir.ui.view">
+            <field name="name">Sync Snapshots</field>
+            <field name="model">product.brand.sync.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Sync AutoPlus Brands">
+                    <p>
+                        Get all existing brands from AutoPlus.
+                    </p>
+                    <footer>
+                        <button name="button_sync_brands" string="Sync Brands" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_sync_brands" model="ir.actions.act_window">
+            <field name="name">Sync Brands</field>
+            <field name="res_model">product.brand.sync.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+         </record>
+
+    </data>
+</odoo>

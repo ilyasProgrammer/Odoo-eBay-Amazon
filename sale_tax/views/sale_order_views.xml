@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="return_sale_view_order_tax_form" model="ir.ui.view">
+            <field name="name">return.sale.order.tax.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <field name="user_id" position="before">
+                    <field name="taxjar_tax"/>
+                    <field name="taxjar_total"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

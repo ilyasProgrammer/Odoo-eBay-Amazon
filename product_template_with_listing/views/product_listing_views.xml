@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_product_listing_sell_with_loss_form" model="ir.ui.view">
+            <field name="name">view.product.listing.sell.with.loss.form</field>
+            <field name="model">product.listing</field>
+            <field name="inherit_id" ref="stock_update_store_real_time.view_product_listing_repricer_form" />
+            <field name="arch" type="xml">
+                <field name="ebay_reprice_against_competitors" position="after">
+                    <field name="sell_with_loss"/>
+                    <field name="sell_with_loss_type" attrs="{'invisible': [('sell_with_loss', '=', False)]}"/>
+                    <field name="sell_with_loss_amount" attrs="{'invisible': ['|', ('sell_with_loss', '=', False), ('sell_with_loss_type', '!=', 'amount')]}"/>
+                    <field name="sell_with_loss_percent" attrs="{'invisible': ['|', ('sell_with_loss', '=', False), ('sell_with_loss_type', '!=', 'percent')]}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

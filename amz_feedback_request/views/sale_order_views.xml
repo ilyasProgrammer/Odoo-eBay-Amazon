@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_sale_order_form_with_feedback" model="ir.ui.view">
+            <field name="name">view.sale.order.form.with.feedback</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <button name="action_done" position="after">
+                    <button name="amz_send_thank_you_mail" type="object" groups="base.group_no_one" string="Send Thank You Mail"/>
+                    <button name="amz_send_feedback_request_mail" type="object" groups="base.group_no_one" string="Send Feedback Request Mail"/>
+                </button>
+                <xpath expr="//group[@name='sales_person']" position="inside">
+                    <field name="ship_date"/>
+                    <field name="message_state"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']//form//group/group[2]" position="inside">
+                    <field name="asin" />
+                    <field name="title" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

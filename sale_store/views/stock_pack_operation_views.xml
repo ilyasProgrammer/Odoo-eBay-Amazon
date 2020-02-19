@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <record id="view_picking_form_ase_inherit" model="ir.ui.view">
+        <field name="name">view.picking.form.ase.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='pack_operation_product_ids']/tree/field[@name='product_id']" position="after">
+                <field name="partslink"/>
+                <field name="mfg_label"/>
+            </xpath>
+        </field>
+    </record>
+
+    <template id="report_picking_ase_inh" inherit_id="stock.report_picking">
+        <xpath expr="//table[@t-if='o.pack_operation_ids']//tr//th[@class='text-right']" position="before">
+            <th t-if='o.product_id.partslink'><strong>Partslink</strong></th>
+            <th t-if='o.product_id.mfg_label'><strong>Mfg Label</strong></th>
+        </xpath>
+        <xpath expr="//table[@t-if='o.pack_operation_ids']//tbody//tr[@t-foreach='pack_operation_ids']//td[@class='text-right']" position="before">
+            <td t-if='pack_operation.product_id.partslink'><span t-field="pack_operation.product_id.partslink"/></td>
+            <td t-if='pack_operation.product_id.mfg_label'><span t-field="pack_operation.product_id.mfg_label"/></td>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_picking_form_form" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">
+                <button name="button_scrap" position="after">
+                    <!--<button name="button_reroute_to_dropship" string="Reroute to Dropship" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('purchase_order_id', '!=', False), ('state', 'in', ('cancel', 'done'))]}"/>-->
+                    <button name="button_reroute_to_dropship" string="Reroute to Dropship" type="object" class="oe_highlight" invisible="True"/>
+                </button>
+                <field name="min_date" position="after">
+                    <field name="purchase_order_id" attrs="{'invisible': [('purchase_order_id', '=', False)]}"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_picking_with_pfg_tracking_form" model="ir.ui.view">
+            <field name="name">stock.picking.with.tracking.form.view</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="ship_shipstation.view_picking_with_carrier_out_form"/>
+            <field name="arch" type="xml">
+                <page name="shipping" position="attributes">
+                    <attribute name="attrs">{'invisible': [('show_shipping_info', '=', False)]}</attribute>
+                </page>
+                <field name="tracking_number" position="replace">
+                    <field name="show_shipping_info" invisible="1"/>
+                    <field name="dropshipper_code" invisible="1"/>
+                    <label for="tracking_number"/>
+                    <div class="o_row">
+                        <field name="tracking_number"/>
+                        <button name="get_pfg_tracking_info" string="Get PFG tracking info" type="object" class="oe_inline fa fa-arrow-right oe_link" attrs="{'invisible': [('dropshipper_code', '!=', 'pfg')]}"/>
+                    </div>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_picking_type_with_show_shipping_info_form" model="ir.ui.view">
+            <field name="name">view.stock.picking.type.with.show.shipping.info.form</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.view_picking_type_form"/>
+            <field name="arch" type="xml">
+                <field name="barcode_nomenclature_id" position="after">
+                    <field name="show_shipping_info" groups="base.group_no_one"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

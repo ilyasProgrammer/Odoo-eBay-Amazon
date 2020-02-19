@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="carrier_fedex_oversized" model="ship.carrier">
+            <field name="name">FedEx</field>
+            <field name="ss_code">fedex</field>
+            <field name="description">For oversized shipments</field>
+            <field name="fedex_account_number">895485055</field>
+            <field name="fedex_weight_unit">KG</field>
+            <field name="fedex_developer_key">qSWVb0uRBooRgnPQ</field>
+            <field name="fedex_developer_password">GJsTR62iZqfen1Ac9Rchbxv6e</field>
+            <field name="fedex_meter_number">250586317</field>
+            <field name="max_girth">160</field>
+            <field name="enabled" eval="True"/>
+            <field name="fedex_environment">production</field>
+            <field name="carrier_environment">test</field>
+            <field name="ups_environment">test</field>
+        </record>
+
+        <record id="oversized_min_shipping_cost" model="ir.config_parameter">
+            <field name="key">oversized.min.shipping.cost</field>
+            <field name="value">70</field>
+        </record>
+    </data>
+</odoo>

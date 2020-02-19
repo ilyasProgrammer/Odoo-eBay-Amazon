@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_sale_store" model="ir.actions.act_window">
+            <field name="name">Stores</field>
+            <field name="res_model">sale.store</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_sale_store_tree" model="ir.ui.view">
+            <field name="name">sale.store.tree</field>
+            <field name="model">sale.store</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="enabled"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_sale_store_form" model="ir.ui.view">
+            <field name="name">sale.store.form</field>
+            <field name="model">sale.store</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="image" widget='image' class="oe_avatar" options='{"preview_image": "image_medium", "size": [90, 90]}'/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" default_focus="1" placeholder="Description"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="site"/>
+                                <field name="enabled"/>
+                            </group>
+                            <group>
+                                <field name="code"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Credentials" name="credentials"/>
+                            <page string="Hosted Images">
+                                <field name="image_ids">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="code"/>
+                                        <field name="image"/>
+                                    </tree>
+                                    <form>
+                                        <h1>
+                                            <field name="name" default_focus="1" placeholder="Description"/>
+                                        </h1>
+                                        <group>
+                                            <group>
+                                                <field name="code"/>
+                                            </group>
+                                            <group />
+                                        </group>
+                                        <group>
+                                            <field name="image" widget="image"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_sale_store_feed" model="ir.actions.act_window">
+            <field name="name">Store Feeds</field>
+            <field name="res_model">sale.store.feed</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_sale_store_feed_list" model="ir.ui.view">
+            <field name="name">view.sale.store.feed.list</field>
+            <field name="model">sale.store.feed</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="store_id"/>
+                    <field name="submission_id"/>
+                    <field name="job_type"/>
+                    <field name="date_submitted"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_sale_store_feed_form" model="ir.ui.view">
+            <field name="name">view.sale.store.feed.form</field>
+            <field name="model">sale.store.feed</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" default_focus="1" placeholder="Some Identifier"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="store_id"/>
+                                <field name="submission_id"/>
+                                <field name="file_reference_id"/>
+                            </group>
+                            <group>
+                                <field name="job_type"/>
+                                <field name="date_submitted"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="result_description"/>
+                        </group>
+                        <notebook>
+                            <page string="Content">
+                                <field name="content"/>
+                            </page>
+                            <page string="Technical Parameters">
+                                <field name="related_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_sale_store_log" model="ir.actions.act_window">
+            <field name="name">Store Logs</field>
+            <field name="res_model">sale.store.log</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_sale_store_log_list" model="ir.ui.view">
+            <field name="name">view.sale.store.log.list</field>
+            <field name="model">sale.store.log</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="result"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_sale_store_log_form" model="ir.ui.view">
+            <field name="name">view.sale.store.log.form</field>
+            <field name="model">sale.store.log</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="result"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>        
+
+        <menuitem
+            id="menu_sale_store_root"
+            name="Store Integration"
+            parent="base.menu_administration"
+            sequence="20"
+            groups="base.group_system"/>
+
+        <menuitem
+            id="menu_sale_store"
+            action="action_sale_store"
+            name="Stores"
+            parent="menu_sale_store_root"
+            sequence="20"
+            groups="base.group_system"/>
+
+        <menuitem
+            id="menu_sale_store_feed"
+            name="Feeds/Submissions"
+            action="action_sale_store_feed"
+            parent="menu_sale_store_root"
+            sequence="30"
+            groups="base.group_system"/>
+
+        <menuitem
+            id="menu_sale_store_log"
+            action="action_sale_store_log"
+            name="Logs"
+            parent="menu_sale_store_root"
+            sequence="40"
+            groups="base.group_system"/>
+    </data>
+</odoo>

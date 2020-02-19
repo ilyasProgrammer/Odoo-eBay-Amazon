@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="assets_frontend" name="website_auto assets" inherit_id="website.assets_frontend">
+        <xpath expr="//script[last()]" position="after">
+            <link rel="stylesheet" href="/website_auto/static/src/less/website_auto.less"></link>
+            <script type="text/javascript" src="/website_auto/static/src/js/jquery.chained.js"></script>
+            <script type="text/javascript" src="/website_auto/static/src/js/jquery.chained.remote.js"></script>
+            <!--<script type="text/javascript" src="/website_auto/static/src/js/bootstrap-switch.js"></script>-->
+            <script type="text/javascript" src="/website_auto/static/src/js/website_auto.js"></script>
+        </xpath>
+    </template>
+
+<template id="website.homepage">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty">
+            <div class="row">
+                <div class="col-sm-2">
+                    <span>Year</span>
+                    <select id="select_year" name="year" class="form-control" placeholder="Year">
+                        <option value="">Year</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <span>Make</span>
+                    <select id="select_make" name="make" class="form-control" placeholder="Make">
+                        <option value="">Make</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <span>Model</span>
+                    <select id="select_model" name="model" class="form-control" placeholder="Model">
+                        <option value="">Model</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <span>Search string</span>
+                    <input id="input_name" name="name" class="form-control" placeholder="put here something like fender">
+                    </input>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn-primary" id="get_parts">Get parts</button>
+                </div>
+            </div>
+            <table class="table table-condensed table-striped">
+                <thead>
+                    <tr>
+                        <th>PartNo</th>
+                        <th>ProdName</th>
+                        <th>MFGLabel</th>
+                        <th>Year</th>
+                        <th>Trim</th>
+                    </tr>
+                </thead>
+                <tbody id="parts_rows">
+                </tbody>
+            </table>
+        </div>
+    </t>
+</template>
+</odoo>

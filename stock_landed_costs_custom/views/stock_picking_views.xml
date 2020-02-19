@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="picking_form_with_landed_cost" model="ir.ui.view">
+            <field name="name">picking.form.with.landed.cost</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">
+                <field name="picking_type_id" position="after">
+                    <field name="freight_po_id"/>
+                    <field name="without_freight_cost"/>
+                    <field name="freight_cost"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_move_picking_form_with_landed_cost" model="ir.ui.view">
+            <field name="name">stock.move.form.with.landed.cost</field>
+            <field name="model">stock.move</field>
+            <field eval="21" name="priority"/>
+            <field name="inherit_id" ref="stock.view_move_picking_form" />
+            <field name="arch" type="xml">
+                <group name="quants_grp" position="after">
+                    <group name="cost_grp" string="Cost" attrs="{'invisible': [('state', '=', 'draft')]}">
+                        <field name="cu_ft"/>
+                        <field name="price_unit"/>
+                        <field name="landed_cost"/>
+                    </group>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

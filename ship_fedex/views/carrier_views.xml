@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<record id="view_ship_carrier_fedex_form" model="ir.ui.view">
+            <field name="name">view.ship.carrier.fedex.form</field>
+            <field name="model">ship.carrier</field>
+      		<field name="inherit_id" ref="sale_store.view_ship_carrier_form" />
+            <field name="arch" type="xml">
+            	<xpath expr="//group" positon="inside">
+            		<group string="Fedex Credentials" attrs="{'invisible': [('name', '!=', 'FedEx')]}">
+            			<field name="fedex_developer_key"/>
+            			<field name="fedex_developer_password"/>
+            			<field name="fedex_account_number"/>
+            			<field name="fedex_meter_number"/>
+                        <field name="fedex_environment"/>
+                        <field name="max_girth"/>
+            		</group>
+            	</xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

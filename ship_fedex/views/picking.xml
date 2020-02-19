@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_picking_services_prices_log_form2" model="ir.ui.view">
+        <field name="name">view_picking.services.prices.log.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <notebook position="inside">
+                    <page string="Service log">
+                        <field name="services_prices_log"/>
+                    </page>
+                </notebook>
+                <field name="exceeds_limits" positon="before">
+                    <field name="residential"/>
+                </field>
+            </data>
+        </field>
+    </record>
+</odoo>

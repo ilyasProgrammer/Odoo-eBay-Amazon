@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_fba_demand_report_tree" model="ir.ui.view">
+            <field name="name">view.fba.demand.report.tree</field>
+            <field name="model">sale.fba.demand.report</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_tmpl_id"/>
+                    <field name="seller_sku" />
+                    <field name="current_qty"/>
+                    <field name="demand_14"/>
+                    <field name="demand_30"/>
+                    <field name="suggested_qty"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_fba_demand_report_form" model="ir.ui.view">
+            <field name="name">view.fba.demand.report.form</field>
+            <field name="model">sale.fba.demand.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="product_tmpl_id" />
+                                <field name="seller_sku" />
+                            </group>
+                            <group>
+                                <field name="current_qty"/>
+                                <field name="demand_14"/>
+                                <field name="demand_30"/>
+                                <field name="suggested_qty"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_fba_demand_report" model="ir.actions.act_window">
+            <field name="name">FBA Demand Report</field>
+            <field name="res_model">sale.fba.demand.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="FBA Demand Report"
+            id="menu_fba_demand_report"
+            parent="stock.menu_warehouse_report"
+            action="action_fba_demand_report"
+            sequence="68"/>
+    </data>
+</odoo>

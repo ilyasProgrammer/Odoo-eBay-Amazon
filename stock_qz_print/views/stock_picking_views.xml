@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_stock_picking_with_qz_print_form" model="ir.ui.view">
+            <field name="name">view.stock.picking.with.qz.print.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <button name="button_scrap" position="after">
+                        <button id="qz-print-product-labels" name="button_print_product_labels" string="Print Product Label" class="btn-primary" type="object"/>
+                    </button>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_revise_item" model="ir.ui.view">
+            <field name="name">view.revise.item</field>
+            <field name="model">sale.store.ebay.revise.item</field>
+            <field name="arch" type="xml">
+                <form string="Revise Item">
+                    <group>
+                        <group>
+                            <field name="listing_id" readonly="1"/>
+                            <field name="sku"/>
+                        </group>
+                        <group>
+                            <field name="price"/>
+                            <field name="quantity"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="title"/>
+                    </group>
+                    <footer>
+                      <button name="button_revise_item" type="object" string="Revise Item" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_revise_item_wizard" model="ir.actions.act_window">
+            <field name="name">Revise Item</field>
+            <field name="res_model">sale.store.ebay.revise.item</field>
+            <field name="src_model">sale.store.ebay.revise.item</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

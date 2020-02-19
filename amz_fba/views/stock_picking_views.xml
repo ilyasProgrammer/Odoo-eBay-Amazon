@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <record id="stock_picking_amz_fba_form" model="ir.ui.view">
+        <field name="name">stock.picking.amz.fba.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <field name="store_id" position="after">
+                <field name="amz_order_type" />
+            </field>
+        </field>
+    </record>
+
+    <record id="stock_picking_amz_fba_tree" model="ir.ui.view">
+        <field name="name">stock.picking.amz.fba.tree</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <field name="store_id" position="after">
+                <field name="amz_order_type_code"/>
+            </field>
+             <field name="store_id" position="replace">
+                <field name="store_id" invisible="1"/>
+            </field>
+        </field>
+    </record>
+
+</data>
+</odoo>

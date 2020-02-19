@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_comp_history_user,comp.history.user,model_repricer_competitor_history,base.group_user,1,1,1,1

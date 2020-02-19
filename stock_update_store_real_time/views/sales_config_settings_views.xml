@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_sale_shipping_rate_calculation_settings" model="ir.ui.view">
+            <field name="name">view.sale.shipping.rate.calculation.settings</field>
+            <field name="model">sale.config.settings</field>
+            <field name="inherit_id" ref="sales_team.view_sale_config_settings"/>
+            <field name="arch" type="xml">
+                <div id="main" position="inside">
+                    <separator string="Shipping Rate Calculation"/>
+                    <group>
+                        <field name="ship_from_address_id" class="oe_inline"/>
+                        <field name="ship_to_address_id" class="oe_inline"/>
+                    </group>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

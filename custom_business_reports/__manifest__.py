@@ -1,0 +1,46 @@
+# -*- coding: utf-8 -*-
+
+{
+    'name': "Custom Business Reports",
+    'summary': "WH, sales demand, and purchase Reports",
+    'description': """
+WH, sales demand, and purchase Reports
+=================================================================================
+    """,
+    'author': 'Opsyst',
+    'website': 'http://opsyst.com',
+    'category': 'Opsyst',
+    'version': '1.0',
+    'depends': ['sale_dropship', 'product_auto_attributes', 'stock_update_store_real_time'],
+    'data': [
+        'wizard/competition_demand_views.xml',
+        'wizard/dropship_margin_views.xml',
+        'wizard/dropship_demand_views.xml',
+        'wizard/missing_features_views.xml',
+        'wizard/sale_demand_views.xml',
+        'wizard/sale_margin_views.xml',
+        'wizard/unlisted_wh_items_views.xml',
+        'wizard/unlisted_wh_kits_views.xml',
+        'wizard/unsold_wh_items_views.xml',
+        'wizard/unlisted_wh_items_by_brand_views.xml',
+        'wizard/ebay_stock.xml',
+        'wizard/box_demand.xml',
+        'wizard/lossy_do_not_reprice_listings.xml',
+        'wizard/sales_per_product.xml',
+        'wizard/amz_custom_report_views.xml',
+        'wizard/mapm_buy_box.xml',
+        'wizard/return_scrap_views.xml',
+        'wizard/return_percent_views.xml',
+        'wizard/po_reports.xml',
+        'views/report_views.xml',
+        'views/inventory_reports.xml',
+        'report/mapm_sales.xml',
+        'report/mapm_pbl_sales.xml',
+        'report/return_cost_report.xml',
+        'security/ir.model.access.csv',
+        'views/templates.xml',
+        'views/dynamic_reports.xml',
+    ],
+    'application': False,
+    'license': 'OEEL-1',
+}

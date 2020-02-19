@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_cron_amz_request_feedback" model="ir.cron">
+            <field name="name">[Amazon] Request Feedback</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">12</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">115</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="True" name="active"/>
+            <field eval="'cron_amz_request_feedback'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+
+        <record id="ir_cron_amz_mark_orders_as_shipped" model="ir.cron">
+            <field name="name">[Amazon] Mark Sales Orders as Shipped</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">12</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">116</field>
+            <field eval="False" name="doall"/>
+            <field eval="'sale.store'" name="model"/>
+            <field eval="True" name="active"/>
+            <field eval="'cron_mark_sales_orders_as_shipped'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+    </data>
+</odoo>

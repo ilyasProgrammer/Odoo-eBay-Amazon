@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_product_listing_fba_form" model="ir.ui.view">
+            <field name="name">view.product.listing.fba.form</field>
+            <field name="model">product.listing</field>
+            <field name="inherit_id" ref="sale_store.view_product_listing_form" />
+            <field name="arch" type="xml">
+                <button name="button_end_item" position="after">
+                    <button name="%(action_print_fba_label)d"
+                        type='action'
+                        string="Print FBA Label"
+                        attrs="{'invisible': [('site', '!=', 'amz')]}"/>
+                </button>
+
+            </field>
+        </record>
+
+        <record id="view_product_listing_fba_qty_form" model="ir.ui.view">
+            <field name="name">view.product.listing.listing.type.form</field>
+            <field name="model">product.listing</field>
+            <field name="inherit_id" ref="amz_merchant_fulfillment.view_product_listing_listing_type_form" />
+            <field name="arch" type="xml">
+                <field name="listing_type" position="after">
+                    <field name="fba_qty" attrs="{'invisible': [('listing_type', '!=', 'fba')]}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_sale_shipstation_settings" model="ir.ui.view">
+            <field name="name">shipstation.settings</field>
+            <field name="model">sale.config.settings</field>
+            <field name="inherit_id" ref="sales_team.view_sale_config_settings"/>
+            <field name="arch" type="xml">
+                <div id="main" position="inside">
+                    <separator string="Shipstation Integration"/>
+                    <group>
+                        <group>
+                            <div>
+                                <div>
+                                    <label for="ss_api_key"/>
+                                    <field name="ss_api_key"/>
+                                </div>
+                                <div>
+                                    <label for="ss_api_secret"/>
+                                    <field name="ss_api_secret"/>
+                                </div>
+                            </div>
+                        </group>
+                    </group>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

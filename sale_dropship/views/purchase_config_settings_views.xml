@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_sale_lkq_settings" model="ir.ui.view">
+            <field name="name">lkq.settings</field>
+            <field name="model">purchase.config.settings</field>
+            <field name="inherit_id" ref="purchase.view_purchase_configuration"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/group[1]" position="after">
+                    <group string="LKQ API">
+                        <group>
+                            <field name="lkq_account_number"/>
+                            <field name="lkq_user_name"/>
+                            <field name="lkq_user_password"/>
+                            <field name="lkq_verification_code"/>
+                            <field name="lkq_partner_code"/>
+                        </group>
+                    </group>
+                    <group string="PFG API">
+                        <group>
+                            <field name="pfg_environment"/>
+                            <field name="pfg_customer_id"/>
+                            <field name="pfg_user_name"/>
+                            <field name="pfg_password"/>
+                            <field name="pfg_shipping_code"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

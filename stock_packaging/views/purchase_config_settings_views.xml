@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_packaging_purchase_settings" model="ir.ui.view">
+            <field name="name">view.packaging.purchase.settings</field>
+            <field name="model">purchase.config.settings</field>
+            <field name="inherit_id" ref="purchase.view_purchase_configuration"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/group[1]" position="after">
+                    <group string="Packaging Purchases">
+                        <group>
+                            <field name="packaging_partner_id"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="assets_backend" name="crm_voip_extended assets" inherit_id="web.assets_backend">
+        <!-- <xpath expr="." position="inside">
+            <script type="text/javascript" src="crm_voip_extended/static/src/js/voip_extend.js"></script>
+        </xpath> -->
+        <xpath expr="//script[@src='/crm_voip/static/src/js/crm_voip.js']" position="replace">
+            <script type="text/javascript" src="crm_voip_extended/static/src/js/voip_extend.js"></script>
+        </xpath>
+    </template>
+
+</odoo>

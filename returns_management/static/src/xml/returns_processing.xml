@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+    <t t-name="returns_processing_main_menu">
+        <div class="rp_main_menu_container">
+            <div class="container">
+                <h1 class="rp_directive">
+                    <t t-esc="widget.directive" class="ret_info"/>
+                </h1>
+                <t t-if="widget.got_item_scanned">
+                    <div class="rp_row">
+                        <p class="ret_info_title">Order: <span class="ret_info"><t t-esc="widget.ret_data.web_order_id"/></span></p>
+                        <p class="ret_info_title">Carrier: <span class="ret_info"><t t-esc="widget.ret_data.carrier_name"/></span></p>
+                        <p class="ret_info_title">Tacking: <span class="ret_info"><t t-esc="widget.ret_data.tracking_number"/></span></p>
+                        <p class="ret_info_title">LAD: <span class="ret_info"><t t-esc="widget.ret_data.lad"/></span></p>
+                        <p class="ret_info_title bold"><span class="ret_info"><t t-esc="widget.ret_data.product_name"/></span></p>
+                        <p class="ret_info_title">Reason: <span class="ret_info"><t t-esc="widget.ret_data.return_reason"/></span></p>
+                        <p class="ret_info_title">Comment: <span class="ret_info"><t t-esc="widget.ret_data.customer_comments"/></span></p>
+                    </div>
+                </t>
+                <button style="display:none;" class="op_btn btn-primary button_scrap">Scrap</button>
+                <h1 id="received_msg" class="rp_received"/>
+                <h1 id="error_msg" class="rp_error"/>
+            </div>
+        </div>
+    </t>
+
+</templates>

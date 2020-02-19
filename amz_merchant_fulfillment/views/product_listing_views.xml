@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_product_listing_fbm_form" model="ir.ui.view">
+            <field name="name">view.product.listing.fbm.form</field>
+            <field name="model">product.listing</field>
+            <field name="inherit_id" ref="sale_store.view_product_listing_form" />
+            <field name="arch" type="xml">
+                <button name="button_end_item" position="before">
+                    <button name="%(action_update_shipping_template_wizard)d"
+                        type='action'
+                        string='Update Template'
+                        class="oe_highlight"
+                        attrs="{'invisible': ['|', ('site', '!=', 'amz'), ('listing_type', '!=', 'fbm')]}"
+                    />
+                </button>
+            </field>
+        </record>
+
+        <record id="view_product_listing_listing_type_form" model="ir.ui.view">
+            <field name="name">view.product.listing.listing.type.form</field>
+            <field name="model">product.listing</field>
+            <field name="inherit_id" ref="product_listing_extension.view_product_listing_extended_form" />
+            <field name="arch" type="xml">
+                <field name="asin" position="after">
+                    <field name="listing_type" attrs="{'invisible': [('site', '!=', 'amz')]}"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

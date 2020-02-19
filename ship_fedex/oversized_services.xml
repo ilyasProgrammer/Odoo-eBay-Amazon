@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="service_fedex_ground_oversized" model="ship.carrier.service">
+            <field name="name">FedEx Ground Oversized</field>
+            <field name="ss_code">fedex_ground</field>
+            <field name="fedex_code">FEDEX_GROUND</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="package_id" ref="package_fedex_package_oversized"/>
+            <field name="max_weight">70</field>
+            <field name="max_length">108</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+            <field name="oversized" eval="True"/>
+        </record>
+
+        <record id="service_fedex_home_delivery_oversized" model="ship.carrier.service">
+            <field name="name">FedEx Home Delivery Oversized</field>
+            <field name="ss_code">fedex_home_delivery</field>
+            <field name="fedex_code">GROUND_HOME_DELIVERY</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="package_id" ref="package_fedex_package_oversized"/>
+            <field name="max_weight">70</field>
+            <field name="max_length">108</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+            <field name="oversized" eval="True"/>
+        </record>
+
+        <record id="service_fedex_2day_oversized" model="ship.carrier.service">
+            <field name="name">FedEx 2Day Oversized</field>
+            <field name="ss_code">fedex_2day</field>
+            <field name="fedex_code">FEDEX_2_DAY</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="package_id" ref="package_fedex_package_oversized"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">150</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+            <field name="oversized" eval="True"/>
+        </record>
+
+        <record id="service_fedex_2day_am_oversized" model="ship.carrier.service">
+            <field name="name">FedEx 2Day A.M. Oversized</field>
+            <field name="ss_code">fedex_2day_am</field>
+            <field name="fedex_code">FEDEX_2_DAY_AM</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="package_id" ref="package_fedex_package_oversized"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">150</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+            <field name="oversized" eval="True"/>
+        </record>
+
+        <record id="service_fedex_express_saver_oversized" model="ship.carrier.service">
+            <field name="name">FedEx Express Saver Oversized</field>
+            <field name="ss_code">fedex_express_saver</field>
+            <field name="fedex_code">FEDEX_EXPRESS_SAVER</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="package_id" ref="package_fedex_package_oversized"/>
+            <field name="max_weight">150</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+            <field name="oversized" eval="True"/>
+        </record>
+
+        <record id="service_fedex_standard_overnight_oversized" model="ship.carrier.service">
+            <field name="name">FedEx Standard Overnight Oversized</field>
+            <field name="ss_code">fedex_standard_overnight</field>
+            <field name="fedex_code">STANDARD_OVERNIGHT</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="package_id" ref="package_fedex_package_oversized"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">150</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+            <field name="oversized" eval="True"/>
+        </record>
+
+        <record id="service_fedex_priority_overnight_oversized" model="ship.carrier.service">
+            <field name="name">FedEx Priority Overnight Oversized</field>
+            <field name="ss_code">fedex_priority_overnight</field>
+            <field name="fedex_code">PRIORITY_OVERNIGHT</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="package_id" ref="package_fedex_package_oversized"/>
+            <field name="max_weight">2400</field>
+            <field name="max_length">150</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+            <field name="oversized" eval="True"/>
+        </record>
+
+        <record id="service_fedex_first_overnight_oversized" model="ship.carrier.service">
+            <field name="name">FedEx First Overnight Oversized</field>
+            <field name="ss_code">fedex_first_overnight</field>
+            <field name="fedex_code">FIRST_OVERNIGHT</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="package_id" ref="package_fedex_package_oversized"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">150</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+            <field name="oversized" eval="True"/>
+        </record>
+
+        <record id="service_fedex_1_day_freight_oversized" model="ship.carrier.service">
+            <field name="name">FedEx 1Day Freight Oversized</field>
+            <field name="ss_code">fedex_1_day_freight</field>
+            <field name="fedex_code">FEDEX_1_DAY_FREIGHT</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="package_id" ref="package_fedex_package_oversized"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">150</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+            <field name="oversized" eval="True"/>
+        </record>
+
+        <record id="service_fedex_2_day_freight_oversized" model="ship.carrier.service">
+            <field name="name">FedEx 2Day Freight Oversized</field>
+            <field name="ss_code">fedex_2_day_freight</field>
+            <field name="fedex_code">FEDEX_2_DAY_FREIGHT</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="package_id" ref="package_fedex_package_oversized"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">150</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+            <field name="oversized" eval="True"/>
+        </record>
+
+        <record id="service_fedex_3_day_freight_oversized" model="ship.carrier.service">
+            <field name="name">FedEx 3Day Freight Oversized</field>
+            <field name="ss_code">fedex_3_day_freight</field>
+            <field name="fedex_code">FEDEX_3_DAY_FREIGHT</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="package_id" ref="package_fedex_package_oversized"/>
+            <field name="max_weight">150</field>
+            <field name="max_length">150</field>
+            <field name="max_length_plus_girth">165</field>
+            <field name="domestic" eval="True"/>
+            <field name="enabled" eval="True"/>
+            <field name="oversized" eval="True"/>
+        </record>
+
+        <!--<record id="service_fedex_first_overnight_freight_oversized" model="ship.carrier.service">-->
+            <!--<field name="name">FedEx First Overnight Freight</field>-->
+            <!--<field name="ss_code">fedex_first_overnight_freight</field>-->
+            <!--<field name="fedex_code">-&#45;&#45;</field>-->
+            <!--<field name="carrier_id" ref="carrier_fedex_oversized"/>-->
+            <!--<field name="package_id" ref="package_fedex_package_oversized"/>-->
+            <!--<field name="max_weight">150</field>-->
+            <!--<field name="max_length">150</field>-->
+            <!--<field name="max_length_plus_girth">165</field>-->
+            <!--<field name="domestic" eval="True"/>-->
+            <!--<field name="enabled" eval="True"/>
+            <field name="oversized" eval="True"/>-->
+        <!--</record>-->
+
+        <!--<record id="service_fedex_ground_international_oversized" model="ship.carrier.service">-->
+            <!--<field name="name">FedEx International Ground</field>-->
+            <!--<field name="ss_code">fedex_ground_international</field>-->
+            <!--<field name="fedex_code">-&#45;&#45;</field>-->
+            <!--<field name="carrier_id" ref="carrier_fedex_oversized"/>-->
+            <!--<field name="package_id" ref="package_fedex_package_oversized"/>-->
+            <!--<field name="international" eval="True"/>-->
+        <!--</record>-->
+
+        <record id="service_fedex_international_economy_oversized" model="ship.carrier.service">
+            <field name="name">FedEx International Economy Oversized</field>
+            <field name="ss_code">fedex_international_economy</field>
+            <field name="fedex_code">INTERNATIONAL_ECONOMY</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="package_id" ref="package_fedex_package_oversized"/>
+            <field name="international" eval="True"/>
+            <field name="oversized" eval="True"/>
+        </record>
+
+        <record id="service_fedex_international_priority_oversized" model="ship.carrier.service">
+            <field name="name">FedEx International Priority Oversized</field>
+            <field name="ss_code">fedex_international_priority</field>
+            <field name="fedex_code">INTERNATIONAL_PRIORITY</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="package_id" ref="package_fedex_package_oversized"/>
+            <field name="international" eval="True"/>
+            <field name="oversized" eval="True"/>
+        </record>
+
+        <record id="service_fedex_international_first_overszied" model="ship.carrier.service">
+            <field name="name">FedEx International First Oversized</field>
+            <field name="ss_code">fedex_international_first</field>
+            <field name="fedex_code">INTERNATIONAL_FIRST</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="package_id" ref="package_fedex_package_oversized"/>
+            <field name="international" eval="True"/>
+            <field name="oversized" eval="True"/>
+        </record>
+
+        <record id="service_fedex_international_economy_freight_oversized" model="ship.carrier.service">
+            <field name="name">FedEx International Economy Freight Oversized</field>
+            <field name="ss_code">fedex_international_economy_freight</field>
+            <field name="fedex_code">INTERNATIONAL_ECONOMY_FREIGHT</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="package_id" ref="package_fedex_package_oversized"/>
+            <field name="international" eval="True"/>
+            <field name="oversized" eval="True"/>
+        </record>
+
+        <record id="service_fedex_international_priority_freight_oversized" model="ship.carrier.service">
+            <field name="name">FedEx International Priority Freight Oversized</field>
+            <field name="ss_code">fedex_international_priority_freight</field>
+            <field name="fedex_code">INTERNATIONAL_PRIORITY_FREIGHT</field>
+            <field name="carrier_id" ref="carrier_fedex_oversized"/>
+            <field name="package_id" ref="package_fedex_package_oversized"/>
+            <field name="international" eval="True"/>
+            <field name="oversized" eval="True"/>
+        </record>
+
+    </data>
+</odoo>
